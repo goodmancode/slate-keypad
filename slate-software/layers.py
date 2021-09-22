@@ -84,6 +84,11 @@ slate_config = {
                     "actions": (STRING, "Slate"),
                 },
             ],
+            "encoder": {
+                "increment": (MEDIA, ConsumerControlCode.VOLUME_INCREMENT),
+                "decrement": (MEDIA, ConsumerControlCode.VOLUME_DECREMENT),
+                "button": (MEDIA, ConsumerControlCode.PLAY_PAUSE),
+            },
         },
         {
             "name": "Youtube Controls",

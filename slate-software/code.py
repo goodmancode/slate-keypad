@@ -11,6 +11,8 @@ This version runs on Feather nRF52840 Express with a 3.5" FeatherWing
 import time
 import displayio
 import terminalio
+import rotaryio
+import digitalio
 import board
 import keypad
 from adafruit_display_text import bitmap_label
@@ -37,6 +39,14 @@ KEY_PINS = (
     board.D12,  # Key 1
 )
 keys = keypad.Keys(KEY_PINS, value_when_pressed=False, pull=True)
+
+# Rotary encoder setup
+encoder = rotaryio.IncrementalEncoder(board.A1, board.A2)
+last_position = encoder.position
+encoder_button = digitalio.DigitalInOut(board.A3)
+encoder_button.direction = digitalio.Direction.INPUT
+encoder_button.pull = digitalio.Pull.UP
+encoder_button_state = None
 
 # seems to help the touchscreen not get stuck with chip not found
 time.sleep(2)
@@ -222,7 +232,7 @@ load_layer(current_layer)
 
 #  main loop
 while True:
-    # Process physical key events and actions first
+    # Physical key events and actions
     keyevent = keys.events.get()
     if keyevent:
         print(keyevent)
@@ -234,7 +244,35 @@ while True:
                     break
             performActions(_cur_actions)
 
-    # Then process touchscreen events and actions
+    # Rotary encoder events and actions
+    current_position = encoder.position
+    position_change = current_position - last_position
+    # Check if encoder rotated clockwise
+    if position_change > 0:
+        for _ in range(position_change):
+            # Perform increment macro
+            _cur_actions = slate_config["layers"][current_layer]["encoder"].get("increment")
+            performActions(_cur_actions)
+            print("[Encoder] position: " + str(current_position))
+    # Check if encoder rotated counter-clockwise
+    if position_change < 0:
+        for _ in range(-position_change):
+            # Perform decrement macro
+            _cur_actions = slate_config["layers"][current_layer]["encoder"].get("decrement")
+            performActions(_cur_actions)
+            print("[Encoder] position: " + str(current_position))
+    last_position = current_position
+    # Check if encoder button pressed
+    if not encoder_button.value and encoder_button_state is None:
+        encoder_button_state = "pressed"
+    if encoder_button.value and encoder_button_state == "pressed":
+        # Perform encoder button macro
+        _cur_actions = slate_config["layers"][current_layer]["encoder"].get("button")
+        performActions(_cur_actions)
+        print("[Encoder] button pressed.")
+        encoder_button_state = None
+
+    # Touchscreen events and actions
     if touchscreen.touched:
         # loop over all data in touchscreen buffer
         while not touchscreen.buffer_empty:
