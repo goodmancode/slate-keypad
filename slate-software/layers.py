@@ -12,7 +12,7 @@ slate_config = {
     "layers": [
         {
             "name": "Slate",
-            "shortcuts": [
+            "touch_shortcuts": [
                 {
                     "label": "Slate Logo",
                     "icon": "icons/slate.bmp",
@@ -74,10 +74,20 @@ slate_config = {
                     "actions": (STRING, "Slate"),
                 },
             ],
+            "key_shortcuts": [
+                {
+                    "assigned_key": 0,
+                    "actions": (STRING, "Slate"),
+                },
+                {
+                    "assigned_key": 1,
+                    "actions": (STRING, "Slate"),
+                },
+            ],
         },
         {
             "name": "Youtube Controls",
-            "shortcuts": [
+            "touch_shortcuts": [
                 {
                     "label": "Play",
                     "icon": "icons/pr_play.bmp",

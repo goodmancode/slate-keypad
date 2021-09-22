@@ -33,8 +33,8 @@ from layers import (
 
 # Physical keys setup
 KEY_PINS = (
-    board.D13,
-    board.D12,
+    board.D13,  # Key 0
+    board.D12,  # Key 1
 )
 keys = keypad.Keys(KEY_PINS, value_when_pressed=False, pull=True)
 
@@ -160,7 +160,7 @@ def load_layer(layer_index):
     layer_label.text = slate_config["layers"][layer_index]["name"]
 
     # loop over each shortcut and it's index
-    for i, shortcut in enumerate(slate_config["layers"][layer_index]["shortcuts"]):
+    for i, shortcut in enumerate(slate_config["layers"][layer_index]["touch_shortcuts"]):
         # create an icon for the current shortcut
         _new_icon = IconWidget(shortcut["label"], shortcut["icon"], on_disk=True)
 
@@ -175,6 +175,43 @@ def load_layer(layer_index):
     time.sleep(0.05)
     main_group.pop()
 
+def performActions(_cur_actions):
+    # tuple means it's a single action
+    if isinstance(_cur_actions, tuple):
+        # put it in a list by itself
+        _cur_actions = [_cur_actions]
+    # loop over the actions
+    for _action in _cur_actions:
+        # HID keyboard keys
+        if _action[0] == KEY:
+            kbd.press(*_action[1])
+            kbd.release(*_action[1])
+        # String to write from layout
+        elif _action[0] == STRING:
+            kbd_layout.write(_action[1])
+        # Consumer control code
+        elif _action[0] == MEDIA:
+            cc.send(_action[1])
+        # Key press
+        elif _action[0] == KEY_PRESS:
+            kbd.press(*_action[1])
+        # Key release
+        elif _action[0] == KEY_RELEASE:
+            kbd.release(*_action[1])
+        # Change Layer
+        elif _action[0] == CHANGE_LAYER:
+            if isinstance(
+                _action[1], int
+            ) and 0 <= _action[1] < len(
+                slate_config["layers"]
+            ):
+                current_layer = _action[1]
+                load_layer(_action[1])
+        # if there are multiple actions
+        if len(_cur_actions) > 1:
+            # small sleep to make sure
+            # OS can respond to previous action
+            time.sleep(0.2)
 
 # append the grid layout to the main_group
 # so it gets shown on the display
@@ -185,9 +222,19 @@ load_layer(current_layer)
 
 #  main loop
 while True:
+    # Process physical key events and actions first
     keyevent = keys.events.get()
     if keyevent:
         print(keyevent)
+        if keyevent.pressed:
+            # get actions for this key from config object
+            for key in slate_config["layers"][current_layer]["key_shortcuts"]:
+                if key["assigned_key"] == keyevent.key_number:
+                    _cur_actions = key["actions"]
+                    break
+            performActions(_cur_actions)
+
+    # Then process touchscreen events and actions
     if touchscreen.touched:
         # loop over all data in touchscreen buffer
         while not touchscreen.buffer_empty:
@@ -282,52 +329,9 @@ while True:
                                     # get actions for this icon from config object
                                     _cur_actions = slate_config["layers"][
                                         current_layer
-                                    ]["shortcuts"][index]["actions"]
+                                    ]["touch_shortcuts"][index]["actions"]
 
-                                    # tuple means it's a single action
-                                    if isinstance(_cur_actions, tuple):
-                                        # put it in a list by itself
-                                        _cur_actions = [_cur_actions]
-
-                                    # loop over the actions
-                                    for _action in _cur_actions:
-                                        # HID keyboard keys
-                                        if _action[0] == KEY:
-                                            kbd.press(*_action[1])
-                                            kbd.release(*_action[1])
-
-                                        # String to write from layout
-                                        elif _action[0] == STRING:
-                                            kbd_layout.write(_action[1])
-
-                                        # Consumer control code
-                                        elif _action[0] == MEDIA:
-                                            cc.send(_action[1])
-
-                                        # Key press
-                                        elif _action[0] == KEY_PRESS:
-                                            kbd.press(*_action[1])
-
-                                        # Key release
-                                        elif _action[0] == KEY_RELEASE:
-                                            kbd.release(*_action[1])
-
-                                        # Change Layer
-                                        elif _action[0] == CHANGE_LAYER:
-                                            if isinstance(
-                                                _action[1], int
-                                            ) and 0 <= _action[1] < len(
-                                                slate_config["layers"]
-                                            ):
-
-                                                current_layer = _action[1]
-                                                load_layer(_action[1])
-
-                                        # if there are multiple actions
-                                        if len(_cur_actions) > 1:
-                                            # small sleep to make sure
-                                            # OS can respond to previous action
-                                            time.sleep(0.2)
+                                    performActions(_cur_actions)
 
                                     # save current time to check for timeout
                                     LAST_PRESS_TIME = _now
