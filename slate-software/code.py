@@ -11,6 +11,8 @@ This version runs on Feather nRF52840 Express with a 3.5" FeatherWing
 import time
 import displayio
 import terminalio
+import board
+import keypad
 from adafruit_display_text import bitmap_label
 from adafruit_displayio_layout.layouts.grid_layout import GridLayout
 from adafruit_displayio_layout.widgets.icon_widget import IconWidget
@@ -28,6 +30,13 @@ from layers import (
     KEY_RELEASE,
     CHANGE_LAYER,
 )
+
+# Physical keys setup
+KEY_PINS = (
+    board.D13,
+    board.D12,
+)
+keys = keypad.Keys(KEY_PINS, value_when_pressed=False, pull=True)
 
 # seems to help the touchscreen not get stuck with chip not found
 time.sleep(2)
@@ -176,6 +185,9 @@ load_layer(current_layer)
 
 #  main loop
 while True:
+    keyevent = keys.events.get()
+    if keyevent:
+        print(keyevent)
     if touchscreen.touched:
         # loop over all data in touchscreen buffer
         while not touchscreen.buffer_empty:
