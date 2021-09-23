@@ -13,6 +13,7 @@ import displayio
 import terminalio
 import rotaryio
 import digitalio
+import analogio
 import board
 import keypad
 from adafruit_display_text import bitmap_label
@@ -32,21 +33,45 @@ from layers import (
     KEY_RELEASE,
     CHANGE_LAYER,
 )
+from helpers import *
 
-# Physical keys setup
+# Pin Assignments
 KEY_PINS = (
     board.D13,  # Key 0
     board.D12,  # Key 1
+    #board.PIN_NUM  # Key 2
+    #board.PIN_NUM  # Key 3
+    #board.PIN_NUM  # Key 4
+    #board.PIN_NUM  # Key 5
+    #board.PIN_NUM  # Key 6
+    #board.PIN_NUM  # Key 7
 )
+ENC_CLK = board.A1
+ENC_DT = board.A2
+ENC_SW = board.A3
+JOY_X = board.A4
+JOY_Y = board.A5
+JOY_SW = board.RX
+
+# Physical keys setup
 keys = keypad.Keys(KEY_PINS, value_when_pressed=False, pull=True)
 
 # Rotary encoder setup
-encoder = rotaryio.IncrementalEncoder(board.A1, board.A2)
-last_position = encoder.position
-encoder_button = digitalio.DigitalInOut(board.A3)
+encoder = rotaryio.IncrementalEncoder(ENC_CLK, ENC_DT)
+encoder_last_pos = encoder.position
+encoder_button = digitalio.DigitalInOut(ENC_SW)
 encoder_button.direction = digitalio.Direction.INPUT
 encoder_button.pull = digitalio.Pull.UP
 encoder_button_state = None
+
+# Joystick setup
+joystick_x = analogio.AnalogIn(JOY_X)
+joystick_y = analogio.AnalogIn(JOY_Y)
+joystick_last_pos = scaleJoyPosition((joystick_x.value, joystick_y.value))
+joystick_button = digitalio.DigitalInOut(JOY_SW)
+joystick_button.direction = digitalio.Direction.INPUT
+joystick_button.pull = digitalio.Pull.UP
+joystick_button_state = None
 
 # seems to help the touchscreen not get stuck with chip not found
 time.sleep(2)
@@ -245,32 +270,52 @@ while True:
             performActions(_cur_actions)
 
     # Rotary encoder events and actions
-    current_position = encoder.position
-    position_change = current_position - last_position
+    encoder_current_pos = encoder.position
+    encoder_change = encoder_current_pos - encoder_last_pos
     # Check if encoder rotated clockwise
-    if position_change > 0:
-        for _ in range(position_change):
+    if encoder_change > 0:
+        for _ in range(encoder_change):
             # Perform increment macro
             _cur_actions = slate_config["layers"][current_layer]["encoder"].get("increment")
             performActions(_cur_actions)
-            print("[Encoder] position: " + str(current_position))
+            print("[Encoder] position: " + str(encoder_current_pos))
     # Check if encoder rotated counter-clockwise
-    if position_change < 0:
-        for _ in range(-position_change):
+    if encoder_change < 0:
+        for _ in range(-encoder_change):
             # Perform decrement macro
             _cur_actions = slate_config["layers"][current_layer]["encoder"].get("decrement")
             performActions(_cur_actions)
-            print("[Encoder] position: " + str(current_position))
-    last_position = current_position
+            print("[Encoder] position: " + str(encoder_current_pos))
+    encoder_last_pos = encoder_current_pos
     # Check if encoder button pressed
     if not encoder_button.value and encoder_button_state is None:
         encoder_button_state = "pressed"
     if encoder_button.value and encoder_button_state == "pressed":
         # Perform encoder button macro
-        _cur_actions = slate_config["layers"][current_layer]["encoder"].get("button")
+        _cur_actions = slate_config["layers"][current_layer]["encoder"]["button"]
         performActions(_cur_actions)
         print("[Encoder] button pressed.")
         encoder_button_state = None
+
+    # Check if joystick position changed
+    joystick_current_pos = scaleJoyPosition((joystick_x.value, joystick_y.value))
+    # X position changed
+    if abs(joystick_current_pos[0] - joystick_last_pos[0]) > 5:
+        print("[Joystick] position: " + str(joystick_current_pos))
+        joystick_last_pos = joystick_current_pos
+    # Y position changed
+    if abs(joystick_current_pos[1] - joystick_last_pos[1]) > 5:
+        print("[Joystick] position: " + str(joystick_current_pos))
+        joystick_last_pos = joystick_current_pos
+    # Check if joystick button pressed
+    if not joystick_button.value and joystick_button_state is None:
+        joystick_button_state = "pressed"
+    if joystick_button.value and joystick_button_state == "pressed":
+        # Perform joystick button macro
+        _cur_actions = slate_config["layers"][current_layer]["joystick"].get("button")
+        performActions(_cur_actions)
+        print("[Joystick] button pressed.")
+        joystick_button_state = None
 
     # Touchscreen events and actions
     if touchscreen.touched:

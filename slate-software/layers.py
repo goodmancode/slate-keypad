@@ -89,6 +89,9 @@ slate_config = {
                 "decrement": (MEDIA, ConsumerControlCode.VOLUME_DECREMENT),
                 "button": (MEDIA, ConsumerControlCode.PLAY_PAUSE),
             },
+            "joystick": {
+                "button": (STRING, "Slate"),
+            }
         },
         {
             "name": "Youtube Controls",

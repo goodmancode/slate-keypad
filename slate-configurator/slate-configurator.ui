@@ -1,0 +1,1688 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>820</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>820</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>820</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Slate Configurator</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>801</width>
+      <height>581</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_5">
+     <item>
+      <widget class="QWidget" name="widget" native="true">
+       <widget class="Line" name="line_3">
+        <property name="geometry">
+         <rect>
+          <x>220</x>
+          <y>539</y>
+          <width>31</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton">
+        <property name="geometry">
+         <rect>
+          <x>110</x>
+          <y>540</y>
+          <width>111</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Back</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_2">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>540</y>
+          <width>111</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Save Config as File</string>
+        </property>
+       </widget>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>471</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Layer</string>
+        </property>
+        <widget class="QComboBox" name="comboBox_18">
+         <property name="geometry">
+          <rect>
+           <x>50</x>
+           <y>20</y>
+           <width>191</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <item>
+          <property name="text">
+           <string>Layer 1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Layer 2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Layer 3</string>
+          </property>
+         </item>
+        </widget>
+        <widget class="QPushButton" name="pushButton_6">
+         <property name="geometry">
+          <rect>
+           <x>390</x>
+           <y>20</y>
+           <width>71</width>
+           <height>23</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Delete</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="pushButton_7">
+         <property name="geometry">
+          <rect>
+           <x>260</x>
+           <y>20</y>
+           <width>111</width>
+           <height>23</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>+ Create new layer</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_22">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>20</y>
+           <width>31</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Select:</string>
+         </property>
+         <property name="buddy">
+          <cstring>comboBox_18</cstring>
+         </property>
+        </widget>
+        <widget class="Line" name="line_5">
+         <property name="geometry">
+          <rect>
+           <x>372</x>
+           <y>21</y>
+           <width>21</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+        <widget class="Line" name="line_6">
+         <property name="geometry">
+          <rect>
+           <x>240</x>
+           <y>20</y>
+           <width>21</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="groupBox_2">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>60</y>
+          <width>471</width>
+          <height>471</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Macros</string>
+        </property>
+        <widget class="QTabWidget" name="tabWidget_2">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>20</y>
+           <width>451</width>
+           <height>441</height>
+          </rect>
+         </property>
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <widget class="QWidget" name="tab_5">
+          <attribute name="title">
+           <string>On-Screen Keys</string>
+          </attribute>
+          <widget class="QLabel" name="label_23">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>20</y>
+             <width>31</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Rows</string>
+           </property>
+           <property name="buddy">
+            <cstring>spinBox_3</cstring>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_24">
+           <property name="geometry">
+            <rect>
+             <x>170</x>
+             <y>20</y>
+             <width>41</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Columns</string>
+           </property>
+           <property name="buddy">
+            <cstring>spinBox_4</cstring>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="spinBox_3">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>20</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="maximum">
+            <number>3</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="spinBox_4">
+           <property name="geometry">
+            <rect>
+             <x>220</x>
+             <y>20</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="maximum">
+            <number>4</number>
+           </property>
+          </widget>
+          <widget class="Line" name="line_7">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>50</y>
+             <width>421</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_25">
+           <property name="geometry">
+            <rect>
+             <x>110</x>
+             <y>20</y>
+             <width>41</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#7f7f7f;&quot;&gt;(max 3)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_26">
+           <property name="geometry">
+            <rect>
+             <x>270</x>
+             <y>20</y>
+             <width>41</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#7f7f7f;&quot;&gt;(max 4)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_55">
+           <property name="geometry">
+            <rect>
+             <x>30</x>
+             <y>160</y>
+             <width>81</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Label&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_56">
+           <property name="geometry">
+            <rect>
+             <x>130</x>
+             <y>160</y>
+             <width>81</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Label&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_57">
+           <property name="geometry">
+            <rect>
+             <x>230</x>
+             <y>160</y>
+             <width>81</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Label&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_58">
+           <property name="geometry">
+            <rect>
+             <x>330</x>
+             <y>160</y>
+             <width>81</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Label&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_59">
+           <property name="geometry">
+            <rect>
+             <x>30</x>
+             <y>270</y>
+             <width>81</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Label&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_60">
+           <property name="geometry">
+            <rect>
+             <x>130</x>
+             <y>270</y>
+             <width>81</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Label&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_61">
+           <property name="geometry">
+            <rect>
+             <x>230</x>
+             <y>270</y>
+             <width>81</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Label&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_62">
+           <property name="geometry">
+            <rect>
+             <x>330</x>
+             <y>270</y>
+             <width>81</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Label&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_63">
+           <property name="geometry">
+            <rect>
+             <x>30</x>
+             <y>380</y>
+             <width>81</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Label&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_64">
+           <property name="geometry">
+            <rect>
+             <x>130</x>
+             <y>380</y>
+             <width>81</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Label&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_65">
+           <property name="geometry">
+            <rect>
+             <x>230</x>
+             <y>380</y>
+             <width>81</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Label&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_66">
+           <property name="geometry">
+            <rect>
+             <x>330</x>
+             <y>380</y>
+             <width>81</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Label&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_8">
+           <property name="geometry">
+            <rect>
+             <x>30</x>
+             <y>80</y>
+             <width>81</width>
+             <height>81</height>
+            </rect>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../icons.qrc">
+             <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>80</width>
+             <height>80</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_9">
+           <property name="geometry">
+            <rect>
+             <x>130</x>
+             <y>80</y>
+             <width>81</width>
+             <height>81</height>
+            </rect>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../icons.qrc">
+             <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>80</width>
+             <height>80</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_10">
+           <property name="geometry">
+            <rect>
+             <x>230</x>
+             <y>80</y>
+             <width>81</width>
+             <height>81</height>
+            </rect>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../icons.qrc">
+             <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>80</width>
+             <height>80</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_11">
+           <property name="geometry">
+            <rect>
+             <x>330</x>
+             <y>80</y>
+             <width>81</width>
+             <height>81</height>
+            </rect>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../icons.qrc">
+             <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>80</width>
+             <height>80</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_12">
+           <property name="geometry">
+            <rect>
+             <x>30</x>
+             <y>190</y>
+             <width>81</width>
+             <height>81</height>
+            </rect>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../icons.qrc">
+             <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>80</width>
+             <height>80</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_13">
+           <property name="geometry">
+            <rect>
+             <x>130</x>
+             <y>190</y>
+             <width>81</width>
+             <height>81</height>
+            </rect>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../icons.qrc">
+             <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>80</width>
+             <height>80</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_14">
+           <property name="geometry">
+            <rect>
+             <x>230</x>
+             <y>190</y>
+             <width>81</width>
+             <height>81</height>
+            </rect>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../icons.qrc">
+             <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>80</width>
+             <height>80</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_15">
+           <property name="geometry">
+            <rect>
+             <x>330</x>
+             <y>190</y>
+             <width>81</width>
+             <height>81</height>
+            </rect>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../icons.qrc">
+             <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>80</width>
+             <height>80</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_16">
+           <property name="geometry">
+            <rect>
+             <x>230</x>
+             <y>300</y>
+             <width>81</width>
+             <height>81</height>
+            </rect>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../icons.qrc">
+             <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>80</width>
+             <height>80</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_17">
+           <property name="geometry">
+            <rect>
+             <x>30</x>
+             <y>300</y>
+             <width>81</width>
+             <height>81</height>
+            </rect>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../icons.qrc">
+             <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>80</width>
+             <height>80</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_18">
+           <property name="geometry">
+            <rect>
+             <x>330</x>
+             <y>300</y>
+             <width>81</width>
+             <height>81</height>
+            </rect>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../icons.qrc">
+             <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>80</width>
+             <height>80</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_19">
+           <property name="geometry">
+            <rect>
+             <x>130</x>
+             <y>300</y>
+             <width>81</width>
+             <height>81</height>
+            </rect>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../icons.qrc">
+             <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>80</width>
+             <height>80</height>
+            </size>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QWidget" name="tab_6">
+          <attribute name="title">
+           <string>Physical Keys</string>
+          </attribute>
+          <widget class="QLabel" name="label_27">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>20</y>
+             <width>41</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Key 1</string>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="comboBox_19">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>20</y>
+             <width>121</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <item>
+            <property name="text">
+             <string>None</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Hotkey</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>String</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Media Control</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Window Sizing</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Mouse</string>
+            </property>
+           </item>
+          </widget>
+          <widget class="QLabel" name="label_28">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>50</y>
+             <width>41</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Key 2</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_29">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>80</y>
+             <width>41</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Key 3</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_30">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>110</y>
+             <width>41</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Key 4</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_31">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>140</y>
+             <width>41</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Key 5</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_32">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>170</y>
+             <width>41</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Key 6</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_33">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>200</y>
+             <width>41</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Key 7</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_34">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>230</y>
+             <width>41</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Key 8</string>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="comboBox_20">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>50</y>
+             <width>121</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <item>
+            <property name="text">
+             <string>None</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Hotkey</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>String</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Media Control</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Window Sizing</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Mouse</string>
+            </property>
+           </item>
+          </widget>
+          <widget class="QComboBox" name="comboBox_21">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>110</y>
+             <width>121</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <item>
+            <property name="text">
+             <string>None</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Hotkey</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>String</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Media Control</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Window Sizing</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Mouse</string>
+            </property>
+           </item>
+          </widget>
+          <widget class="QComboBox" name="comboBox_22">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>80</y>
+             <width>121</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <item>
+            <property name="text">
+             <string>None</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Hotkey</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>String</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Media Control</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Window Sizing</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Mouse</string>
+            </property>
+           </item>
+          </widget>
+          <widget class="QComboBox" name="comboBox_23">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>170</y>
+             <width>121</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <item>
+            <property name="text">
+             <string>None</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Hotkey</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>String</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Media Control</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Window Sizing</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Mouse</string>
+            </property>
+           </item>
+          </widget>
+          <widget class="QComboBox" name="comboBox_24">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>140</y>
+             <width>121</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <item>
+            <property name="text">
+             <string>None</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Hotkey</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>String</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Media Control</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Window Sizing</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Mouse</string>
+            </property>
+           </item>
+          </widget>
+          <widget class="QComboBox" name="comboBox_25">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>230</y>
+             <width>121</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <item>
+            <property name="text">
+             <string>None</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Hotkey</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>String</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Media Control</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Window Sizing</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Mouse</string>
+            </property>
+           </item>
+          </widget>
+          <widget class="QComboBox" name="comboBox_26">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>200</y>
+             <width>121</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <item>
+            <property name="text">
+             <string>None</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Hotkey</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>String</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Media Control</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Window Sizing</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Mouse</string>
+            </property>
+           </item>
+          </widget>
+         </widget>
+         <widget class="QWidget" name="tab_7">
+          <attribute name="title">
+           <string>Joystick</string>
+          </attribute>
+          <widget class="QLabel" name="label_35">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>50</y>
+             <width>71</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>X-Axis (-)</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_36">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>20</y>
+             <width>71</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>X-Axis (+)</string>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="comboBox_27">
+           <property name="geometry">
+            <rect>
+             <x>100</x>
+             <y>50</y>
+             <width>121</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <item>
+            <property name="text">
+             <string>None</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Hotkey</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>String</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Media Control</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Window Sizing</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Mouse</string>
+            </property>
+           </item>
+          </widget>
+          <widget class="QComboBox" name="comboBox_28">
+           <property name="geometry">
+            <rect>
+             <x>100</x>
+             <y>20</y>
+             <width>121</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <item>
+            <property name="text">
+             <string>None</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Hotkey</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>String</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Media Control</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Window Sizing</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Mouse</string>
+            </property>
+           </item>
+          </widget>
+          <widget class="QComboBox" name="comboBox_29">
+           <property name="geometry">
+            <rect>
+             <x>100</x>
+             <y>80</y>
+             <width>121</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <item>
+            <property name="text">
+             <string>None</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Hotkey</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>String</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Media Control</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Window Sizing</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Mouse</string>
+            </property>
+           </item>
+          </widget>
+          <widget class="QLabel" name="label_37">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>80</y>
+             <width>71</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Y-Axis (+)</string>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="comboBox_30">
+           <property name="geometry">
+            <rect>
+             <x>100</x>
+             <y>110</y>
+             <width>121</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <item>
+            <property name="text">
+             <string>None</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Hotkey</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>String</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Media Control</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Window Sizing</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Mouse</string>
+            </property>
+           </item>
+          </widget>
+          <widget class="QLabel" name="label_38">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>110</y>
+             <width>71</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Y-Axis (-)</string>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="comboBox_31">
+           <property name="geometry">
+            <rect>
+             <x>100</x>
+             <y>140</y>
+             <width>121</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <item>
+            <property name="text">
+             <string>None</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Hotkey</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>String</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Media Control</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Window Sizing</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Mouse</string>
+            </property>
+           </item>
+          </widget>
+          <widget class="QLabel" name="label_39">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>140</y>
+             <width>71</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Button</string>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QWidget" name="tab_8">
+          <attribute name="title">
+           <string>Rotary Encoder</string>
+          </attribute>
+          <widget class="QLabel" name="label_40">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>20</y>
+             <width>111</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Clockwise (Increment)</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_41">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>50</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Counter-Clockwise (Decrement)</string>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="comboBox_32">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>20</y>
+             <width>121</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <item>
+            <property name="text">
+             <string>None</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Hotkey</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>String</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Media Control</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Window Sizing</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Mouse</string>
+            </property>
+           </item>
+          </widget>
+          <widget class="QComboBox" name="comboBox_33">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>50</y>
+             <width>121</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <item>
+            <property name="text">
+             <string>None</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Hotkey</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>String</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Media Control</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Window Sizing</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Mouse</string>
+            </property>
+           </item>
+          </widget>
+          <widget class="QLabel" name="label_42">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>80</y>
+             <width>41</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Button</string>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="comboBox_34">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>80</y>
+             <width>121</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <item>
+            <property name="text">
+             <string>None</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Hotkey</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>String</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Media Control</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Window Sizing</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Mouse</string>
+            </property>
+           </item>
+          </widget>
+         </widget>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="groupBox_3">
+        <property name="geometry">
+         <rect>
+          <x>479</x>
+          <y>-1</y>
+          <width>301</width>
+          <height>531</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Preview</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_3">
+        <property name="geometry">
+         <rect>
+          <x>520</x>
+          <y>540</y>
+          <width>221</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Apply to Slate</string>
+        </property>
+       </widget>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources>
+  <include location="../icons.qrc"/>
+ </resources>
+ <connections/>
+</ui>
