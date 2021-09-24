@@ -81,7 +81,31 @@ slate_config = {
                 },
                 {
                     "assigned_key": 1,
-                    "actions": (STRING, "Slate"),
+                    "actions": (STRING, "Keypad"),
+                },
+                {
+                    "assigned_key": 2,
+                    "actions": (None, None),
+                },
+                {
+                    "assigned_key": 3,
+                    "actions": (None, None),
+                },
+                {
+                    "assigned_key": 4,
+                    "actions": (None, None),
+                },
+                {
+                    "assigned_key": 5,
+                    "actions": (None, None),
+                },
+                {
+                    "assigned_key": 6,
+                    "actions": (None, None),
+                },
+                {
+                    "assigned_key": 7,
+                    "actions": (None, None),
                 },
             ],
             "encoder": {
