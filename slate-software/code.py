@@ -257,11 +257,22 @@ load_layer(current_layer)
 
 #  main loop
 while True:
+    # Determine if layer uses input types
+    layer_uses_keys = False
+    layer_uses_encoder = False
+    layer_uses_joystick = False
+    if "key_shortcuts" in slate_config["layers"][current_layer]:
+        layer_uses_keys = True
+    if "encoder" in slate_config["layers"][current_layer]:
+        layer_uses_encoder = True
+    if "joystick" in slate_config["layers"][current_layer]:
+        layer_uses_joystick = True
+    
     # Physical key events and actions
     keyevent = keys.events.get()
     if keyevent:
         print(keyevent)
-        if keyevent.pressed:
+        if keyevent.pressed and layer_uses_keys:
             # get actions for this key from config object
             for key in slate_config["layers"][current_layer]["key_shortcuts"]:
                 if key["assigned_key"] == keyevent.key_number:
@@ -276,15 +287,17 @@ while True:
     if encoder_change > 0:
         for _ in range(encoder_change):
             # Perform increment macro
-            _cur_actions = slate_config["layers"][current_layer]["encoder"].get("increment")
-            performActions(_cur_actions)
+            if layer_uses_encoder:
+                _cur_actions = slate_config["layers"][current_layer]["encoder"].get("increment")
+                performActions(_cur_actions)
             print("[Encoder] position: " + str(encoder_current_pos))
     # Check if encoder rotated counter-clockwise
     if encoder_change < 0:
         for _ in range(-encoder_change):
             # Perform decrement macro
-            _cur_actions = slate_config["layers"][current_layer]["encoder"].get("decrement")
-            performActions(_cur_actions)
+            if layer_uses_encoder:
+                _cur_actions = slate_config["layers"][current_layer]["encoder"].get("decrement")
+                performActions(_cur_actions)
             print("[Encoder] position: " + str(encoder_current_pos))
     encoder_last_pos = encoder_current_pos
     # Check if encoder button pressed
@@ -292,8 +305,9 @@ while True:
         encoder_button_state = "pressed"
     if encoder_button.value and encoder_button_state == "pressed":
         # Perform encoder button macro
-        _cur_actions = slate_config["layers"][current_layer]["encoder"]["button"]
-        performActions(_cur_actions)
+        if layer_uses_encoder:
+            _cur_actions = slate_config["layers"][current_layer]["encoder"]["button"]
+            performActions(_cur_actions)
         print("[Encoder] button pressed.")
         encoder_button_state = None
 
