@@ -10,7 +10,7 @@ This version runs on Feather nRF52840 Express with a 3.5" FeatherWing
 # Print starting memory
 import gc
 gc.collect()
-print("[MemCheck] bytes free before imports: " + str(gc.mem_free()))
+print("[MemCheck] bytes free before imports:\t\t\t\t" + str(gc.mem_free()))
 
 # Imports
 import time
@@ -48,7 +48,7 @@ from helpers import *
 
 # Garbage collect and print free memory space
 gc.collect()
-print("[MemCheck] bytes free after imports: " + str(gc.mem_free()))
+print("[MemCheck] bytes free after imports:\t\t\t\t" + str(gc.mem_free()))
 
 # Pin Assignments
 KEY_PINS = (
@@ -112,11 +112,16 @@ scan_response = Advertisement()
 scan_response.complete_name = "CircuitPython HID"
 ble = adafruit_ble.BLERadio()
 if not ble.connected:
-    print("advertising")
+    print("[Bluetooth] advertising.")
     ble.start_advertising(advertisement, scan_response)
+    ble_advertising = True
 else:
-    print("already connected")
+    print("[Bluetooth] already connected.")
     print(ble.connections)
+    ble_advertising = False
+ble_kbd = Keyboard(ble_hid.devices)
+ble_kbd_layout = KeyboardLayoutUS(ble_kbd)
+ble_cc = ConsumerControl(ble_hid.devices)
 
 # variables to enforce timout between icon presses
 COOLDOWN_TIME = 0.5
@@ -221,19 +226,21 @@ def load_layer(layer_index):
     # remove previous layer icons from the layout
     while len(layout) > 0:
         layout.pop()
+        gc.collect()
+        print("[MemCheck] bytes free after popping an icon:\t\t\t" + str(gc.mem_free()))
 
     # set the layer labeled at the top of the screen
     layer_label.text = slate_config["layers"][layer_index]["name"]
     # Garbage collect and print free memory space
     gc.collect()
-    print("[MemCheck] bytes free before loading custom icons: " + str(gc.mem_free()))
+    print("[MemCheck] bytes free before loading custom icons:\t\t" + str(gc.mem_free()))
     # loop over each shortcut and it's index
     for i, shortcut in enumerate(slate_config["layers"][layer_index]["touch_shortcuts"]):
         # create an icon for the current shortcut
         _new_icon = IconWidget(shortcut["label"], shortcut["icon"], on_disk=True)
         # Garbage collect and print free memory space
         gc.collect()
-        print("[MemCheck] bytes free after loading icon " + str(i) + ": " + str(gc.mem_free()))
+        print("[MemCheck] bytes free after loading icon " + str(i) + ":\t\t\t" + str(gc.mem_free()))
         # add it to the list of icons
         _icons.append(_new_icon)
 
@@ -246,6 +253,10 @@ def load_layer(layer_index):
     main_group.pop()
 
 def performActions(_cur_actions):
+    # Check whether to send over Bluetooth
+    bluetooth = False
+    if ble.connected:
+        bluetooth = True
     # tuple means it's a single action
     if isinstance(_cur_actions, tuple):
         # put it in a list by itself
@@ -254,20 +265,36 @@ def performActions(_cur_actions):
     for _action in _cur_actions:
         # HID keyboard keys
         if _action[0] == KEY:
-            kbd.press(*_action[1])
-            kbd.release(*_action[1])
+            if bluetooth:
+                ble_kbd.press(*_action[1])
+                ble_kbd.release(*_action[1])
+            else:
+                kbd.press(*_action[1])
+                kbd.release(*_action[1])
         # String to write from layout
         elif _action[0] == STRING:
-            kbd_layout.write(_action[1])
+            if bluetooth:
+                ble_kbd_layout.write(_action[1])
+            else:
+                kbd_layout.write(_action[1])
         # Consumer control code
         elif _action[0] == MEDIA:
-            cc.send(_action[1])
+            if bluetooth:
+                ble_cc.send(_action[1])
+            else:
+                cc.send(_action[1])
         # Key press
         elif _action[0] == KEY_PRESS:
-            kbd.press(*_action[1])
+            if bluetooth:
+                ble_kbd.press(*_action[1])
+            else:
+                kbd.press(*_action[1])
         # Key release
         elif _action[0] == KEY_RELEASE:
-            kbd.release(*_action[1])
+            if bluetooth:
+                ble_kbd.release(*_action[1])
+            else:
+                kbd.release(*_action[1])
         # Change Layer
         elif _action[0] == CHANGE_LAYER:
             if isinstance(
@@ -289,7 +316,7 @@ main_group.append(layout)
 
 # Garbage collect and print free memory space
 gc.collect()
-print("[MemCheck] bytes free before load_layer: " + str(gc.mem_free()))
+print("[MemCheck] bytes free before load_layer:\t\t\t" + str(gc.mem_free()))
 # load the first layer to start
 load_layer(current_layer)
 
@@ -305,6 +332,18 @@ while True:
         layer_uses_encoder = True
     if "joystick" in slate_config["layers"][current_layer]:
         layer_uses_joystick = True
+
+    # Bluetooth
+    if not ble_advertising and not ble.connected:
+        ble.start_advertising(advertisement)
+        ble_advertising = True
+        print("[Bluetooth] advertising.")
+    connected_message_printed = False
+    if ble.connected:
+        just_connected = ble_advertising
+        if just_connected:
+            print("[Bluetooth] connected.")
+        ble_advertising = False
     
     # Physical key events and actions
     keyevent = keys.events.get()
