@@ -7,7 +7,12 @@
 """
 This version runs on Feather nRF52840 Express with a 3.5" FeatherWing
 """
+# Print starting memory
+import gc
+gc.collect()
+print("[MemCheck] bytes free before imports: " + str(gc.mem_free()))
 
+# Imports
 import time
 import displayio
 import terminalio
@@ -16,6 +21,11 @@ import digitalio
 import analogio
 import board
 import keypad
+import adafruit_ble
+from adafruit_ble.advertising import Advertisement
+from adafruit_ble.advertising.standard import ProvideServicesAdvertisement
+from adafruit_ble.services.standard.hid import HIDService
+from adafruit_ble.services.standard.device_info import DeviceInfoService
 from adafruit_display_text import bitmap_label
 from adafruit_displayio_layout.layouts.grid_layout import GridLayout
 from adafruit_displayio_layout.widgets.icon_widget import IconWidget
@@ -24,6 +34,7 @@ import usb_hid
 from adafruit_hid.keyboard import Keyboard
 from adafruit_hid.keyboard_layout_us import KeyboardLayoutUS
 from adafruit_hid.consumer_control import ConsumerControl
+from adafruit_hid.keycode import Keycode
 from layers import (
     slate_config,
     KEY,
@@ -34,6 +45,10 @@ from layers import (
     CHANGE_LAYER,
 )
 from helpers import *
+
+# Garbage collect and print free memory space
+gc.collect()
+print("[MemCheck] bytes free after imports: " + str(gc.mem_free()))
 
 # Pin Assignments
 KEY_PINS = (
@@ -82,10 +97,26 @@ tft_featherwing = tft_featherwing_35.TFTFeatherWing35()
 display = tft_featherwing.display
 touchscreen = tft_featherwing.touchscreen
 
-# HID setup
+# USB HID setup
 kbd = Keyboard(usb_hid.devices)
 cc = ConsumerControl(usb_hid.devices)
 kbd_layout = KeyboardLayoutUS(kbd)
+
+# Bluetooth HID setup
+ble_hid = HIDService()
+device_info = DeviceInfoService(software_revision=adafruit_ble.__version__,
+                                manufacturer="Adafruit Industries")
+advertisement = ProvideServicesAdvertisement(ble_hid)
+advertisement.appearance = 961
+scan_response = Advertisement()
+scan_response.complete_name = "CircuitPython HID"
+ble = adafruit_ble.BLERadio()
+if not ble.connected:
+    print("advertising")
+    ble.start_advertising(advertisement, scan_response)
+else:
+    print("already connected")
+    print(ble.connections)
 
 # variables to enforce timout between icon presses
 COOLDOWN_TIME = 0.5
@@ -193,12 +224,16 @@ def load_layer(layer_index):
 
     # set the layer labeled at the top of the screen
     layer_label.text = slate_config["layers"][layer_index]["name"]
-
+    # Garbage collect and print free memory space
+    gc.collect()
+    print("[MemCheck] bytes free before loading custom icons: " + str(gc.mem_free()))
     # loop over each shortcut and it's index
     for i, shortcut in enumerate(slate_config["layers"][layer_index]["touch_shortcuts"]):
         # create an icon for the current shortcut
         _new_icon = IconWidget(shortcut["label"], shortcut["icon"], on_disk=True)
-
+        # Garbage collect and print free memory space
+        gc.collect()
+        print("[MemCheck] bytes free after loading icon " + str(i) + ": " + str(gc.mem_free()))
         # add it to the list of icons
         _icons.append(_new_icon)
 
@@ -252,6 +287,9 @@ def performActions(_cur_actions):
 # so it gets shown on the display
 main_group.append(layout)
 
+# Garbage collect and print free memory space
+gc.collect()
+print("[MemCheck] bytes free before load_layer: " + str(gc.mem_free()))
 # load the first layer to start
 load_layer(current_layer)
 
