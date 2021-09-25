@@ -14,6 +14,7 @@ print("[MemCheck] bytes free before imports:\t\t\t\t" + str(gc.mem_free()))
 
 # Imports
 import time
+import supervisor
 import displayio
 import terminalio
 import rotaryio
@@ -98,9 +99,11 @@ display = tft_featherwing.display
 touchscreen = tft_featherwing.touchscreen
 
 # USB HID setup
-kbd = Keyboard(usb_hid.devices)
-cc = ConsumerControl(usb_hid.devices)
-kbd_layout = KeyboardLayoutUS(kbd)
+if supervisor.runtime.usb_connected:
+    kbd = Keyboard(usb_hid.devices)
+    cc = ConsumerControl(usb_hid.devices)
+    kbd_layout = KeyboardLayoutUS(kbd)
+    print("[USB] connected and HID service started.")
 
 # Bluetooth HID setup
 ble_hid = HIDService()
@@ -165,6 +168,32 @@ loading_label.anchored_position = (display.width // 2, display.height // 2)
 # append background and label to the group
 loading_group.append(loading_background_scale_group)
 loading_group.append(loading_label)
+
+# Connect to host screen
+connect_group = displayio.Group()
+
+# black background, screen size minus side buttons
+connect_background = displayio.Bitmap(
+    display.width // 20, display.height // 20, 1
+)
+connect_palette = displayio.Palette(1)
+connect_palette[0] = 0x0
+
+# scale connect screen background
+connect_background_scale_group = displayio.Group(scale=20)
+connect_background_tilegrid = displayio.TileGrid(
+    connect_background, pixel_shader=connect_palette
+)
+connect_background_scale_group.append(connect_background_tilegrid)
+
+# connect screen label
+connect_label = bitmap_label.Label(terminalio.FONT, text="Connect to host via\nUSB or Bluetooth...", scale=3)
+connect_label.anchor_point = (0.5, 0.5)
+connect_label.anchored_position = (display.width // 2, display.height // 2)
+
+# append background and label to the group
+connect_group.append(connect_background_scale_group)
+connect_group.append(connect_label)
 
 # GridLayout to hold the icons
 # size and location can be adjusted to fit
@@ -252,6 +281,23 @@ def load_layer(layer_index):
     time.sleep(0.05)
     main_group.pop()
 
+def connect_screen():
+    # show the connect screen
+    main_group.append(connect_group)
+    time.sleep(0.05)
+    while not (supervisor.runtime.usb_connected or ble.connected):
+        time.sleep(1)
+    if supervisor.runtime.usb_connected:
+        kbd = Keyboard(usb_hid.devices)
+        cc = ConsumerControl(usb_hid.devices)
+        kbd_layout = KeyboardLayoutUS(kbd)
+        print("[USB] connected and HID service started.")
+    if ble.connected:
+        print("[Bluetooth] connected.")
+    main_group.pop()
+    gc.collect()
+    print("[MemCheck] bytes free before loading after host connected:\t\t" + str(gc.mem_free()))
+
 def performActions(_cur_actions):
     # Check whether to send over Bluetooth
     bluetooth = False
@@ -322,6 +368,10 @@ load_layer(current_layer)
 
 #  main loop
 while True:
+    # Wait at connect screen if not connected to a Host device
+    if not (supervisor.runtime.usb_connected or ble.connected):
+        print("[System] host device not found. Waiting on connection...")
+        connect_screen()
     # Determine if layer uses input types
     layer_uses_keys = False
     layer_uses_encoder = False
