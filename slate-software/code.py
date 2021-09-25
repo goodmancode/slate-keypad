@@ -89,15 +89,6 @@ joystick_button.direction = digitalio.Direction.INPUT
 joystick_button.pull = digitalio.Pull.UP
 joystick_button_state = None
 
-# seems to help the touchscreen not get stuck with chip not found
-time.sleep(2)
-
-# display and touchscreen initialization
-displayio.release_displays()
-tft_featherwing = tft_featherwing_35.TFTFeatherWing35()
-display = tft_featherwing.display
-touchscreen = tft_featherwing.touchscreen
-
 # USB HID setup
 if supervisor.runtime.usb_connected:
     kbd = Keyboard(usb_hid.devices)
@@ -125,6 +116,12 @@ else:
 ble_kbd = Keyboard(ble_hid.devices)
 ble_kbd_layout = KeyboardLayoutUS(ble_kbd)
 ble_cc = ConsumerControl(ble_hid.devices)
+
+# display and touchscreen initialization
+displayio.release_displays()
+tft_featherwing = tft_featherwing_35.TFTFeatherWing35()
+display = tft_featherwing.display
+touchscreen = tft_featherwing.touchscreen
 
 # variables to enforce timout between icon presses
 COOLDOWN_TIME = 0.5
