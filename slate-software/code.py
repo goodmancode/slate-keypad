@@ -46,6 +46,7 @@ from layers import (
     CHANGE_LAYER,
 )
 from helpers import *
+from adafruit_simplemath import map_range
 
 # Garbage collect and print free memory space
 gc.collect()
@@ -68,6 +69,15 @@ ENC_SW = board.A3
 JOY_X = board.A4
 JOY_Y = board.A5
 JOY_SW = board.RX
+VDIV_PIN = board.VOLTAGE_MONITOR
+
+# Scales battery voltage values in range 0-100
+battery = analogio.AnalogIn(VDIV_PIN)
+def batteryPercentage():
+    return round(map_range(battery.value,34000,41000,0,100))
+
+# Print battery percentage at startup
+print("[System] battery percentage: "+ str(batteryPercentage()) + "%")
 
 # Physical keys setup
 keys = keypad.Keys(KEY_PINS, value_when_pressed=False, pull=True)
