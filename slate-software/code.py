@@ -73,11 +73,24 @@ VDIV_PIN = board.VOLTAGE_MONITOR
 
 # Scales battery voltage values in range 0-100
 battery = analogio.AnalogIn(VDIV_PIN)
+def get_voltage(pin):
+    return (pin.value * 3.3) / 65536 * 2
+def get_voltage_averaged(pin):
+    averaged = 0
+    for i in range(0,50):
+        averaged += get_voltage(pin)
+    averaged /= 50
+    return averaged
 def batteryPercentage():
-    return round(map_range(battery.value,34000,41000,0,100))
+    return round(map_range(get_voltage(battery),3.4,4.2,0,100))
 
 # Print battery percentage at startup
-print("[System] battery percentage: "+ str(batteryPercentage()) + "%")
+last_battery_voltage = round(get_voltage_averaged(battery), 2)
+current_battery_voltage = last_battery_voltage
+battery_charging = supervisor.runtime.usb_connected
+current_time = time.time()
+battery_poll_timer = 0
+print("[System] battery voltage: "+ str(last_battery_voltage))
 
 # Physical keys setup
 keys = keypad.Keys(KEY_PINS, value_when_pressed=False, pull=True)
@@ -115,14 +128,6 @@ advertisement.appearance = 961
 scan_response = Advertisement()
 scan_response.complete_name = "CircuitPython HID"
 ble = adafruit_ble.BLERadio()
-if not ble.connected:
-    print("[Bluetooth] advertising.")
-    ble.start_advertising(advertisement, scan_response)
-    ble_advertising = True
-else:
-    print("[Bluetooth] already connected.")
-    print(ble.connections)
-    ble_advertising = False
 ble_kbd = Keyboard(ble_hid.devices)
 ble_kbd_layout = KeyboardLayoutUS(ble_kbd)
 ble_cc = ConsumerControl(ble_hid.devices)
@@ -155,16 +160,18 @@ loading_group = displayio.Group()
 
 # black background, screen size minus side buttons
 loading_background = displayio.Bitmap(
-    (display.width - 40) // 20, display.height // 20, 1
+    (display.width) // 10, (display.height // 10), 1
 )
 loading_palette = displayio.Palette(1)
 loading_palette[0] = 0x0
 
 # scaled group to match screen size minus side buttons
-loading_background_scale_group = displayio.Group(scale=20)
+loading_background_scale_group = displayio.Group(scale=10)
 loading_background_tilegrid = displayio.TileGrid(
     loading_background, pixel_shader=loading_palette
 )
+loading_background_tilegrid.x = -4
+loading_background_tilegrid.y = 2
 loading_background_scale_group.append(loading_background_tilegrid)
 
 # loading screen label
@@ -198,8 +205,14 @@ connect_label = bitmap_label.Label(terminalio.FONT, text="Connect to host via\nU
 connect_label.anchor_point = (0.5, 0.5)
 connect_label.anchored_position = (display.width // 2, display.height // 2)
 
+# Battery indicator at the top of the screen (connect screen)
+battery_label_connect = bitmap_label.Label(terminalio.FONT)
+battery_label_connect.anchor_point = (1.0, 0.0)
+battery_label_connect.anchored_position = (display.width - 60, 4)
+
 # append background and label to the group
 connect_group.append(connect_background_scale_group)
+connect_group.append(battery_label_connect)
 connect_group.append(connect_label)
 
 # GridLayout to hold the icons
@@ -227,6 +240,26 @@ layer_label.anchor_point = (0.5, 0.0)
 layer_label.anchored_position = (display.width // 2, 4)
 main_group.append(layer_label)
 
+# Battery indicator at the top of the screen
+battery_label = bitmap_label.Label(terminalio.FONT)
+battery_label.anchor_point = (1.0, 0.0)
+battery_label.anchored_position = (display.width - 60, 4)
+main_group.append(battery_label)
+
+# Charging indicator
+charging_indicator = displayio.OnDiskBitmap("/icons/blanksymbol.bmp")
+charging_indicator_grid = displayio.TileGrid(charging_indicator, pixel_shader=charging_indicator.pixel_shader)
+charging_indicator_grid.x = display.width - 108
+charging_indicator_grid.y = 6
+main_group.append(charging_indicator_grid)
+
+# Bluetooth connection indicator
+ble_indicator = displayio.OnDiskBitmap("/icons/blanksymbol.bmp")
+ble_indicator_grid = displayio.TileGrid(ble_indicator, pixel_shader=ble_indicator.pixel_shader)
+ble_indicator_grid.x = display.width - 125
+ble_indicator_grid.y = 6
+main_group.append(ble_indicator_grid)
+
 # right side layer buttons
 next_layer_btn = IconWidget("", "icons/layer_next.bmp", on_disk=True)
 next_layer_btn.x = display.width - 40
@@ -246,6 +279,29 @@ home_layer_btn.y = 0
 home_layer_btn.resize = (40, 100)
 main_group.append(home_layer_btn)
 
+def changeChargingSymbol(image_path, layer):
+    try:
+        main_group.remove(layer)
+    except ValueError:
+        print("passing on ValueError")
+        pass
+    charging_indicator = displayio.OnDiskBitmap(image_path)
+    charging_indicator_grid = displayio.TileGrid(charging_indicator, pixel_shader=charging_indicator.pixel_shader)
+    charging_indicator_grid.x = display.width - 108
+    charging_indicator_grid.y = 6
+    main_group.append(charging_indicator_grid)
+
+def changeBluetoothSymbol(image_path, layer):
+    try:
+        main_group.remove(layer)
+    except ValueError:
+        print("passing on ValueError")
+        pass
+    ble_indicator = displayio.OnDiskBitmap(image_path)
+    ble_indicator_grid = displayio.TileGrid(ble_indicator, pixel_shader=ble_indicator.pixel_shader)
+    ble_indicator_grid.x = display.width - 125
+    ble_indicator_grid.y = 6
+    main_group.append(ble_indicator_grid)
 
 # helper method to load icons for an index by its index in the
 # list of layers
@@ -267,6 +323,7 @@ def load_layer(layer_index):
 
     # set the layer labeled at the top of the screen
     layer_label.text = slate_config["layers"][layer_index]["name"]
+    battery_label.text = "{:.2f}v".format(last_battery_voltage)
     # Garbage collect and print free memory space
     gc.collect()
     print("[MemCheck] bytes free before loading custom icons:\t\t" + str(gc.mem_free()))
@@ -288,12 +345,21 @@ def load_layer(layer_index):
     time.sleep(0.05)
     main_group.pop()
 
-def connect_screen():
+def connect_screen(last_battery_voltage):
     # show the connect screen
+    battery_label_connect.text = str(last_battery_voltage) + "v"
     main_group.append(connect_group)
     time.sleep(0.05)
+    battery_poll_timer = 0
     while not (supervisor.runtime.usb_connected or ble.connected):
-        time.sleep(1)
+        current_time = time.time()
+        if (current_time - battery_poll_timer) >= 5:
+            current_battery_voltage = round(get_voltage_averaged(battery), 2)
+            if current_battery_voltage < last_battery_voltage:
+                print("[System] battery voltage: " + str(current_battery_voltage))
+                last_battery_voltage = current_battery_voltage
+                battery_label_connect.text = str(last_battery_voltage) + "v"
+            battery_poll_timer = current_time
     if supervisor.runtime.usb_connected:
         kbd = Keyboard(usb_hid.devices)
         cc = ConsumerControl(usb_hid.devices)
@@ -301,9 +367,11 @@ def connect_screen():
         print("[USB] connected and HID service started.")
     if ble.connected:
         print("[Bluetooth] connected.")
+    battery_poll_timer = time.time()
     main_group.pop()
     gc.collect()
     print("[MemCheck] bytes free before loading after host connected:\t\t" + str(gc.mem_free()))
+    return last_battery_voltage
 
 def performActions(_cur_actions):
     # Check whether to send over Bluetooth
@@ -367,18 +435,64 @@ def performActions(_cur_actions):
 # so it gets shown on the display
 main_group.append(layout)
 
+# check existing Bluetooth connection
+if not ble.connected:
+    print("[Bluetooth] advertising.")
+    ble.start_advertising(advertisement, scan_response)
+    ble_advertising = True
+else:
+    print("[Bluetooth] already connected.")
+    print(ble.connections)
+    ble_advertising = False
+    changeBluetoothSymbol("/icons/bluetooth.bmp", ble_indicator_grid)
+
 # Garbage collect and print free memory space
 gc.collect()
 print("[MemCheck] bytes free before load_layer:\t\t\t" + str(gc.mem_free()))
 # load the first layer to start
 load_layer(current_layer)
 
+battery_poll_timer = time.time()
+fully_charged = False
+charging_indicator_visible = False
+
 #  main loop
 while True:
+    # Poll battery every 10 seconds and print at every 0.01v change
+    current_battery_voltage = round(get_voltage_averaged(battery), 2)
+    battery_charging = supervisor.runtime.usb_connected
+    current_time = time.time()
+    if battery_charging and not charging_indicator_visible:
+        print("Changing symbol to charging")
+        changeChargingSymbol("/icons/charging.bmp", charging_indicator_grid)
+        charging_indicator_visible = True
+    if not battery_charging and charging_indicator_visible:
+        ("Changing symbol to nothing")
+        changeChargingSymbol("/icons/blanksymbol.bmp", charging_indicator_grid)
+        fully_charged = False
+        charging_indicator_visible = False
+    if (current_time - battery_poll_timer) >= 5:
+        if battery_charging:
+            if last_battery_voltage >= 4.2 and fully_charged == False:
+                print("attempting to turn indicator green")
+                changeChargingSymbol("/icons/charged.bmp", charging_indicator_grid)
+                fully_charged = True
+            if current_battery_voltage > last_battery_voltage:
+                print("[System] battery voltage: " + str(current_battery_voltage))
+                last_battery_voltage = current_battery_voltage
+                battery_label.text = "{:.2f}v".format(last_battery_voltage)
+        else:
+            if current_battery_voltage < last_battery_voltage:
+                print("[System] battery voltage: " + str(current_battery_voltage))
+                last_battery_voltage = current_battery_voltage
+                battery_label.text = "{:.2f}v".format(last_battery_voltage)
+        battery_poll_timer = current_time
+
     # Wait at connect screen if not connected to a Host device
     if not (supervisor.runtime.usb_connected or ble.connected):
         print("[System] host device not found. Waiting on connection...")
-        connect_screen()
+        last_battery_voltage = connect_screen(last_battery_voltage)
+
     # Determine if layer uses input types
     layer_uses_keys = False
     layer_uses_encoder = False
@@ -394,11 +508,13 @@ while True:
     if not ble_advertising and not ble.connected:
         ble.start_advertising(advertisement)
         ble_advertising = True
+        changeBluetoothSymbol("/icons/blanksymbol.bmp", ble_indicator_grid)
         print("[Bluetooth] advertising.")
     connected_message_printed = False
     if ble.connected:
         just_connected = ble_advertising
         if just_connected:
+            changeBluetoothSymbol("/icons/bluetooth.bmp", ble_indicator_grid)
             print("[Bluetooth] connected.")
         ble_advertising = False
     
