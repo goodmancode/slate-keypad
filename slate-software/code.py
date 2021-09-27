@@ -92,8 +92,7 @@ def batteryPercentage():
 # Print battery percentage at startup
 last_battery_voltage = round(get_voltage_averaged(battery), 2)
 current_battery_voltage = last_battery_voltage
-battery_charging = supervisor.runtime.usb_connected
-current_time = time.time()
+battery_charging = False
 battery_poll_timer = 0
 print("[System] battery voltage: "+ str(last_battery_voltage))
 
@@ -308,6 +307,26 @@ def changeBluetoothSymbol(image_path, layer):
     ble_indicator_grid.y = 6
     main_group.append(ble_indicator_grid)
 
+def isBatteryCharging():
+    global last_battery_voltage
+    global current_battery_voltage
+    global usb_attached
+    # USB Host detected, charging status is guaranteed
+    if supervisor.runtime.usb_connected:
+        return True
+    # When connecting a USB power source, the battery voltage
+    # jumps ~ +0.05V, therefore charging is likely occurring (hacky)
+    if current_battery_voltage - last_battery_voltage >= 0.03:
+        usb_attached = True
+        return True
+    if last_battery_voltage - current_battery_voltage >= 0.03:
+        usb_attached = False
+        return False
+    if usb_attached:
+        return True
+    else:
+        return False
+
 # helper method to load icons for an index by its index in the
 # list of layers
 def load_layer(layer_index):
@@ -350,21 +369,25 @@ def load_layer(layer_index):
     time.sleep(0.05)
     main_group.pop()
 
-def connect_screen(last_battery_voltage):
+def connect_screen():
+    global battery_poll_timer
+    global current_time
+    global last_battery_voltage
     # show the connect screen
     battery_label_connect.text = "{:.2f}v".format(last_battery_voltage)
     main_group.append(connect_group)
     time.sleep(0.05)
     battery_poll_timer = 0
-    while not (supervisor.runtime.usb_connected or ble.connected):
+    while not (isBatteryCharging() or ble.connected):
         current_time = time.time()
+        print("Current time is: {}".format(current_time))
         if (current_time - battery_poll_timer) >= 5:
             current_battery_voltage = round(get_voltage_averaged(battery), 2)
+            battery_poll_timer = current_time
             if current_battery_voltage < last_battery_voltage:
                 print("[System] battery voltage: " + str(current_battery_voltage))
                 last_battery_voltage = current_battery_voltage
                 battery_label_connect.text = "{:.2f}v".format(last_battery_voltage)
-            battery_poll_timer = current_time
     if supervisor.runtime.usb_connected:
         kbd = Keyboard(usb_hid.devices)
         cc = ConsumerControl(usb_hid.devices)
@@ -372,6 +395,7 @@ def connect_screen(last_battery_voltage):
         print("[USB] connected and HID service started.")
     if ble.connected:
         print("[Bluetooth] connected.")
+    current_battery_voltage = round(get_voltage_averaged(battery), 2)
     battery_poll_timer = time.time()
     main_group.pop()
     gc.collect()
@@ -460,6 +484,7 @@ load_layer(current_layer)
 battery_poll_timer = time.time()
 fully_charged = False
 charging_indicator_visible = False
+usb_attached = False
 
 #  main loop
 while True:
@@ -469,7 +494,7 @@ while True:
         break
     # Poll battery every 10 seconds and print at every 0.01v change
     current_battery_voltage = round(get_voltage_averaged(battery), 2)
-    battery_charging = supervisor.runtime.usb_connected
+    battery_charging = isBatteryCharging()
     current_time = time.time()
     if battery_charging and not charging_indicator_visible:
         print("Changing symbol to charging")
@@ -500,7 +525,7 @@ while True:
     # Wait at connect screen if not connected to a Host device
     if not (supervisor.runtime.usb_connected or ble.connected):
         print("[System] host device not found. Waiting on connection...")
-        last_battery_voltage = connect_screen(last_battery_voltage)
+        last_battery_voltage = connect_screen()
 
     # Determine if layer uses input types
     layer_uses_keys = False
