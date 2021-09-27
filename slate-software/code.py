@@ -352,7 +352,7 @@ def load_layer(layer_index):
 
 def connect_screen(last_battery_voltage):
     # show the connect screen
-    battery_label_connect.text = str(last_battery_voltage) + "v"
+    battery_label_connect.text = "{:.2f}v".format(last_battery_voltage)
     main_group.append(connect_group)
     time.sleep(0.05)
     battery_poll_timer = 0
@@ -363,7 +363,7 @@ def connect_screen(last_battery_voltage):
             if current_battery_voltage < last_battery_voltage:
                 print("[System] battery voltage: " + str(current_battery_voltage))
                 last_battery_voltage = current_battery_voltage
-                battery_label_connect.text = str(last_battery_voltage) + "v"
+                battery_label_connect.text = "{:.2f}v".format(last_battery_voltage)
             battery_poll_timer = current_time
     if supervisor.runtime.usb_connected:
         kbd = Keyboard(usb_hid.devices)
