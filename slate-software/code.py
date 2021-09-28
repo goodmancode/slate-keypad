@@ -247,14 +247,14 @@ main_group.append(layer_label)
 # Battery indicator at the top of the screen
 battery_label = bitmap_label.Label(terminalio.FONT)
 battery_label.anchor_point = (1.0, 0.0)
-battery_label.anchored_position = (display.width - 60, 4)
+battery_label.anchored_position = (display.width - 4, 4)
 main_group.append(battery_label)
 
 # Charging indicator
 charging_group = displayio.Group()
 charging_indicator = displayio.OnDiskBitmap("/icons/blanksymbol.bmp")
 charging_indicator_grid = displayio.TileGrid(charging_indicator, pixel_shader=charging_indicator.pixel_shader)
-charging_indicator_grid.x = display.width - 108
+charging_indicator_grid.x = display.width - 52
 charging_indicator_grid.y = 6
 charging_group.append(charging_indicator_grid)
 main_group.append(charging_group)
@@ -263,7 +263,7 @@ main_group.append(charging_group)
 ble_group = displayio.Group()
 ble_indicator = displayio.OnDiskBitmap("/icons/bluetooth.bmp")
 ble_indicator_grid = displayio.TileGrid(ble_indicator, pixel_shader=ble_indicator.pixel_shader)
-ble_indicator_grid.x = display.width - 125
+ble_indicator_grid.x = display.width - 69
 ble_indicator_grid.y = 6
 main_group.append(ble_group)
 
@@ -271,7 +271,7 @@ main_group.append(ble_group)
 usb_group = displayio.Group()
 usb_indicator = displayio.OnDiskBitmap("/icons/usb.bmp")
 usb_indicator_grid = displayio.TileGrid(usb_indicator, pixel_shader=usb_indicator.pixel_shader)
-usb_indicator_grid.x = display.width - 152
+usb_indicator_grid.x = display.width - 96
 usb_indicator_grid.y = 6
 main_group.append(usb_group)
 
@@ -295,7 +295,7 @@ def changeChargingSymbol(image_path):
     global charging_indicator_grid
     charging_indicator = displayio.OnDiskBitmap(image_path)
     charging_indicator_grid = displayio.TileGrid(charging_indicator, pixel_shader=charging_indicator.pixel_shader)
-    charging_indicator_grid.x = display.width - 108
+    charging_indicator_grid.x = display.width - 52
     charging_indicator_grid.y = 6
     charging_group.pop()
     charging_group.append(charging_indicator_grid)
