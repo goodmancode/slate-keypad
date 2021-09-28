@@ -45,7 +45,6 @@ from layers import (
     KEY_RELEASE,
     CHANGE_LAYER,
 )
-from helpers import *
 from adafruit_simplemath import map_range
 
 # Garbage collect and print free memory space
@@ -110,6 +109,9 @@ encoder_button.direction = digitalio.Direction.INPUT
 encoder_button.pull = digitalio.Pull.UP
 encoder_button_state = None
 
+# Scales analog joystick values in range -100 to 100 (adjust to desired min/max)
+def scaleJoyPosition(position):
+    return (round(map_range(position[0], 300, 65000, -100, 100)), round(map_range(position[1], 300, 65000, -100, 100)))
 # Joystick setup
 joystick_x = analogio.AnalogIn(JOY_X)
 joystick_y = analogio.AnalogIn(JOY_Y)
