@@ -174,7 +174,7 @@ loading_background_scale_group = displayio.Group(scale=10)
 loading_background_tilegrid = displayio.TileGrid(
     loading_background, pixel_shader=loading_palette
 )
-loading_background_tilegrid.x = -4
+loading_background_tilegrid.x = -5
 loading_background_tilegrid.y = 2
 loading_background_scale_group.append(loading_background_tilegrid)
 
@@ -223,7 +223,7 @@ connect_group.append(connect_label)
 # size and location can be adjusted to fit
 # different sized screens.
 layout = GridLayout(
-    x=20,
+    x=14,
     y=20,
     width=420,
     height=290,
@@ -277,21 +277,18 @@ main_group.append(usb_group)
 
 # right side layer buttons
 next_layer_btn = IconWidget("", "icons/layer_next.bmp", on_disk=True)
-next_layer_btn.x = display.width - 40
+next_layer_btn.x = display.width - 42
 next_layer_btn.y = display.height - 100
-next_layer_btn.resize = (40, 100)
 main_group.append(next_layer_btn)
 
 prev_layer_btn = IconWidget("", "icons/layer_prev.bmp", on_disk=True)
-prev_layer_btn.x = display.width - 40
+prev_layer_btn.x = display.width - 42
 prev_layer_btn.y = 110
-prev_layer_btn.resize = (40, 100)
 main_group.append(prev_layer_btn)
 
 home_layer_btn = IconWidget("", "icons/layer_home.bmp", on_disk=True)
-home_layer_btn.x = display.width - 40
-home_layer_btn.y = 0
-home_layer_btn.resize = (40, 100)
+home_layer_btn.x = display.width - 42
+home_layer_btn.y = 28
 main_group.append(home_layer_btn)
 
 def changeChargingSymbol(image_path):
