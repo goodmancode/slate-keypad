@@ -251,18 +251,29 @@ battery_label.anchored_position = (display.width - 60, 4)
 main_group.append(battery_label)
 
 # Charging indicator
+charging_group = displayio.Group()
 charging_indicator = displayio.OnDiskBitmap("/icons/blanksymbol.bmp")
 charging_indicator_grid = displayio.TileGrid(charging_indicator, pixel_shader=charging_indicator.pixel_shader)
 charging_indicator_grid.x = display.width - 108
 charging_indicator_grid.y = 6
-main_group.append(charging_indicator_grid)
+charging_group.append(charging_indicator_grid)
+main_group.append(charging_group)
 
 # Bluetooth connection indicator
-ble_indicator = displayio.OnDiskBitmap("/icons/blanksymbol.bmp")
+ble_group = displayio.Group()
+ble_indicator = displayio.OnDiskBitmap("/icons/bluetooth.bmp")
 ble_indicator_grid = displayio.TileGrid(ble_indicator, pixel_shader=ble_indicator.pixel_shader)
 ble_indicator_grid.x = display.width - 125
 ble_indicator_grid.y = 6
-main_group.append(ble_indicator_grid)
+main_group.append(ble_group)
+
+# USB connection indicator
+usb_group = displayio.Group()
+usb_indicator = displayio.OnDiskBitmap("/icons/usb.bmp")
+usb_indicator_grid = displayio.TileGrid(usb_indicator, pixel_shader=usb_indicator.pixel_shader)
+usb_indicator_grid.x = display.width - 152
+usb_indicator_grid.y = 6
+main_group.append(usb_group)
 
 # right side layer buttons
 next_layer_btn = IconWidget("", "icons/layer_next.bmp", on_disk=True)
@@ -283,46 +294,59 @@ home_layer_btn.y = 0
 home_layer_btn.resize = (40, 100)
 main_group.append(home_layer_btn)
 
-def changeChargingSymbol(image_path, layer):
-    try:
-        main_group.remove(layer)
-    except ValueError:
-        print("passing on ValueError")
-        pass
+def changeChargingSymbol(image_path):
+    global charging_indicator_grid
     charging_indicator = displayio.OnDiskBitmap(image_path)
     charging_indicator_grid = displayio.TileGrid(charging_indicator, pixel_shader=charging_indicator.pixel_shader)
     charging_indicator_grid.x = display.width - 108
     charging_indicator_grid.y = 6
-    main_group.append(charging_indicator_grid)
+    charging_group.pop()
+    charging_group.append(charging_indicator_grid)
 
-def changeBluetoothSymbol(image_path, layer):
-    try:
-        main_group.remove(layer)
-    except ValueError:
-        print("passing on ValueError")
-        pass
-    ble_indicator = displayio.OnDiskBitmap(image_path)
-    ble_indicator_grid = displayio.TileGrid(ble_indicator, pixel_shader=ble_indicator.pixel_shader)
-    ble_indicator_grid.x = display.width - 125
-    ble_indicator_grid.y = 6
-    main_group.append(ble_indicator_grid)
+def showBluetoothSymbol(show_bluetooth):
+    global ble_indicator_grid
+    global ble_group
+    if show_bluetooth:
+        try:
+            ble_group.append(ble_indicator_grid)
+        except ValueError:
+            pass
+    if not show_bluetooth:
+        try:
+            ble_group.pop()
+        except ValueError:
+            pass
+
+def showUSBSymbol(show_usb):
+    global usb_indicator_grid
+    global usb_group
+    if show_usb:
+        try:
+            usb_group.append(usb_indicator_grid)
+        except ValueError:
+            pass
+    if not show_usb:
+        try:
+            usb_group.pop()
+        except ValueError:
+            pass
 
 def isBatteryCharging():
     global last_battery_voltage
     global current_battery_voltage
-    global usb_attached
+    global usb_power
     # USB Host detected, charging status is guaranteed
     if supervisor.runtime.usb_connected:
         return True
     # When connecting a USB power source, the battery voltage
     # jumps ~ +0.05V, therefore charging is likely occurring (hacky)
     if current_battery_voltage - last_battery_voltage >= 0.03:
-        usb_attached = True
+        usb_power = True
         return True
     if last_battery_voltage - current_battery_voltage >= 0.03:
-        usb_attached = False
+        usb_power = False
         return False
-    if usb_attached:
+    if usb_power:
         return True
     else:
         return False
@@ -378,9 +402,8 @@ def connect_screen():
     main_group.append(connect_group)
     time.sleep(0.05)
     battery_poll_timer = 0
-    while not (isBatteryCharging() or ble.connected):
+    while not (supervisor.runtime.usb_connected or ble.connected):
         current_time = time.time()
-        print("Current time is: {}".format(current_time))
         if (current_time - battery_poll_timer) >= 5:
             current_battery_voltage = round(get_voltage_averaged(battery), 2)
             battery_poll_timer = current_time
@@ -473,7 +496,7 @@ else:
     print("[Bluetooth] already connected.")
     print(ble.connections)
     ble_advertising = False
-    changeBluetoothSymbol("/icons/bluetooth.bmp", ble_indicator_grid)
+    showBluetoothSymbol(True)
 
 # Garbage collect and print free memory space
 gc.collect()
@@ -484,7 +507,8 @@ load_layer(current_layer)
 battery_poll_timer = time.time()
 fully_charged = False
 charging_indicator_visible = False
-usb_attached = False
+usb_indicator_visible = False
+usb_power = False
 
 #  main loop
 while True:
@@ -498,18 +522,18 @@ while True:
     current_time = time.time()
     if battery_charging and not charging_indicator_visible:
         print("Changing symbol to charging")
-        changeChargingSymbol("/icons/charging.bmp", charging_indicator_grid)
+        changeChargingSymbol("/icons/charging.bmp")
         charging_indicator_visible = True
     if not battery_charging and charging_indicator_visible:
         ("Changing symbol to nothing")
-        changeChargingSymbol("/icons/blanksymbol.bmp", charging_indicator_grid)
+        changeChargingSymbol("/icons/blanksymbol.bmp")
         fully_charged = False
         charging_indicator_visible = False
     if (current_time - battery_poll_timer) >= 5:
         if battery_charging:
             if last_battery_voltage >= 4.2 and fully_charged == False:
                 print("attempting to turn indicator green")
-                changeChargingSymbol("/icons/charged.bmp", charging_indicator_grid)
+                changeChargingSymbol("/icons/charged.bmp")
                 fully_charged = True
             if current_battery_voltage > last_battery_voltage:
                 print("[System] battery voltage: " + str(current_battery_voltage))
@@ -522,10 +546,36 @@ while True:
                 battery_label.text = "{:.2f}v".format(last_battery_voltage)
         battery_poll_timer = current_time
 
+    # Display USB indicator if connected to USB host
+    if not usb_indicator_visible and supervisor.runtime.usb_connected:
+        print("Displaying USB host indicator.")
+        showUSBSymbol(True)
+        usb_indicator_visible = True
+
+    if usb_indicator_visible and not supervisor.runtime.usb_connected:
+        print("Hiding USB host indicator.")
+        showUSBSymbol(False)
+        usb_indicator_visible = False
+
+    # Bluetooth
+    if not ble_advertising and not ble.connected:
+        ble.start_advertising(advertisement, scan_response)
+        ble_advertising = True
+        showBluetoothSymbol(False)
+        print("[Bluetooth] advertising.")
+    connected_message_printed = False
+    if ble.connected:
+        just_connected = ble_advertising
+        if just_connected:
+            showBluetoothSymbol(True)
+            print("[Bluetooth] connected.")
+        ble_advertising = False
+
     # Wait at connect screen if not connected to a Host device
     if not (supervisor.runtime.usb_connected or ble.connected):
         print("[System] host device not found. Waiting on connection...")
         last_battery_voltage = connect_screen()
+    
 
     # Determine if layer uses input types
     layer_uses_keys = False
@@ -537,20 +587,6 @@ while True:
         layer_uses_encoder = True
     if "joystick" in slate_config["layers"][current_layer]:
         layer_uses_joystick = True
-
-    # Bluetooth
-    if not ble_advertising and not ble.connected:
-        ble.start_advertising(advertisement)
-        ble_advertising = True
-        changeBluetoothSymbol("/icons/blanksymbol.bmp", ble_indicator_grid)
-        print("[Bluetooth] advertising.")
-    connected_message_printed = False
-    if ble.connected:
-        just_connected = ble_advertising
-        if just_connected:
-            changeBluetoothSymbol("/icons/bluetooth.bmp", ble_indicator_grid)
-            print("[Bluetooth] connected.")
-        ble_advertising = False
     
     # Physical key events and actions
     keyevent = keys.events.get()
