@@ -314,7 +314,8 @@ def showBluetoothSymbol(show_bluetooth):
     if not show_bluetooth:
         try:
             ble_group.pop()
-        except ValueError:
+        except IndexError:
+            print("[ERROR] ble_group.pop(): ble_group already empty.")
             pass
 
 def showUSBSymbol(show_usb):
@@ -328,7 +329,8 @@ def showUSBSymbol(show_usb):
     if not show_usb:
         try:
             usb_group.pop()
-        except ValueError:
+        except IndexError:
+            print("[ERROR] usb_group.pop(): usb_group already empty.")
             pass
 
 def isBatteryCharging():
