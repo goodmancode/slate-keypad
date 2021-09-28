@@ -307,10 +307,7 @@ def showBluetoothSymbol(show_bluetooth):
     global ble_indicator_grid
     global ble_group
     if show_bluetooth:
-        try:
-            ble_group.append(ble_indicator_grid)
-        except ValueError:
-            pass
+        ble_group.append(ble_indicator_grid)
     if not show_bluetooth:
         try:
             ble_group.pop()
@@ -322,10 +319,7 @@ def showUSBSymbol(show_usb):
     global usb_indicator_grid
     global usb_group
     if show_usb:
-        try:
-            usb_group.append(usb_indicator_grid)
-        except ValueError:
-            pass
+        usb_group.append(usb_indicator_grid)
     if not show_usb:
         try:
             usb_group.pop()
