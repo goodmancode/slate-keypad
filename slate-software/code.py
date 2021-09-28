@@ -86,8 +86,8 @@ def get_voltage_averaged(pin):
         averaged += get_voltage(pin)
     averaged /= 50
     return averaged
-def batteryPercentage():
-    return round(map_range(get_voltage(battery),3.4,4.2,0,100))
+def batteryPercentage(voltage):
+    return round(map_range(voltage,3.4,4.2,0,100))
 
 # Print battery percentage at startup
 last_battery_voltage = round(get_voltage_averaged(battery), 2)
@@ -192,7 +192,7 @@ connect_group = displayio.Group()
 
 # black background, screen size minus side buttons
 connect_background = displayio.Bitmap(
-    display.width // 20, display.height // 20, 1
+    display.width // 20, (display.height - 20) // 20, 1
 )
 connect_palette = displayio.Palette(1)
 connect_palette[0] = 0x0
@@ -202,6 +202,7 @@ connect_background_scale_group = displayio.Group(scale=20)
 connect_background_tilegrid = displayio.TileGrid(
     connect_background, pixel_shader=connect_palette
 )
+connect_background_tilegrid.y = 1
 connect_background_scale_group.append(connect_background_tilegrid)
 
 # connect screen label
@@ -209,14 +210,8 @@ connect_label = bitmap_label.Label(terminalio.FONT, text="Connect to host via\nU
 connect_label.anchor_point = (0.5, 0.5)
 connect_label.anchored_position = (display.width // 2, display.height // 2)
 
-# Battery indicator at the top of the screen (connect screen)
-battery_label_connect = bitmap_label.Label(terminalio.FONT)
-battery_label_connect.anchor_point = (1.0, 0.0)
-battery_label_connect.anchored_position = (display.width - 60, 4)
-
 # append background and label to the group
 connect_group.append(connect_background_scale_group)
-connect_group.append(battery_label_connect)
 connect_group.append(connect_label)
 
 # GridLayout to hold the icons
@@ -247,14 +242,14 @@ main_group.append(layer_label)
 # Battery indicator at the top of the screen
 battery_label = bitmap_label.Label(terminalio.FONT)
 battery_label.anchor_point = (1.0, 0.0)
-battery_label.anchored_position = (display.width - 4, 4)
+battery_label.anchored_position = (display.width - 6, 4)
 main_group.append(battery_label)
 
 # Charging indicator
 charging_group = displayio.Group()
 charging_indicator = displayio.OnDiskBitmap("/icons/blanksymbol.bmp")
 charging_indicator_grid = displayio.TileGrid(charging_indicator, pixel_shader=charging_indicator.pixel_shader)
-charging_indicator_grid.x = display.width - 52
+charging_indicator_grid.x = display.width - 46
 charging_indicator_grid.y = 6
 charging_group.append(charging_indicator_grid)
 main_group.append(charging_group)
@@ -263,7 +258,7 @@ main_group.append(charging_group)
 ble_group = displayio.Group()
 ble_indicator = displayio.OnDiskBitmap("/icons/bluetooth.bmp")
 ble_indicator_grid = displayio.TileGrid(ble_indicator, pixel_shader=ble_indicator.pixel_shader)
-ble_indicator_grid.x = display.width - 69
+ble_indicator_grid.x = display.width - 63
 ble_indicator_grid.y = 6
 main_group.append(ble_group)
 
@@ -271,7 +266,7 @@ main_group.append(ble_group)
 usb_group = displayio.Group()
 usb_indicator = displayio.OnDiskBitmap("/icons/usb.bmp")
 usb_indicator_grid = displayio.TileGrid(usb_indicator, pixel_shader=usb_indicator.pixel_shader)
-usb_indicator_grid.x = display.width - 96
+usb_indicator_grid.x = display.width - 90
 usb_indicator_grid.y = 6
 main_group.append(usb_group)
 
@@ -295,7 +290,7 @@ def changeChargingSymbol(image_path):
     global charging_indicator_grid
     charging_indicator = displayio.OnDiskBitmap(image_path)
     charging_indicator_grid = displayio.TileGrid(charging_indicator, pixel_shader=charging_indicator.pixel_shader)
-    charging_indicator_grid.x = display.width - 52
+    charging_indicator_grid.x = display.width - 46
     charging_indicator_grid.y = 6
     charging_group.pop()
     charging_group.append(charging_indicator_grid)
@@ -364,7 +359,7 @@ def load_layer(layer_index):
 
     # set the layer labeled at the top of the screen
     layer_label.text = slate_config["layers"][layer_index]["name"]
-    battery_label.text = "{:.2f}v".format(last_battery_voltage)
+    battery_label.text = "{}%".format(batteryPercentage(last_battery_voltage))
     # Garbage collect and print free memory space
     gc.collect()
     print("[MemCheck] bytes free before loading custom icons:\t\t" + str(gc.mem_free()))
@@ -391,7 +386,9 @@ def connect_screen():
     global current_time
     global last_battery_voltage
     # show the connect screen
-    battery_label_connect.text = "{:.2f}v".format(last_battery_voltage)
+    battery_label.text = "{}%".format(batteryPercentage(last_battery_voltage))
+    last_layer_name = layer_label.text
+    layer_label.text = ""
     main_group.append(connect_group)
     time.sleep(0.05)
     battery_poll_timer = 0
@@ -403,7 +400,7 @@ def connect_screen():
             if current_battery_voltage < last_battery_voltage:
                 print("[System] battery voltage: " + str(current_battery_voltage))
                 last_battery_voltage = current_battery_voltage
-                battery_label_connect.text = "{:.2f}v".format(last_battery_voltage)
+                battery_label.text = "{}%".format(batteryPercentage(last_battery_voltage))
     if supervisor.runtime.usb_connected:
         kbd = Keyboard(usb_hid.devices)
         cc = ConsumerControl(usb_hid.devices)
@@ -411,6 +408,7 @@ def connect_screen():
         print("[USB] connected and HID service started.")
     if ble.connected:
         print("[Bluetooth] connected.")
+    layer_label.text = last_layer_name
     current_battery_voltage = round(get_voltage_averaged(battery), 2)
     battery_poll_timer = time.time()
     main_group.pop()
@@ -531,12 +529,12 @@ while True:
             if current_battery_voltage > last_battery_voltage:
                 print("[System] Battery voltage: " + str(current_battery_voltage))
                 last_battery_voltage = current_battery_voltage
-                battery_label.text = "{:.2f}v".format(last_battery_voltage)
+                battery_label.text = "{}%".format(batteryPercentage(last_battery_voltage))
         else:
             if current_battery_voltage < last_battery_voltage:
                 print("[System] Battery voltage: " + str(current_battery_voltage))
                 last_battery_voltage = current_battery_voltage
-                battery_label.text = "{:.2f}v".format(last_battery_voltage)
+                battery_label.text = "{}%".format(batteryPercentage(last_battery_voltage))
         battery_poll_timer = current_time
 
     # Display USB indicator if connected to USB host
