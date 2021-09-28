@@ -510,59 +510,61 @@ usb_power = False
 while True:
      # DEBUGGING - User switch will stop code if pressed
     if not repl.value:
-        print("Stopping code execution...")
+        print("[System] Stopping code execution...")
         break
     # Poll battery every 10 seconds and print at every 0.01v change
     current_battery_voltage = round(get_voltage_averaged(battery), 2)
     battery_charging = isBatteryCharging()
     current_time = time.time()
     if battery_charging and not charging_indicator_visible:
-        print("Changing symbol to charging")
+        print("[Status] Power connected, displaying charging indicator.")
         changeChargingSymbol("/icons/charging.bmp")
         charging_indicator_visible = True
     if not battery_charging and charging_indicator_visible:
-        ("Changing symbol to nothing")
+        print("[Status] Power disconnected, hiding charging indicator.")
         changeChargingSymbol("/icons/blanksymbol.bmp")
         fully_charged = False
         charging_indicator_visible = False
     if (current_time - battery_poll_timer) >= 5:
         if battery_charging:
             if last_battery_voltage >= 4.2 and fully_charged == False:
-                print("attempting to turn indicator green")
+                print("[Status] Battery full, changing charging indicator to green.")
                 changeChargingSymbol("/icons/charged.bmp")
                 fully_charged = True
             if current_battery_voltage > last_battery_voltage:
-                print("[System] battery voltage: " + str(current_battery_voltage))
+                print("[System] Battery voltage: " + str(current_battery_voltage))
                 last_battery_voltage = current_battery_voltage
                 battery_label.text = "{:.2f}v".format(last_battery_voltage)
         else:
             if current_battery_voltage < last_battery_voltage:
-                print("[System] battery voltage: " + str(current_battery_voltage))
+                print("[System] Battery voltage: " + str(current_battery_voltage))
                 last_battery_voltage = current_battery_voltage
                 battery_label.text = "{:.2f}v".format(last_battery_voltage)
         battery_poll_timer = current_time
 
     # Display USB indicator if connected to USB host
     if not usb_indicator_visible and supervisor.runtime.usb_connected:
-        print("Displaying USB host indicator.")
+        print("[Status] USB host connected, displaying USB host indicator.")
         showUSBSymbol(True)
         usb_indicator_visible = True
 
     if usb_indicator_visible and not supervisor.runtime.usb_connected:
-        print("Hiding USB host indicator.")
+        print("[Status] USB host disconnected, hiding USB host indicator.")
         showUSBSymbol(False)
         usb_indicator_visible = False
 
     # Bluetooth
     if not ble_advertising and not ble.connected:
+        print("[Status] BLE host disconnected, hiding BLE host indicator.")
+        showBluetoothSymbol(False)
         ble.start_advertising(advertisement, scan_response)
         ble_advertising = True
-        showBluetoothSymbol(False)
         print("[Bluetooth] advertising.")
     connected_message_printed = False
     if ble.connected:
         just_connected = ble_advertising
         if just_connected:
+            print("[Status] BLE host connected, displaying BLE host indicator.")
             showBluetoothSymbol(True)
             print("[Bluetooth] connected.")
         ble_advertising = False
