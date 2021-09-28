@@ -72,6 +72,9 @@ JOY_SW = board.RX
 VDIV_PIN = board.VOLTAGE_MONITOR
 REPL = board.SWITCH
 
+# Print flags
+print_joystick = False
+
 # User switch to stop code execution
 repl = digitalio.DigitalInOut(REPL)
 repl.switch_to_input(pull=digitalio.Pull.UP)
@@ -628,11 +631,11 @@ while True:
     joystick_current_pos = scaleJoyPosition((joystick_x.value, joystick_y.value))
     # X position changed
     if abs(joystick_current_pos[0] - joystick_last_pos[0]) > 5:
-        print("[Joystick] position: " + str(joystick_current_pos))
+        if print_joystick: print("[Joystick] position: " + str(joystick_current_pos))
         joystick_last_pos = joystick_current_pos
     # Y position changed
     if abs(joystick_current_pos[1] - joystick_last_pos[1]) > 5:
-        print("[Joystick] position: " + str(joystick_current_pos))
+        if print_joystick: print("[Joystick] position: " + str(joystick_current_pos))
         joystick_last_pos = joystick_current_pos
     # Check if joystick button pressed
     if not joystick_button.value and joystick_button_state is None:
@@ -641,7 +644,7 @@ while True:
         # Perform joystick button macro
         _cur_actions = slate_config["layers"][current_layer]["joystick"].get("button")
         performActions(_cur_actions)
-        print("[Joystick] button pressed.")
+        if print_joystick: print("[Joystick] button pressed.")
         joystick_button_state = None
 
     # Touchscreen events and actions
