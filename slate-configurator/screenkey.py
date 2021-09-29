@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'new_screenkey.ui'
+# Form implementation generated from reading ui file 'screenkey.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -11,21 +11,21 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_newScreenKeyDialog(object):
-    def setupUi(self, newScreenKeyDialog):
-        newScreenKeyDialog.setObjectName("newScreenKeyDialog")
-        newScreenKeyDialog.resize(400, 215)
+class Ui_screenKeyDialog(object):
+    def setupUi(self, screenKeyDialog):
+        screenKeyDialog.setObjectName("screenKeyDialog")
+        screenKeyDialog.resize(400, 215)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(newScreenKeyDialog.sizePolicy().hasHeightForWidth())
-        newScreenKeyDialog.setSizePolicy(sizePolicy)
-        newScreenKeyDialog.setMinimumSize(QtCore.QSize(400, 215))
-        newScreenKeyDialog.setMaximumSize(QtCore.QSize(400, 215))
+        sizePolicy.setHeightForWidth(screenKeyDialog.sizePolicy().hasHeightForWidth())
+        screenKeyDialog.setSizePolicy(sizePolicy)
+        screenKeyDialog.setMinimumSize(QtCore.QSize(400, 215))
+        screenKeyDialog.setMaximumSize(QtCore.QSize(400, 215))
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("slate_windowicon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        newScreenKeyDialog.setWindowIcon(icon)
-        self.verticalLayoutWidget = QtWidgets.QWidget(newScreenKeyDialog)
+        screenKeyDialog.setWindowIcon(icon)
+        self.verticalLayoutWidget = QtWidgets.QWidget(screenKeyDialog)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(-1, -1, 401, 221))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
@@ -75,32 +75,32 @@ class Ui_newScreenKeyDialog(object):
         self.image_preview_label.setObjectName("image_preview_label")
         self.verticalLayout.addWidget(self.widget)
 
-        self.retranslateUi(newScreenKeyDialog)
-        self.buttonBox.accepted.connect(newScreenKeyDialog.accept)
-        self.buttonBox.rejected.connect(newScreenKeyDialog.reject)
-        QtCore.QMetaObject.connectSlotsByName(newScreenKeyDialog)
+        self.retranslateUi(screenKeyDialog)
+        self.buttonBox.accepted.connect(screenKeyDialog.accept)
+        self.buttonBox.rejected.connect(screenKeyDialog.reject)
+        QtCore.QMetaObject.connectSlotsByName(screenKeyDialog)
 
-    def retranslateUi(self, newScreenKeyDialog):
+    def retranslateUi(self, screenKeyDialog):
         _translate = QtCore.QCoreApplication.translate
-        newScreenKeyDialog.setWindowTitle(_translate("newScreenKeyDialog", "On-Screen Key"))
-        self.screenkey_name_label.setText(_translate("newScreenKeyDialog", "Label:"))
-        self.screenkey_macro_label.setText(_translate("newScreenKeyDialog", "Macro:"))
-        self.screenkey_macro.setItemText(0, _translate("newScreenKeyDialog", "None"))
-        self.screenkey_macro.setItemText(1, _translate("newScreenKeyDialog", "Hotkey"))
-        self.screenkey_macro.setItemText(2, _translate("newScreenKeyDialog", "String"))
-        self.screenkey_macro.setItemText(3, _translate("newScreenKeyDialog", "Media Control"))
-        self.screenkey_macro.setItemText(4, _translate("newScreenKeyDialog", "Window Sizing"))
-        self.screenkey_macro.setItemText(5, _translate("newScreenKeyDialog", "Mouse"))
-        self.screenkey_image_label.setText(_translate("newScreenKeyDialog", "Image:"))
-        self.fileSelect.setText(_translate("newScreenKeyDialog", "..."))
-        self.image_preview_label.setText(_translate("newScreenKeyDialog", "<html><head/><body><p align=\"center\">IMAGE</p></body></html>"))
+        screenKeyDialog.setWindowTitle(_translate("screenKeyDialog", "On-Screen Key"))
+        self.screenkey_name_label.setText(_translate("screenKeyDialog", "Label:"))
+        self.screenkey_macro_label.setText(_translate("screenKeyDialog", "Macro:"))
+        self.screenkey_macro.setItemText(0, _translate("screenKeyDialog", "None"))
+        self.screenkey_macro.setItemText(1, _translate("screenKeyDialog", "Hotkey"))
+        self.screenkey_macro.setItemText(2, _translate("screenKeyDialog", "String"))
+        self.screenkey_macro.setItemText(3, _translate("screenKeyDialog", "Media Control"))
+        self.screenkey_macro.setItemText(4, _translate("screenKeyDialog", "Window Sizing"))
+        self.screenkey_macro.setItemText(5, _translate("screenKeyDialog", "Mouse"))
+        self.screenkey_image_label.setText(_translate("screenKeyDialog", "Image:"))
+        self.fileSelect.setText(_translate("screenKeyDialog", "..."))
+        self.image_preview_label.setText(_translate("screenKeyDialog", "<html><head/><body><p align=\"center\">IMAGE</p></body></html>"))
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    newScreenKeyDialog = QtWidgets.QDialog()
-    ui = Ui_newScreenKeyDialog()
-    ui.setupUi(newScreenKeyDialog)
-    newScreenKeyDialog.show()
+    screenKeyDialog = QtWidgets.QDialog()
+    ui = Ui_screenKeyDialog()
+    ui.setupUi(screenKeyDialog)
+    screenKeyDialog.show()
     sys.exit(app.exec_())
