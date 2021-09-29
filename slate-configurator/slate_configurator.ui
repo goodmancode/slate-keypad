@@ -31,6 +31,10 @@
   <property name="windowTitle">
    <string>Slate Configurator</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>slate_windowicon.png</normaloff>slate_windowicon.png</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
@@ -41,10 +45,10 @@
       <height>581</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout_5">
+    <layout class="QVBoxLayout" name="verticalLayout">
      <item>
       <widget class="QWidget" name="widget" native="true">
-       <widget class="Line" name="line_3">
+       <widget class="Line" name="button_separator">
         <property name="geometry">
          <rect>
           <x>220</x>
@@ -57,7 +61,7 @@
          <enum>Qt::Vertical</enum>
         </property>
        </widget>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="back_button">
         <property name="geometry">
          <rect>
           <x>110</x>
@@ -70,7 +74,7 @@
          <string>Back</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="save_config_button">
         <property name="geometry">
          <rect>
           <x>250</x>
@@ -83,7 +87,7 @@
          <string>Save Config as File</string>
         </property>
        </widget>
-       <widget class="QGroupBox" name="groupBox">
+       <widget class="QGroupBox" name="layerGroupBox">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -95,7 +99,7 @@
         <property name="title">
          <string>Layer</string>
         </property>
-        <widget class="QComboBox" name="comboBox_18">
+        <widget class="QComboBox" name="layer_select">
          <property name="geometry">
           <rect>
            <x>50</x>
@@ -120,7 +124,7 @@
           </property>
          </item>
         </widget>
-        <widget class="QPushButton" name="pushButton_6">
+        <widget class="QPushButton" name="delete_layer_button">
          <property name="geometry">
           <rect>
            <x>390</x>
@@ -133,7 +137,7 @@
           <string>Delete</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="pushButton_7">
+        <widget class="QPushButton" name="create_layer_button">
          <property name="geometry">
           <rect>
            <x>260</x>
@@ -146,7 +150,7 @@
           <string>+ Create new layer</string>
          </property>
         </widget>
-        <widget class="QLabel" name="label_22">
+        <widget class="QLabel" name="layer_select_label">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -159,10 +163,10 @@
           <string>Select:</string>
          </property>
          <property name="buddy">
-          <cstring>comboBox_18</cstring>
+          <cstring>layer_select</cstring>
          </property>
         </widget>
-        <widget class="Line" name="line_5">
+        <widget class="Line" name="layer_separator_2">
          <property name="geometry">
           <rect>
            <x>372</x>
@@ -175,7 +179,7 @@
           <enum>Qt::Vertical</enum>
          </property>
         </widget>
-        <widget class="Line" name="line_6">
+        <widget class="Line" name="layer_separator_1">
          <property name="geometry">
           <rect>
            <x>240</x>
@@ -189,7 +193,7 @@
          </property>
         </widget>
        </widget>
-       <widget class="QGroupBox" name="groupBox_2">
+       <widget class="QGroupBox" name="macroGroupBox">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -201,7 +205,7 @@
         <property name="title">
          <string>Macros</string>
         </property>
-        <widget class="QTabWidget" name="tabWidget_2">
+        <widget class="QTabWidget" name="macroTabs">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -213,11 +217,11 @@
          <property name="currentIndex">
           <number>0</number>
          </property>
-         <widget class="QWidget" name="tab_5">
+         <widget class="QWidget" name="macroTab_screenkeys">
           <attribute name="title">
            <string>On-Screen Keys</string>
           </attribute>
-          <widget class="QLabel" name="label_23">
+          <widget class="QLabel" name="row_select_label">
            <property name="geometry">
             <rect>
              <x>20</x>
@@ -230,10 +234,10 @@
             <string>Rows</string>
            </property>
            <property name="buddy">
-            <cstring>spinBox_3</cstring>
+            <cstring>row_select</cstring>
            </property>
           </widget>
-          <widget class="QLabel" name="label_24">
+          <widget class="QLabel" name="column_select_label">
            <property name="geometry">
             <rect>
              <x>170</x>
@@ -246,10 +250,10 @@
             <string>Columns</string>
            </property>
            <property name="buddy">
-            <cstring>spinBox_4</cstring>
+            <cstring>column_select</cstring>
            </property>
           </widget>
-          <widget class="QSpinBox" name="spinBox_3">
+          <widget class="QSpinBox" name="row_select">
            <property name="geometry">
             <rect>
              <x>60</x>
@@ -261,8 +265,11 @@
            <property name="maximum">
             <number>3</number>
            </property>
+           <property name="value">
+            <number>3</number>
+           </property>
           </widget>
-          <widget class="QSpinBox" name="spinBox_4">
+          <widget class="QSpinBox" name="column_select">
            <property name="geometry">
             <rect>
              <x>220</x>
@@ -274,8 +281,11 @@
            <property name="maximum">
             <number>4</number>
            </property>
+           <property name="value">
+            <number>4</number>
+           </property>
           </widget>
-          <widget class="Line" name="line_7">
+          <widget class="Line" name="divider_screenkey">
            <property name="geometry">
             <rect>
              <x>10</x>
@@ -288,7 +298,7 @@
             <enum>Qt::Horizontal</enum>
            </property>
           </widget>
-          <widget class="QLabel" name="label_25">
+          <widget class="QLabel" name="max_row_label">
            <property name="geometry">
             <rect>
              <x>110</x>
@@ -301,7 +311,7 @@
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#7f7f7f;&quot;&gt;(max 3)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
           </widget>
-          <widget class="QLabel" name="label_26">
+          <widget class="QLabel" name="max_column_label">
            <property name="geometry">
             <rect>
              <x>270</x>
@@ -314,7 +324,7 @@
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#7f7f7f;&quot;&gt;(max 4)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
           </widget>
-          <widget class="QLabel" name="label_55">
+          <widget class="QLabel" name="screenkey_0_label">
            <property name="geometry">
             <rect>
              <x>30</x>
@@ -327,7 +337,7 @@
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Label&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
           </widget>
-          <widget class="QLabel" name="label_56">
+          <widget class="QLabel" name="screenkey_1_label">
            <property name="geometry">
             <rect>
              <x>130</x>
@@ -340,7 +350,7 @@
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Label&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
           </widget>
-          <widget class="QLabel" name="label_57">
+          <widget class="QLabel" name="screenkey_2_label">
            <property name="geometry">
             <rect>
              <x>230</x>
@@ -353,7 +363,7 @@
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Label&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
           </widget>
-          <widget class="QLabel" name="label_58">
+          <widget class="QLabel" name="screenkey_3_label">
            <property name="geometry">
             <rect>
              <x>330</x>
@@ -366,7 +376,7 @@
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Label&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
           </widget>
-          <widget class="QLabel" name="label_59">
+          <widget class="QLabel" name="screenkey_4_label">
            <property name="geometry">
             <rect>
              <x>30</x>
@@ -379,7 +389,7 @@
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Label&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
           </widget>
-          <widget class="QLabel" name="label_60">
+          <widget class="QLabel" name="screenkey_5_label">
            <property name="geometry">
             <rect>
              <x>130</x>
@@ -392,7 +402,7 @@
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Label&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
           </widget>
-          <widget class="QLabel" name="label_61">
+          <widget class="QLabel" name="screenkey_6_label">
            <property name="geometry">
             <rect>
              <x>230</x>
@@ -405,7 +415,7 @@
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Label&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
           </widget>
-          <widget class="QLabel" name="label_62">
+          <widget class="QLabel" name="screenkey_7_label">
            <property name="geometry">
             <rect>
              <x>330</x>
@@ -418,7 +428,7 @@
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Label&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
           </widget>
-          <widget class="QLabel" name="label_63">
+          <widget class="QLabel" name="screenkey_8_label">
            <property name="geometry">
             <rect>
              <x>30</x>
@@ -431,7 +441,7 @@
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Label&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
           </widget>
-          <widget class="QLabel" name="label_64">
+          <widget class="QLabel" name="screenkey_9_label">
            <property name="geometry">
             <rect>
              <x>130</x>
@@ -444,7 +454,7 @@
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Label&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
           </widget>
-          <widget class="QLabel" name="label_65">
+          <widget class="QLabel" name="screenkey_10_label">
            <property name="geometry">
             <rect>
              <x>230</x>
@@ -457,7 +467,7 @@
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Label&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
           </widget>
-          <widget class="QLabel" name="label_66">
+          <widget class="QLabel" name="screenkey_11_label">
            <property name="geometry">
             <rect>
              <x>330</x>
@@ -470,7 +480,7 @@
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Label&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
           </widget>
-          <widget class="QPushButton" name="pushButton_8">
+          <widget class="QPushButton" name="screenkey_0">
            <property name="geometry">
             <rect>
              <x>30</x>
@@ -486,7 +496,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../icons.qrc">
+            <iconset resource="icons.qrc">
              <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
            </property>
            <property name="iconSize">
@@ -496,7 +506,7 @@
             </size>
            </property>
           </widget>
-          <widget class="QPushButton" name="pushButton_9">
+          <widget class="QPushButton" name="screenkey_1">
            <property name="geometry">
             <rect>
              <x>130</x>
@@ -512,7 +522,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../icons.qrc">
+            <iconset resource="icons.qrc">
              <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
            </property>
            <property name="iconSize">
@@ -522,7 +532,7 @@
             </size>
            </property>
           </widget>
-          <widget class="QPushButton" name="pushButton_10">
+          <widget class="QPushButton" name="screenkey_2">
            <property name="geometry">
             <rect>
              <x>230</x>
@@ -538,7 +548,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../icons.qrc">
+            <iconset resource="icons.qrc">
              <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
            </property>
            <property name="iconSize">
@@ -548,7 +558,7 @@
             </size>
            </property>
           </widget>
-          <widget class="QPushButton" name="pushButton_11">
+          <widget class="QPushButton" name="screenkey_3">
            <property name="geometry">
             <rect>
              <x>330</x>
@@ -564,7 +574,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../icons.qrc">
+            <iconset resource="icons.qrc">
              <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
            </property>
            <property name="iconSize">
@@ -574,7 +584,7 @@
             </size>
            </property>
           </widget>
-          <widget class="QPushButton" name="pushButton_12">
+          <widget class="QPushButton" name="screenkey_4">
            <property name="geometry">
             <rect>
              <x>30</x>
@@ -590,7 +600,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../icons.qrc">
+            <iconset resource="icons.qrc">
              <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
            </property>
            <property name="iconSize">
@@ -600,7 +610,7 @@
             </size>
            </property>
           </widget>
-          <widget class="QPushButton" name="pushButton_13">
+          <widget class="QPushButton" name="screenkey_5">
            <property name="geometry">
             <rect>
              <x>130</x>
@@ -616,7 +626,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../icons.qrc">
+            <iconset resource="icons.qrc">
              <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
            </property>
            <property name="iconSize">
@@ -626,7 +636,7 @@
             </size>
            </property>
           </widget>
-          <widget class="QPushButton" name="pushButton_14">
+          <widget class="QPushButton" name="screenkey_6">
            <property name="geometry">
             <rect>
              <x>230</x>
@@ -642,7 +652,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../icons.qrc">
+            <iconset resource="icons.qrc">
              <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
            </property>
            <property name="iconSize">
@@ -652,7 +662,7 @@
             </size>
            </property>
           </widget>
-          <widget class="QPushButton" name="pushButton_15">
+          <widget class="QPushButton" name="screenkey_7">
            <property name="geometry">
             <rect>
              <x>330</x>
@@ -668,7 +678,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../icons.qrc">
+            <iconset resource="icons.qrc">
              <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
            </property>
            <property name="iconSize">
@@ -678,7 +688,7 @@
             </size>
            </property>
           </widget>
-          <widget class="QPushButton" name="pushButton_16">
+          <widget class="QPushButton" name="screenkey_10">
            <property name="geometry">
             <rect>
              <x>230</x>
@@ -694,7 +704,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../icons.qrc">
+            <iconset resource="icons.qrc">
              <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
            </property>
            <property name="iconSize">
@@ -704,7 +714,7 @@
             </size>
            </property>
           </widget>
-          <widget class="QPushButton" name="pushButton_17">
+          <widget class="QPushButton" name="screenkey_8">
            <property name="geometry">
             <rect>
              <x>30</x>
@@ -720,7 +730,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../icons.qrc">
+            <iconset resource="icons.qrc">
              <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
            </property>
            <property name="iconSize">
@@ -730,7 +740,7 @@
             </size>
            </property>
           </widget>
-          <widget class="QPushButton" name="pushButton_18">
+          <widget class="QPushButton" name="screenkey_11">
            <property name="geometry">
             <rect>
              <x>330</x>
@@ -746,7 +756,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../icons.qrc">
+            <iconset resource="icons.qrc">
              <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
            </property>
            <property name="iconSize">
@@ -756,7 +766,7 @@
             </size>
            </property>
           </widget>
-          <widget class="QPushButton" name="pushButton_19">
+          <widget class="QPushButton" name="screenkey_9">
            <property name="geometry">
             <rect>
              <x>130</x>
@@ -772,7 +782,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../icons.qrc">
+            <iconset resource="icons.qrc">
              <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
            </property>
            <property name="iconSize">
@@ -783,11 +793,11 @@
            </property>
           </widget>
          </widget>
-         <widget class="QWidget" name="tab_6">
+         <widget class="QWidget" name="macroTab_physicalkeys">
           <attribute name="title">
            <string>Physical Keys</string>
           </attribute>
-          <widget class="QLabel" name="label_27">
+          <widget class="QLabel" name="key_0_label">
            <property name="geometry">
             <rect>
              <x>20</x>
@@ -800,7 +810,7 @@
             <string>Key 1</string>
            </property>
           </widget>
-          <widget class="QComboBox" name="comboBox_19">
+          <widget class="QComboBox" name="key_0">
            <property name="geometry">
             <rect>
              <x>60</x>
@@ -840,7 +850,7 @@
             </property>
            </item>
           </widget>
-          <widget class="QLabel" name="label_28">
+          <widget class="QLabel" name="key_1_label">
            <property name="geometry">
             <rect>
              <x>20</x>
@@ -853,7 +863,7 @@
             <string>Key 2</string>
            </property>
           </widget>
-          <widget class="QLabel" name="label_29">
+          <widget class="QLabel" name="key_2_label">
            <property name="geometry">
             <rect>
              <x>20</x>
@@ -866,7 +876,7 @@
             <string>Key 3</string>
            </property>
           </widget>
-          <widget class="QLabel" name="label_30">
+          <widget class="QLabel" name="key_3_label">
            <property name="geometry">
             <rect>
              <x>20</x>
@@ -879,7 +889,7 @@
             <string>Key 4</string>
            </property>
           </widget>
-          <widget class="QLabel" name="label_31">
+          <widget class="QLabel" name="key_4_label">
            <property name="geometry">
             <rect>
              <x>20</x>
@@ -892,7 +902,7 @@
             <string>Key 5</string>
            </property>
           </widget>
-          <widget class="QLabel" name="label_32">
+          <widget class="QLabel" name="key_5_label">
            <property name="geometry">
             <rect>
              <x>20</x>
@@ -905,7 +915,7 @@
             <string>Key 6</string>
            </property>
           </widget>
-          <widget class="QLabel" name="label_33">
+          <widget class="QLabel" name="key_6_label">
            <property name="geometry">
             <rect>
              <x>20</x>
@@ -918,7 +928,7 @@
             <string>Key 7</string>
            </property>
           </widget>
-          <widget class="QLabel" name="label_34">
+          <widget class="QLabel" name="key_7_label">
            <property name="geometry">
             <rect>
              <x>20</x>
@@ -931,7 +941,7 @@
             <string>Key 8</string>
            </property>
           </widget>
-          <widget class="QComboBox" name="comboBox_20">
+          <widget class="QComboBox" name="key_1">
            <property name="geometry">
             <rect>
              <x>60</x>
@@ -971,7 +981,7 @@
             </property>
            </item>
           </widget>
-          <widget class="QComboBox" name="comboBox_21">
+          <widget class="QComboBox" name="key_3">
            <property name="geometry">
             <rect>
              <x>60</x>
@@ -1011,7 +1021,7 @@
             </property>
            </item>
           </widget>
-          <widget class="QComboBox" name="comboBox_22">
+          <widget class="QComboBox" name="key_2">
            <property name="geometry">
             <rect>
              <x>60</x>
@@ -1051,7 +1061,7 @@
             </property>
            </item>
           </widget>
-          <widget class="QComboBox" name="comboBox_23">
+          <widget class="QComboBox" name="key_5">
            <property name="geometry">
             <rect>
              <x>60</x>
@@ -1091,7 +1101,7 @@
             </property>
            </item>
           </widget>
-          <widget class="QComboBox" name="comboBox_24">
+          <widget class="QComboBox" name="key_4">
            <property name="geometry">
             <rect>
              <x>60</x>
@@ -1131,7 +1141,7 @@
             </property>
            </item>
           </widget>
-          <widget class="QComboBox" name="comboBox_25">
+          <widget class="QComboBox" name="key_7">
            <property name="geometry">
             <rect>
              <x>60</x>
@@ -1171,7 +1181,7 @@
             </property>
            </item>
           </widget>
-          <widget class="QComboBox" name="comboBox_26">
+          <widget class="QComboBox" name="key_6">
            <property name="geometry">
             <rect>
              <x>60</x>
@@ -1212,11 +1222,11 @@
            </item>
           </widget>
          </widget>
-         <widget class="QWidget" name="tab_7">
+         <widget class="QWidget" name="macroTab_joystick">
           <attribute name="title">
            <string>Joystick</string>
           </attribute>
-          <widget class="QLabel" name="label_35">
+          <widget class="QLabel" name="xAxis_neg_label">
            <property name="geometry">
             <rect>
              <x>20</x>
@@ -1229,7 +1239,7 @@
             <string>X-Axis (-)</string>
            </property>
           </widget>
-          <widget class="QLabel" name="label_36">
+          <widget class="QLabel" name="xAxis_pos_label">
            <property name="geometry">
             <rect>
              <x>20</x>
@@ -1242,7 +1252,7 @@
             <string>X-Axis (+)</string>
            </property>
           </widget>
-          <widget class="QComboBox" name="comboBox_27">
+          <widget class="QComboBox" name="xAxis_neg">
            <property name="geometry">
             <rect>
              <x>100</x>
@@ -1282,7 +1292,7 @@
             </property>
            </item>
           </widget>
-          <widget class="QComboBox" name="comboBox_28">
+          <widget class="QComboBox" name="xAxis_pos">
            <property name="geometry">
             <rect>
              <x>100</x>
@@ -1322,7 +1332,7 @@
             </property>
            </item>
           </widget>
-          <widget class="QComboBox" name="comboBox_29">
+          <widget class="QComboBox" name="yAxis_pos">
            <property name="geometry">
             <rect>
              <x>100</x>
@@ -1362,7 +1372,7 @@
             </property>
            </item>
           </widget>
-          <widget class="QLabel" name="label_37">
+          <widget class="QLabel" name="yAxis_pos_label">
            <property name="geometry">
             <rect>
              <x>20</x>
@@ -1375,7 +1385,7 @@
             <string>Y-Axis (+)</string>
            </property>
           </widget>
-          <widget class="QComboBox" name="comboBox_30">
+          <widget class="QComboBox" name="yAxis_neg">
            <property name="geometry">
             <rect>
              <x>100</x>
@@ -1415,7 +1425,7 @@
             </property>
            </item>
           </widget>
-          <widget class="QLabel" name="label_38">
+          <widget class="QLabel" name="yAxis_neg_label">
            <property name="geometry">
             <rect>
              <x>20</x>
@@ -1428,7 +1438,7 @@
             <string>Y-Axis (-)</string>
            </property>
           </widget>
-          <widget class="QComboBox" name="comboBox_31">
+          <widget class="QComboBox" name="joystick_button">
            <property name="geometry">
             <rect>
              <x>100</x>
@@ -1468,7 +1478,7 @@
             </property>
            </item>
           </widget>
-          <widget class="QLabel" name="label_39">
+          <widget class="QLabel" name="joystick_button_label">
            <property name="geometry">
             <rect>
              <x>20</x>
@@ -1482,11 +1492,11 @@
            </property>
           </widget>
          </widget>
-         <widget class="QWidget" name="tab_8">
+         <widget class="QWidget" name="macroTab_encoder">
           <attribute name="title">
            <string>Rotary Encoder</string>
           </attribute>
-          <widget class="QLabel" name="label_40">
+          <widget class="QLabel" name="encoder_increment_label">
            <property name="geometry">
             <rect>
              <x>20</x>
@@ -1499,7 +1509,7 @@
             <string>Clockwise (Increment)</string>
            </property>
           </widget>
-          <widget class="QLabel" name="label_41">
+          <widget class="QLabel" name="encoder_decrement_label">
            <property name="geometry">
             <rect>
              <x>20</x>
@@ -1512,7 +1522,7 @@
             <string>Counter-Clockwise (Decrement)</string>
            </property>
           </widget>
-          <widget class="QComboBox" name="comboBox_32">
+          <widget class="QComboBox" name="encoder_increment">
            <property name="geometry">
             <rect>
              <x>190</x>
@@ -1552,7 +1562,7 @@
             </property>
            </item>
           </widget>
-          <widget class="QComboBox" name="comboBox_33">
+          <widget class="QComboBox" name="encoder_decrement">
            <property name="geometry">
             <rect>
              <x>190</x>
@@ -1592,7 +1602,7 @@
             </property>
            </item>
           </widget>
-          <widget class="QLabel" name="label_42">
+          <widget class="QLabel" name="encoder_button_label">
            <property name="geometry">
             <rect>
              <x>20</x>
@@ -1605,7 +1615,7 @@
             <string>Button</string>
            </property>
           </widget>
-          <widget class="QComboBox" name="comboBox_34">
+          <widget class="QComboBox" name="encoder_button">
            <property name="geometry">
             <rect>
              <x>190</x>
@@ -1648,7 +1658,7 @@
          </widget>
         </widget>
        </widget>
-       <widget class="QGroupBox" name="groupBox_3">
+       <widget class="QGroupBox" name="previewGroupBox">
         <property name="geometry">
          <rect>
           <x>479</x>
@@ -1661,7 +1671,7 @@
          <string>Preview</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="pushButton_3">
+       <widget class="QPushButton" name="apply_config_button">
         <property name="geometry">
          <rect>
           <x>520</x>
@@ -1682,7 +1692,7 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources>
-  <include location="../icons.qrc"/>
+  <include location="icons.qrc"/>
  </resources>
  <connections/>
 </ui>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog">
+ <class>newLayerDialog</class>
+ <widget class="QDialog" name="newLayerDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>230</width>
-    <height>99</height>
+    <height>100</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,7 +19,7 @@
   <property name="minimumSize">
    <size>
     <width>230</width>
-    <height>0</height>
+    <height>100</height>
    </size>
   </property>
   <property name="maximumSize">
@@ -29,7 +29,11 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>New Layer</string>
+   <string>Create New Layer</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>slate_windowicon.png</normaloff>slate_windowicon.png</iconset>
   </property>
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
@@ -40,7 +44,7 @@
      <height>101</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout_2">
+   <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QWidget" name="widget" native="true">
       <widget class="QDialogButtonBox" name="buttonBox">
@@ -59,7 +63,7 @@
         <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
        </property>
       </widget>
-      <widget class="QLineEdit" name="lineEdit">
+      <widget class="QLineEdit" name="newlayer_name">
        <property name="geometry">
         <rect>
          <x>20</x>
