@@ -8,7 +8,7 @@
     <div class="container">
       <div class="row mt-5 justify-content-center">
         <div class="col-4">
-          <img class="img-fluid" src="img/keypad_render_transparent.png" alt="keypad render"> 
+          <img class="img-fluid" src="img/slate_render_transparent.png" alt="Slate PCB render"> 
         </div>
       </div>
       <div class="row mt-5">
