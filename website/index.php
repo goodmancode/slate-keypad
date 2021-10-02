@@ -7,7 +7,7 @@
     <?php readfile("./html/navbar.html"); ?>
     <div class="container">
       <div class="row mt-5 justify-content-center">
-        <div class="col-4">
+        <div class="col-lg-6 col-md-8 col-10">
           <img class="img-fluid" src="img/slate_render_transparent.png" alt="Slate PCB render"> 
         </div>
       </div>
