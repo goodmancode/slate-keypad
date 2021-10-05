@@ -1,5 +1,9 @@
 <RCC>
-  <qresource prefix="default">
+  <qresource prefix="icons">
+    <file>../slate-software/icons/blanksymbol.bmp</file>
+    <file>../slate-software/icons/bluetooth.bmp</file>
+    <file>../slate-software/icons/charged.bmp</file>
+    <file>../slate-software/icons/charging.bmp</file>
     <file>../slate-software/icons/layer_home.bmp</file>
     <file>../slate-software/icons/layer_next.bmp</file>
     <file>../slate-software/icons/layer_prev.bmp</file>
@@ -37,6 +41,12 @@
     <file>../slate-software/icons/td_side_cam.bmp</file>
     <file>../slate-software/icons/td_teal.bmp</file>
     <file>../slate-software/icons/td_white.bmp</file>
-    <file>../slate-software/icons/td_chrome.bmp</file>
+    <file>../slate-software/icons/usb.bmp</file>
+  </qresource>
+  <qresource prefix="preview_images">
+    <file>images/slate_config_ref_encoder.png</file>
+    <file>images/slate_config_ref_joystick.png</file>
+    <file>images/slate_config_ref_screenkeys.png</file>
+    <file>images/slate_config_ref_keys.png</file>
   </qresource>
 </RCC>

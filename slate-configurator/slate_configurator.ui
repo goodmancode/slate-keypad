@@ -254,6 +254,9 @@
            </property>
           </widget>
           <widget class="QSpinBox" name="row_select">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="geometry">
             <rect>
              <x>60</x>
@@ -261,6 +264,12 @@
              <width>42</width>
              <height>22</height>
             </rect>
+           </property>
+           <property name="toolTip">
+            <string>Currently only supports 3 rows</string>
+           </property>
+           <property name="statusTip">
+            <string/>
            </property>
            <property name="maximum">
             <number>3</number>
@@ -270,6 +279,9 @@
            </property>
           </widget>
           <widget class="QSpinBox" name="column_select">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="geometry">
             <rect>
              <x>220</x>
@@ -277,6 +289,9 @@
              <width>42</width>
              <height>22</height>
             </rect>
+           </property>
+           <property name="toolTip">
+            <string>Currently only supports 4 columns</string>
            </property>
            <property name="maximum">
             <number>4</number>
@@ -299,6 +314,9 @@
            </property>
           </widget>
           <widget class="QLabel" name="max_row_label">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
            <property name="geometry">
             <rect>
              <x>110</x>
@@ -496,8 +514,8 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="icons.qrc">
-             <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
+            <iconset resource="images.qrc">
+             <normaloff>:/icons/slate-software/icons/pr_blank.bmp</normaloff>:/icons/slate-software/icons/pr_blank.bmp</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -522,8 +540,8 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="icons.qrc">
-             <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
+            <iconset resource="images.qrc">
+             <normaloff>:/icons/slate-software/icons/pr_blank.bmp</normaloff>:/icons/slate-software/icons/pr_blank.bmp</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -548,8 +566,8 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="icons.qrc">
-             <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
+            <iconset resource="images.qrc">
+             <normaloff>:/icons/slate-software/icons/pr_blank.bmp</normaloff>:/icons/slate-software/icons/pr_blank.bmp</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -574,8 +592,8 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="icons.qrc">
-             <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
+            <iconset resource="images.qrc">
+             <normaloff>:/icons/slate-software/icons/pr_blank.bmp</normaloff>:/icons/slate-software/icons/pr_blank.bmp</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -600,8 +618,8 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="icons.qrc">
-             <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
+            <iconset resource="images.qrc">
+             <normaloff>:/icons/slate-software/icons/pr_blank.bmp</normaloff>:/icons/slate-software/icons/pr_blank.bmp</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -626,8 +644,8 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="icons.qrc">
-             <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
+            <iconset resource="images.qrc">
+             <normaloff>:/icons/slate-software/icons/pr_blank.bmp</normaloff>:/icons/slate-software/icons/pr_blank.bmp</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -652,8 +670,8 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="icons.qrc">
-             <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
+            <iconset resource="images.qrc">
+             <normaloff>:/icons/slate-software/icons/pr_blank.bmp</normaloff>:/icons/slate-software/icons/pr_blank.bmp</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -678,8 +696,8 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="icons.qrc">
-             <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
+            <iconset resource="images.qrc">
+             <normaloff>:/icons/slate-software/icons/pr_blank.bmp</normaloff>:/icons/slate-software/icons/pr_blank.bmp</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -704,8 +722,8 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="icons.qrc">
-             <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
+            <iconset resource="images.qrc">
+             <normaloff>:/icons/slate-software/icons/pr_blank.bmp</normaloff>:/icons/slate-software/icons/pr_blank.bmp</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -730,8 +748,8 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="icons.qrc">
-             <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
+            <iconset resource="images.qrc">
+             <normaloff>:/icons/slate-software/icons/pr_blank.bmp</normaloff>:/icons/slate-software/icons/pr_blank.bmp</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -756,8 +774,8 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="icons.qrc">
-             <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
+            <iconset resource="images.qrc">
+             <normaloff>:/icons/slate-software/icons/pr_blank.bmp</normaloff>:/icons/slate-software/icons/pr_blank.bmp</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -782,8 +800,8 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="icons.qrc">
-             <normaloff>:/default/slate-software/icons/slate.bmp</normaloff>:/default/slate-software/icons/slate.bmp</iconset>
+            <iconset resource="images.qrc">
+             <normaloff>:/icons/slate-software/icons/pr_blank.bmp</normaloff>:/icons/slate-software/icons/pr_blank.bmp</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -816,7 +834,7 @@
              <x>60</x>
              <y>20</y>
              <width>121</width>
-             <height>22</height>
+             <height>21</height>
             </rect>
            </property>
            <item>
@@ -841,7 +859,7 @@
            </item>
            <item>
             <property name="text">
-             <string>Window Sizing</string>
+             <string>Windows</string>
             </property>
            </item>
            <item>
@@ -947,7 +965,7 @@
              <x>60</x>
              <y>50</y>
              <width>121</width>
-             <height>22</height>
+             <height>21</height>
             </rect>
            </property>
            <item>
@@ -972,7 +990,7 @@
            </item>
            <item>
             <property name="text">
-             <string>Window Sizing</string>
+             <string>Windows</string>
             </property>
            </item>
            <item>
@@ -987,7 +1005,7 @@
              <x>60</x>
              <y>110</y>
              <width>121</width>
-             <height>22</height>
+             <height>21</height>
             </rect>
            </property>
            <item>
@@ -1012,7 +1030,7 @@
            </item>
            <item>
             <property name="text">
-             <string>Window Sizing</string>
+             <string>Windows</string>
             </property>
            </item>
            <item>
@@ -1027,7 +1045,7 @@
              <x>60</x>
              <y>80</y>
              <width>121</width>
-             <height>22</height>
+             <height>21</height>
             </rect>
            </property>
            <item>
@@ -1052,7 +1070,7 @@
            </item>
            <item>
             <property name="text">
-             <string>Window Sizing</string>
+             <string>Windows</string>
             </property>
            </item>
            <item>
@@ -1067,7 +1085,7 @@
              <x>60</x>
              <y>170</y>
              <width>121</width>
-             <height>22</height>
+             <height>21</height>
             </rect>
            </property>
            <item>
@@ -1092,7 +1110,7 @@
            </item>
            <item>
             <property name="text">
-             <string>Window Sizing</string>
+             <string>Windows</string>
             </property>
            </item>
            <item>
@@ -1107,7 +1125,7 @@
              <x>60</x>
              <y>140</y>
              <width>121</width>
-             <height>22</height>
+             <height>21</height>
             </rect>
            </property>
            <item>
@@ -1132,7 +1150,7 @@
            </item>
            <item>
             <property name="text">
-             <string>Window Sizing</string>
+             <string>Windows</string>
             </property>
            </item>
            <item>
@@ -1147,7 +1165,7 @@
              <x>60</x>
              <y>230</y>
              <width>121</width>
-             <height>22</height>
+             <height>21</height>
             </rect>
            </property>
            <item>
@@ -1172,7 +1190,7 @@
            </item>
            <item>
             <property name="text">
-             <string>Window Sizing</string>
+             <string>Windows</string>
             </property>
            </item>
            <item>
@@ -1187,7 +1205,7 @@
              <x>60</x>
              <y>200</y>
              <width>121</width>
-             <height>22</height>
+             <height>21</height>
             </rect>
            </property>
            <item>
@@ -1212,7 +1230,7 @@
            </item>
            <item>
             <property name="text">
-             <string>Window Sizing</string>
+             <string>Windows</string>
             </property>
            </item>
            <item>
@@ -1220,6 +1238,454 @@
              <string>Mouse</string>
             </property>
            </item>
+          </widget>
+          <widget class="QKeySequenceEdit" name="key_0_hotkey">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>20</y>
+             <width>131</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="key_0_string">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>20</y>
+             <width>231</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="key_0_mediacontrol">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>20</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="key_0_windows">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>20</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="key_0_mouse">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>20</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="key_1_mediacontrol">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>50</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="key_1_mouse">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>50</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="key_1_string">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>50</y>
+             <width>231</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="key_1_windows">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>50</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QKeySequenceEdit" name="key_1_hotkey">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>50</y>
+             <width>131</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="key_2_string">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>80</y>
+             <width>231</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QKeySequenceEdit" name="key_2_hotkey">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>80</y>
+             <width>131</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="key_2_mediacontrol">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>80</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="key_2_mouse">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>80</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="key_2_windows">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>80</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="key_3_windows">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>110</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="key_3_mouse">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>110</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="key_3_string">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>110</y>
+             <width>231</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QKeySequenceEdit" name="key_3_hotkey">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>110</y>
+             <width>131</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="key_3_mediacontrol">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>110</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="key_4_string">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>140</y>
+             <width>231</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="key_4_mouse">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>140</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QKeySequenceEdit" name="key_4_hotkey">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>140</y>
+             <width>131</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="key_4_windows">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>140</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="key_4_mediacontrol">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>140</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="key_5_string">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>170</y>
+             <width>231</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="key_5_mediacontrol">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>170</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="key_5_mouse">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>170</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QKeySequenceEdit" name="key_5_hotkey">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>170</y>
+             <width>131</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="key_5_windows">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>170</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="key_6_windows">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>200</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="key_6_mouse">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>200</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="key_6_mediacontrol">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>200</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="key_6_string">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>200</y>
+             <width>231</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QKeySequenceEdit" name="key_6_hotkey">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>200</y>
+             <width>131</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="key_7_mouse">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>230</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="key_7_mediacontrol">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>230</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QKeySequenceEdit" name="key_7_hotkey">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>230</y>
+             <width>131</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="key_7_string">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>230</y>
+             <width>231</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="key_7_windows">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>230</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
           </widget>
          </widget>
          <widget class="QWidget" name="macroTab_joystick">
@@ -1283,7 +1749,7 @@
            </item>
            <item>
             <property name="text">
-             <string>Window Sizing</string>
+             <string>Windows</string>
             </property>
            </item>
            <item>
@@ -1323,7 +1789,7 @@
            </item>
            <item>
             <property name="text">
-             <string>Window Sizing</string>
+             <string>Windows</string>
             </property>
            </item>
            <item>
@@ -1363,7 +1829,7 @@
            </item>
            <item>
             <property name="text">
-             <string>Window Sizing</string>
+             <string>Windows</string>
             </property>
            </item>
            <item>
@@ -1416,7 +1882,7 @@
            </item>
            <item>
             <property name="text">
-             <string>Window Sizing</string>
+             <string>Windows</string>
             </property>
            </item>
            <item>
@@ -1469,7 +1935,7 @@
            </item>
            <item>
             <property name="text">
-             <string>Window Sizing</string>
+             <string>Windows</string>
             </property>
            </item>
            <item>
@@ -1501,12 +1967,12 @@
             <rect>
              <x>20</x>
              <y>20</y>
-             <width>111</width>
+             <width>151</width>
              <height>21</height>
             </rect>
            </property>
            <property name="text">
-            <string>Clockwise (Increment)</string>
+            <string>Clockwise (Increment, +)</string>
            </property>
           </widget>
           <widget class="QLabel" name="encoder_decrement_label">
@@ -1514,18 +1980,18 @@
             <rect>
              <x>20</x>
              <y>50</y>
-             <width>161</width>
+             <width>171</width>
              <height>21</height>
             </rect>
            </property>
            <property name="text">
-            <string>Counter-Clockwise (Decrement)</string>
+            <string>Counter-Clockwise (Decrement, -)</string>
            </property>
           </widget>
           <widget class="QComboBox" name="encoder_increment">
            <property name="geometry">
             <rect>
-             <x>190</x>
+             <x>200</x>
              <y>20</y>
              <width>121</width>
              <height>22</height>
@@ -1553,7 +2019,7 @@
            </item>
            <item>
             <property name="text">
-             <string>Window Sizing</string>
+             <string>Windows</string>
             </property>
            </item>
            <item>
@@ -1565,7 +2031,7 @@
           <widget class="QComboBox" name="encoder_decrement">
            <property name="geometry">
             <rect>
-             <x>190</x>
+             <x>200</x>
              <y>50</y>
              <width>121</width>
              <height>22</height>
@@ -1593,7 +2059,7 @@
            </item>
            <item>
             <property name="text">
-             <string>Window Sizing</string>
+             <string>Windows</string>
             </property>
            </item>
            <item>
@@ -1618,7 +2084,7 @@
           <widget class="QComboBox" name="encoder_button">
            <property name="geometry">
             <rect>
-             <x>190</x>
+             <x>200</x>
              <y>80</y>
              <width>121</width>
              <height>22</height>
@@ -1646,7 +2112,7 @@
            </item>
            <item>
             <property name="text">
-             <string>Window Sizing</string>
+             <string>Windows</string>
             </property>
            </item>
            <item>
@@ -1658,23 +2124,36 @@
          </widget>
         </widget>
        </widget>
-       <widget class="QGroupBox" name="previewGroupBox">
+       <widget class="QGroupBox" name="referenceGroupBox">
         <property name="geometry">
          <rect>
           <x>479</x>
           <y>-1</y>
-          <width>301</width>
+          <width>311</width>
           <height>531</height>
          </rect>
         </property>
         <property name="title">
-         <string>Preview</string>
+         <string>Reference</string>
         </property>
+        <widget class="QLabel" name="reference_image_label">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>50</y>
+           <width>251</width>
+           <height>441</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/preview_images/images/slate_config_ref_screenkeys.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
        </widget>
        <widget class="QPushButton" name="apply_config_button">
         <property name="geometry">
          <rect>
-          <x>520</x>
+          <x>530</x>
           <y>540</y>
           <width>221</width>
           <height>31</height>
@@ -1692,7 +2171,7 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources>
-  <include location="icons.qrc"/>
+  <include location="images.qrc"/>
  </resources>
  <connections/>
 </ui>
