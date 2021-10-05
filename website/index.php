@@ -7,12 +7,12 @@
     <?php readfile("./html/navbar.html"); ?>
     <div class="container">
       <div class="row mt-5 justify-content-center">
-        <div class="col-lg-6 col-md-8 col-10">
-          <img class="img-fluid" src="img/slate_render_transparent.png" alt="Slate PCB render"> 
+        <div class="col-lg-5 col-md-8 col-10">
+          <img class="img-fluid" src="img/slate_render2_transparent.png" alt="Slate PCB render"> 
         </div>
       </div>
       <div class="row mt-5">
-        <h1 class="display-1 text-center">Slate</h1>
+        <h1 class="display-2 text-center">Slate</h1>
       </div>
       <div class="row">
         <h1 class="display-6 text-center">A multi-input programmable wireless macro keypad.</h1>
