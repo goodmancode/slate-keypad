@@ -7,4 +7,4 @@ Currently in development.
 
 [slatekeypad.com](http://slatekeypad.com/)
 
-![Slate Render](/website/img/slate_dark_assembled.png)
+![Slate Render](/website/img/slate_dark_assembled_both.png)
