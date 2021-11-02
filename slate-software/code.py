@@ -144,6 +144,7 @@ ble = adafruit_ble.BLERadio()
 ble_kbd = Keyboard(ble_hid.devices)
 ble_kbd_layout = KeyboardLayoutUS(ble_kbd)
 ble_cc = ConsumerControl(ble_hid.devices)
+ble_mouse = Mouse(ble_hid.devices)
 
 # display and touchscreen initialization
 displayio.release_displays()
@@ -472,14 +473,15 @@ def performActions(_cur_actions):
         # Mouse click
         elif _action[0] == MOUSE_CLICK:
             if bluetooth:
-                pass
+                ble_mouse.press(_action[1])
+                ble_mouse.release(_action[1])
             else:
                 mouse.press(_action[1])
                 mouse.release(_action[1])
         # Mouse movement
         elif _action[0] == MOUSE_MOVE:
             if bluetooth:
-                pass
+                ble_mouse.move(_action[1][0], _action[1][1], _action[1][2])
             else:
                 mouse.move(_action[1][0], _action[1][1], _action[1][2])
         # Change Layer
