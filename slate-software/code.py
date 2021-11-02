@@ -243,6 +243,13 @@ _icons = []
 # used for debouncing
 _pressed_icons = []
 
+# input feedback label at top-left of screen
+input_label = bitmap_label.Label(terminalio.FONT)
+input_label.color = 0x00FF00
+input_label.anchor_point = (0.0, 0.0)
+input_label.anchored_position = (6, 4)
+main_group.append(input_label)
+
 # layer label at the top of the screen
 layer_label = bitmap_label.Label(terminalio.FONT)
 layer_label.anchor_point = (0.5, 0.0)
