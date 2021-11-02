@@ -618,12 +618,16 @@ while True:
     if keyevent:
         print(keyevent)
         if keyevent.pressed and layer_uses_keys:
+            # update input feedback label at top of screen
+            input_label.text = "KEY " + str(keyevent.key_number)
             # get actions for this key from config object
             for key in slate_config["layers"][current_layer]["key_shortcuts"]:
                 if key["assigned_key"] == keyevent.key_number:
                     _cur_actions = key["actions"]
                     break
             performActions(_cur_actions)
+        if keyevent.released and layer_uses_keys:
+            input_label.text = "     "
 
     # Rotary encoder events and actions
     encoder_current_pos = encoder.position
