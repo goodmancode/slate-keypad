@@ -114,6 +114,10 @@ slate_config = {
                 "button": (MEDIA, ConsumerControlCode.PLAY_PAUSE),
             },
             "joystick": {
+                "x+": (KEY, [Keycode.RIGHT_ARROW]),
+                "x-": (KEY, [Keycode.LEFT_ARROW]),
+                "y+": (KEY, [Keycode.UP_ARROW]),
+                "y-": (KEY, [Keycode.DOWN_ARROW]),
                 "button": (STRING, "Slate"),
             }
         },

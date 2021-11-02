@@ -512,7 +512,7 @@ while True:
     if not repl.value:
         print("[System] Stopping code execution...")
         break
-    # Poll battery every 10 seconds and print at every 0.01v change
+    # Poll battery every 5 seconds and print at every 0.01v change
     current_battery_voltage = round(get_voltage_averaged(battery), 2)
     battery_charging = isBatteryCharging()
     current_time = time.time()
@@ -634,10 +634,28 @@ while True:
     # X position changed
     if abs(joystick_current_pos[0] - joystick_last_pos[0]) > 5:
         if print_joystick: print("[Joystick] position: " + str(joystick_current_pos))
+        # Only implmentation currently is for discrete movement, not analog
+        # X+
+        if joystick_current_pos[0] > 95 and layer_uses_joystick:
+            _cur_actions = slate_config["layers"][current_layer]["joystick"].get("x+")
+            performActions(_cur_actions)
+        # X-
+        if joystick_current_pos[0] < -95 and layer_uses_joystick:
+            _cur_actions = slate_config["layers"][current_layer]["joystick"].get("x-")
+            performActions(_cur_actions)
         joystick_last_pos = joystick_current_pos
     # Y position changed
     if abs(joystick_current_pos[1] - joystick_last_pos[1]) > 5:
         if print_joystick: print("[Joystick] position: " + str(joystick_current_pos))
+        # Only implmentation currently is for discrete movement, not analog
+        # Y+
+        if joystick_current_pos[1] > 95 and layer_uses_joystick:
+            _cur_actions = slate_config["layers"][current_layer]["joystick"].get("y+")
+            performActions(_cur_actions)
+        # Y-
+        if joystick_current_pos[1] < -95 and layer_uses_joystick:
+            _cur_actions = slate_config["layers"][current_layer]["joystick"].get("y-")
+            performActions(_cur_actions)
         joystick_last_pos = joystick_current_pos
     # Check if joystick button pressed
     if not joystick_button.value and joystick_button_state is None:
