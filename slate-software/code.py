@@ -44,8 +44,11 @@ from layers import (
     KEY_PRESS,
     KEY_RELEASE,
     CHANGE_LAYER,
+    MOUSE_CLICK,
+    MOUSE_MOVE,
 )
 from adafruit_simplemath import map_range
+from adafruit_hid.mouse import Mouse
 
 # Garbage collect and print free memory space
 gc.collect()
@@ -126,6 +129,7 @@ if supervisor.runtime.usb_connected:
     kbd = Keyboard(usb_hid.devices)
     cc = ConsumerControl(usb_hid.devices)
     kbd_layout = KeyboardLayoutUS(kbd)
+    mouse = Mouse(usb_hid.devices)
     print("[USB] connected and HID service started.")
 
 # Bluetooth HID setup
@@ -410,6 +414,7 @@ def connect_screen():
         kbd = Keyboard(usb_hid.devices)
         cc = ConsumerControl(usb_hid.devices)
         kbd_layout = KeyboardLayoutUS(kbd)
+        mouse = Mouse(usb_hid.devices)
         print("[USB] connected and HID service started.")
     if ble.connected:
         print("[Bluetooth] connected.")
@@ -464,6 +469,19 @@ def performActions(_cur_actions):
                 ble_kbd.release(*_action[1])
             else:
                 kbd.release(*_action[1])
+        # Mouse click
+        elif _action[0] == MOUSE_CLICK:
+            if bluetooth:
+                pass
+            else:
+                mouse.press(_action[1])
+                mouse.release(_action[1])
+        # Mouse movement
+        elif _action[0] == MOUSE_MOVE:
+            if bluetooth:
+                pass
+            else:
+                mouse.move(_action[1][0], _action[1][1], _action[1][2])
         # Change Layer
         elif _action[0] == CHANGE_LAYER:
             if isinstance(

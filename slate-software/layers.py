@@ -1,5 +1,6 @@
 from adafruit_hid.keycode import Keycode
 from adafruit_hid.consumer_control_code import ConsumerControlCode
+from adafruit_hid.mouse import Mouse
 
 MEDIA = 1
 KEY = 2
@@ -7,6 +8,8 @@ STRING = 3
 KEY_PRESS = 4
 KEY_RELEASE = 5
 CHANGE_LAYER = 6
+MOUSE_CLICK = 7
+MOUSE_MOVE = 8
 
 slate_config = {
     "layers": [
@@ -114,11 +117,11 @@ slate_config = {
                 "button": (MEDIA, ConsumerControlCode.PLAY_PAUSE),
             },
             "joystick": {
-                "x+": (KEY, [Keycode.RIGHT_ARROW]),
-                "x-": (KEY, [Keycode.LEFT_ARROW]),
-                "y+": (KEY, [Keycode.UP_ARROW]),
-                "y-": (KEY, [Keycode.DOWN_ARROW]),
-                "button": (STRING, "Slate"),
+                "x+": (MOUSE_MOVE, [-100, 0, 0]),
+                "x-": (MOUSE_MOVE, [100, 0, 0]),
+                "y+": (MOUSE_MOVE, [0, 100, 0]),
+                "y-": (MOUSE_MOVE, [0, -100, 0]),
+                "button": (MOUSE_CLICK, Mouse.LEFT_BUTTON),
             }
         },
         {
