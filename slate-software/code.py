@@ -56,23 +56,23 @@ print("[MemCheck] bytes free after imports:\t\t\t\t" + str(gc.mem_free()))
 
 # Pin Assignments
 KEY_PINS = (
-    board.D13,  # Key 0
-    board.D12,  # Key 1
-    #board.PIN_NUM  # Key 2
-    #board.PIN_NUM  # Key 3
-    #board.PIN_NUM  # Key 4
-    #board.PIN_NUM  # Key 5
-    #board.PIN_NUM  # Key 6
-    #board.PIN_NUM  # Key 7
+    board.RX,  # Key 0
+    board.TX,  # Key 1
+    board.D2,  # Key 2
+    board.SDA,  # Key 3
+    board.SCL, # Key 4
+    board.D10,  # Key 5
+    board.D11,  # Key 6
+    board.D12,  # Key 7
 )
-ENC_CLK = board.A1
-ENC_DT = board.A2
-ENC_SW = board.A3
-JOY_X = board.A4
-JOY_Y = board.A5
-JOY_SW = board.RX
+ENC_CLK = board.A0
+ENC_DT = board.A1
+ENC_SW = board.A2
+JOY_X = board.A5
+JOY_Y = board.A4
+JOY_SW = board.A3
 VDIV_PIN = board.VOLTAGE_MONITOR
-REPL = board.SWITCH
+#REPL = board.SWITCH
 
 # Print flags
 print_joystick = False
