@@ -786,6 +786,7 @@ while True:
                         for index, icon_shortcut in enumerate(_icons):
                             # if this icon was pressed
                             if icon_shortcut.contains(p):
+                                input_label.text = "SCREENKEY " + str(index + 1)
                                 # debounce logic, check that it wasn't already pressed
                                 if index not in _pressed_icons:
                                     # print("pressed {}".format(index))
@@ -801,6 +802,7 @@ while True:
                                     LAST_PRESS_TIME = _now
                                     # append this index to pressed icons for debouncing
                                     _pressed_icons.append(index)
+                                input_label.text = "            "
     else:  # screen not touched
 
         # empty the pressed icons list
