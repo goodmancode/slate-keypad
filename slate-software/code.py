@@ -72,14 +72,9 @@ JOY_X = board.A5
 JOY_Y = board.A4
 JOY_SW = board.A3
 VDIV_PIN = board.VOLTAGE_MONITOR
-#REPL = board.SWITCH
 
 # Print flags
 print_joystick = False
-
-# User switch to stop code execution
-repl = digitalio.DigitalInOut(REPL)
-repl.switch_to_input(pull=digitalio.Pull.UP)
 
 # Scales battery voltage values in range 0-100
 battery = analogio.AnalogIn(VDIV_PIN)
@@ -535,10 +530,6 @@ usb_power = False
 
 #  main loop
 while True:
-     # DEBUGGING - User switch will stop code if pressed
-    if not repl.value:
-        print("[System] Stopping code execution...")
-        break
     # Poll battery every 5 seconds and print at every 0.01v change
     current_battery_voltage = round(get_voltage_averaged(battery), 2)
     battery_charging = isBatteryCharging()
