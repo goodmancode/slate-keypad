@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>820</width>
-    <height>600</height>
+    <width>850</width>
+    <height>610</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -18,14 +18,14 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>820</width>
-    <height>600</height>
+    <width>850</width>
+    <height>610</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>820</width>
-    <height>600</height>
+    <width>850</width>
+    <height>610</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -41,8 +41,8 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>801</width>
-      <height>581</height>
+      <width>841</width>
+      <height>571</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -67,7 +67,7 @@
           <x>110</x>
           <y>540</y>
           <width>111</width>
-          <height>31</height>
+          <height>29</height>
          </rect>
         </property>
         <property name="text">
@@ -79,8 +79,8 @@
          <rect>
           <x>250</x>
           <y>540</y>
-          <width>111</width>
-          <height>31</height>
+          <width>141</width>
+          <height>29</height>
          </rect>
         </property>
         <property name="text">
@@ -92,8 +92,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>471</width>
-          <height>51</height>
+          <width>521</width>
+          <height>61</height>
          </rect>
         </property>
         <property name="title">
@@ -102,10 +102,10 @@
         <widget class="QComboBox" name="layer_select">
          <property name="geometry">
           <rect>
-           <x>50</x>
+           <x>60</x>
            <y>20</y>
-           <width>191</width>
-           <height>21</height>
+           <width>141</width>
+           <height>29</height>
           </rect>
          </property>
          <item>
@@ -127,10 +127,10 @@
         <widget class="QPushButton" name="delete_layer_button">
          <property name="geometry">
           <rect>
-           <x>390</x>
+           <x>440</x>
            <y>20</y>
            <width>71</width>
-           <height>23</height>
+           <height>29</height>
           </rect>
          </property>
          <property name="text">
@@ -140,14 +140,14 @@
         <widget class="QPushButton" name="create_layer_button">
          <property name="geometry">
           <rect>
-           <x>260</x>
+           <x>300</x>
            <y>20</y>
-           <width>111</width>
-           <height>23</height>
+           <width>121</width>
+           <height>29</height>
           </rect>
          </property>
          <property name="text">
-          <string>+ Create new layer</string>
+          <string>+ Create layer</string>
          </property>
         </widget>
         <widget class="QLabel" name="layer_select_label">
@@ -155,8 +155,8 @@
           <rect>
            <x>10</x>
            <y>20</y>
-           <width>31</width>
-           <height>21</height>
+           <width>51</width>
+           <height>29</height>
           </rect>
          </property>
          <property name="text">
@@ -169,23 +169,49 @@
         <widget class="Line" name="layer_separator_2">
          <property name="geometry">
           <rect>
-           <x>372</x>
-           <y>21</y>
+           <x>420</x>
+           <y>20</y>
            <width>21</width>
-           <height>20</height>
+           <height>29</height>
           </rect>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
         </widget>
-        <widget class="Line" name="layer_separator_1">
+        <widget class="QPushButton" name="create_layer_button_2">
          <property name="geometry">
           <rect>
-           <x>240</x>
+           <x>220</x>
+           <y>20</y>
+           <width>61</width>
+           <height>29</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Rename</string>
+         </property>
+        </widget>
+        <widget class="Line" name="layer_separator_3">
+         <property name="geometry">
+          <rect>
+           <x>280</x>
            <y>20</y>
            <width>21</width>
-           <height>20</height>
+           <height>29</height>
+          </rect>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+        <widget class="Line" name="layer_separator_4">
+         <property name="geometry">
+          <rect>
+           <x>200</x>
+           <y>20</y>
+           <width>21</width>
+           <height>29</height>
           </rect>
          </property>
          <property name="orientation">
@@ -198,7 +224,7 @@
          <rect>
           <x>0</x>
           <y>60</y>
-          <width>471</width>
+          <width>521</width>
           <height>471</height>
          </rect>
         </property>
@@ -210,7 +236,7 @@
           <rect>
            <x>10</x>
            <y>20</y>
-           <width>451</width>
+           <width>501</width>
            <height>441</height>
           </rect>
          </property>
@@ -242,7 +268,7 @@
             <rect>
              <x>170</x>
              <y>20</y>
-             <width>41</width>
+             <width>51</width>
              <height>21</height>
             </rect>
            </property>
@@ -284,7 +310,7 @@
            </property>
            <property name="geometry">
             <rect>
-             <x>220</x>
+             <x>230</x>
              <y>20</y>
              <width>42</width>
              <height>22</height>
@@ -321,7 +347,7 @@
             <rect>
              <x>110</x>
              <y>20</y>
-             <width>41</width>
+             <width>51</width>
              <height>21</height>
             </rect>
            </property>
@@ -332,9 +358,9 @@
           <widget class="QLabel" name="max_column_label">
            <property name="geometry">
             <rect>
-             <x>270</x>
+             <x>280</x>
              <y>20</y>
-             <width>41</width>
+             <width>51</width>
              <height>21</height>
             </rect>
            </property>
@@ -827,6 +853,9 @@
            <property name="text">
             <string>Key 1</string>
            </property>
+           <property name="buddy">
+            <cstring>key_0</cstring>
+           </property>
           </widget>
           <widget class="QComboBox" name="key_0">
            <property name="geometry">
@@ -880,6 +909,9 @@
            <property name="text">
             <string>Key 2</string>
            </property>
+           <property name="buddy">
+            <cstring>key_1</cstring>
+           </property>
           </widget>
           <widget class="QLabel" name="key_2_label">
            <property name="geometry">
@@ -892,6 +924,9 @@
            </property>
            <property name="text">
             <string>Key 3</string>
+           </property>
+           <property name="buddy">
+            <cstring>key_2</cstring>
            </property>
           </widget>
           <widget class="QLabel" name="key_3_label">
@@ -906,6 +941,9 @@
            <property name="text">
             <string>Key 4</string>
            </property>
+           <property name="buddy">
+            <cstring>key_3</cstring>
+           </property>
           </widget>
           <widget class="QLabel" name="key_4_label">
            <property name="geometry">
@@ -918,6 +956,9 @@
            </property>
            <property name="text">
             <string>Key 5</string>
+           </property>
+           <property name="buddy">
+            <cstring>key_4</cstring>
            </property>
           </widget>
           <widget class="QLabel" name="key_5_label">
@@ -932,6 +973,9 @@
            <property name="text">
             <string>Key 6</string>
            </property>
+           <property name="buddy">
+            <cstring>key_5</cstring>
+           </property>
           </widget>
           <widget class="QLabel" name="key_6_label">
            <property name="geometry">
@@ -945,6 +989,9 @@
            <property name="text">
             <string>Key 7</string>
            </property>
+           <property name="buddy">
+            <cstring>key_6</cstring>
+           </property>
           </widget>
           <widget class="QLabel" name="key_7_label">
            <property name="geometry">
@@ -957,6 +1004,9 @@
            </property>
            <property name="text">
             <string>Key 8</string>
+           </property>
+           <property name="buddy">
+            <cstring>key_7</cstring>
            </property>
           </widget>
           <widget class="QComboBox" name="key_1">
@@ -1247,7 +1297,7 @@
             <rect>
              <x>190</x>
              <y>20</y>
-             <width>131</width>
+             <width>161</width>
              <height>21</height>
             </rect>
            </property>
@@ -1260,12 +1310,12 @@
             <rect>
              <x>190</x>
              <y>20</y>
-             <width>231</width>
+             <width>291</width>
              <height>21</height>
             </rect>
            </property>
           </widget>
-          <widget class="QComboBox" name="key_0_mediacontrol">
+          <widget class="QComboBox" name="key_0_combobox">
            <property name="geometry">
             <rect>
              <x>190</x>
@@ -1275,27 +1325,10 @@
             </rect>
            </property>
           </widget>
-          <widget class="QComboBox" name="key_0_windows">
-           <property name="geometry">
-            <rect>
-             <x>190</x>
-             <y>20</y>
-             <width>161</width>
-             <height>21</height>
-            </rect>
+          <widget class="QKeySequenceEdit" name="key_1_hotkey">
+           <property name="enabled">
+            <bool>true</bool>
            </property>
-          </widget>
-          <widget class="QComboBox" name="key_0_mouse">
-           <property name="geometry">
-            <rect>
-             <x>190</x>
-             <y>20</y>
-             <width>161</width>
-             <height>21</height>
-            </rect>
-           </property>
-          </widget>
-          <widget class="QComboBox" name="key_1_mediacontrol">
            <property name="geometry">
             <rect>
              <x>190</x>
@@ -1305,7 +1338,7 @@
             </rect>
            </property>
           </widget>
-          <widget class="QComboBox" name="key_1_mouse">
+          <widget class="QComboBox" name="key_1_combobox">
            <property name="geometry">
             <rect>
              <x>190</x>
@@ -1323,43 +1356,7 @@
             <rect>
              <x>190</x>
              <y>50</y>
-             <width>231</width>
-             <height>21</height>
-            </rect>
-           </property>
-          </widget>
-          <widget class="QComboBox" name="key_1_windows">
-           <property name="geometry">
-            <rect>
-             <x>190</x>
-             <y>50</y>
-             <width>161</width>
-             <height>21</height>
-            </rect>
-           </property>
-          </widget>
-          <widget class="QKeySequenceEdit" name="key_1_hotkey">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="geometry">
-            <rect>
-             <x>190</x>
-             <y>50</y>
-             <width>131</width>
-             <height>21</height>
-            </rect>
-           </property>
-          </widget>
-          <widget class="QLineEdit" name="key_2_string">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="geometry">
-            <rect>
-             <x>190</x>
-             <y>80</y>
-             <width>231</width>
+             <width>291</width>
              <height>21</height>
             </rect>
            </property>
@@ -1372,12 +1369,12 @@
             <rect>
              <x>190</x>
              <y>80</y>
-             <width>131</width>
+             <width>161</width>
              <height>21</height>
             </rect>
            </property>
           </widget>
-          <widget class="QComboBox" name="key_2_mediacontrol">
+          <widget class="QComboBox" name="key_2_combobox">
            <property name="geometry">
             <rect>
              <x>190</x>
@@ -1387,27 +1384,23 @@
             </rect>
            </property>
           </widget>
-          <widget class="QComboBox" name="key_2_mouse">
+          <widget class="QLineEdit" name="key_2_string">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
            <property name="geometry">
             <rect>
              <x>190</x>
              <y>80</y>
-             <width>161</width>
+             <width>291</width>
              <height>21</height>
             </rect>
            </property>
           </widget>
-          <widget class="QComboBox" name="key_2_windows">
-           <property name="geometry">
-            <rect>
-             <x>190</x>
-             <y>80</y>
-             <width>161</width>
-             <height>21</height>
-            </rect>
+          <widget class="QKeySequenceEdit" name="key_3_hotkey">
+           <property name="enabled">
+            <bool>true</bool>
            </property>
-          </widget>
-          <widget class="QComboBox" name="key_3_windows">
            <property name="geometry">
             <rect>
              <x>190</x>
@@ -1417,7 +1410,7 @@
             </rect>
            </property>
           </widget>
-          <widget class="QComboBox" name="key_3_mouse">
+          <widget class="QComboBox" name="key_3_combobox">
            <property name="geometry">
             <rect>
              <x>190</x>
@@ -1435,29 +1428,29 @@
             <rect>
              <x>190</x>
              <y>110</y>
-             <width>231</width>
+             <width>291</width>
              <height>21</height>
             </rect>
            </property>
           </widget>
-          <widget class="QKeySequenceEdit" name="key_3_hotkey">
+          <widget class="QKeySequenceEdit" name="key_4_hotkey">
            <property name="enabled">
             <bool>true</bool>
            </property>
            <property name="geometry">
             <rect>
              <x>190</x>
-             <y>110</y>
-             <width>131</width>
+             <y>140</y>
+             <width>151</width>
              <height>21</height>
             </rect>
            </property>
           </widget>
-          <widget class="QComboBox" name="key_3_mediacontrol">
+          <widget class="QComboBox" name="key_4_combobox">
            <property name="geometry">
             <rect>
              <x>190</x>
-             <y>110</y>
+             <y>140</y>
              <width>161</width>
              <height>21</height>
             </rect>
@@ -1471,49 +1464,29 @@
             <rect>
              <x>190</x>
              <y>140</y>
-             <width>231</width>
+             <width>291</width>
              <height>21</height>
             </rect>
            </property>
           </widget>
-          <widget class="QComboBox" name="key_4_mouse">
-           <property name="geometry">
-            <rect>
-             <x>190</x>
-             <y>140</y>
-             <width>161</width>
-             <height>21</height>
-            </rect>
-           </property>
-          </widget>
-          <widget class="QKeySequenceEdit" name="key_4_hotkey">
+          <widget class="QKeySequenceEdit" name="key_5_hotkey">
            <property name="enabled">
             <bool>true</bool>
            </property>
            <property name="geometry">
             <rect>
              <x>190</x>
-             <y>140</y>
-             <width>131</width>
-             <height>21</height>
-            </rect>
-           </property>
-          </widget>
-          <widget class="QComboBox" name="key_4_windows">
-           <property name="geometry">
-            <rect>
-             <x>190</x>
-             <y>140</y>
+             <y>170</y>
              <width>161</width>
              <height>21</height>
             </rect>
            </property>
           </widget>
-          <widget class="QComboBox" name="key_4_mediacontrol">
+          <widget class="QComboBox" name="key_5_combobox">
            <property name="geometry">
             <rect>
              <x>190</x>
-             <y>140</y>
+             <y>170</y>
              <width>161</width>
              <height>21</height>
             </rect>
@@ -1527,75 +1500,25 @@
             <rect>
              <x>190</x>
              <y>170</y>
-             <width>231</width>
+             <width>291</width>
              <height>21</height>
             </rect>
            </property>
           </widget>
-          <widget class="QComboBox" name="key_5_mediacontrol">
-           <property name="geometry">
-            <rect>
-             <x>190</x>
-             <y>170</y>
-             <width>161</width>
-             <height>21</height>
-            </rect>
-           </property>
-          </widget>
-          <widget class="QComboBox" name="key_5_mouse">
-           <property name="geometry">
-            <rect>
-             <x>190</x>
-             <y>170</y>
-             <width>161</width>
-             <height>21</height>
-            </rect>
-           </property>
-          </widget>
-          <widget class="QKeySequenceEdit" name="key_5_hotkey">
+          <widget class="QKeySequenceEdit" name="key_6_hotkey">
            <property name="enabled">
             <bool>true</bool>
            </property>
            <property name="geometry">
             <rect>
              <x>190</x>
-             <y>170</y>
-             <width>131</width>
-             <height>21</height>
-            </rect>
-           </property>
-          </widget>
-          <widget class="QComboBox" name="key_5_windows">
-           <property name="geometry">
-            <rect>
-             <x>190</x>
-             <y>170</y>
-             <width>161</width>
-             <height>21</height>
-            </rect>
-           </property>
-          </widget>
-          <widget class="QComboBox" name="key_6_windows">
-           <property name="geometry">
-            <rect>
-             <x>190</x>
              <y>200</y>
              <width>161</width>
              <height>21</height>
             </rect>
            </property>
           </widget>
-          <widget class="QComboBox" name="key_6_mouse">
-           <property name="geometry">
-            <rect>
-             <x>190</x>
-             <y>200</y>
-             <width>161</width>
-             <height>21</height>
-            </rect>
-           </property>
-          </widget>
-          <widget class="QComboBox" name="key_6_mediacontrol">
+          <widget class="QComboBox" name="key_6_combobox">
            <property name="geometry">
             <rect>
              <x>190</x>
@@ -1613,40 +1536,7 @@
             <rect>
              <x>190</x>
              <y>200</y>
-             <width>231</width>
-             <height>21</height>
-            </rect>
-           </property>
-          </widget>
-          <widget class="QKeySequenceEdit" name="key_6_hotkey">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="geometry">
-            <rect>
-             <x>190</x>
-             <y>200</y>
-             <width>131</width>
-             <height>21</height>
-            </rect>
-           </property>
-          </widget>
-          <widget class="QComboBox" name="key_7_mouse">
-           <property name="geometry">
-            <rect>
-             <x>190</x>
-             <y>230</y>
-             <width>161</width>
-             <height>21</height>
-            </rect>
-           </property>
-          </widget>
-          <widget class="QComboBox" name="key_7_mediacontrol">
-           <property name="geometry">
-            <rect>
-             <x>190</x>
-             <y>230</y>
-             <width>161</width>
+             <width>291</width>
              <height>21</height>
             </rect>
            </property>
@@ -1659,7 +1549,17 @@
             <rect>
              <x>190</x>
              <y>230</y>
-             <width>131</width>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="key_7_combobox">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>230</y>
+             <width>161</width>
              <height>21</height>
             </rect>
            </property>
@@ -1672,17 +1572,7 @@
             <rect>
              <x>190</x>
              <y>230</y>
-             <width>231</width>
-             <height>21</height>
-            </rect>
-           </property>
-          </widget>
-          <widget class="QComboBox" name="key_7_windows">
-           <property name="geometry">
-            <rect>
-             <x>190</x>
-             <y>230</y>
-             <width>161</width>
+             <width>291</width>
              <height>21</height>
             </rect>
            </property>
@@ -1957,6 +1847,186 @@
             <string>Button</string>
            </property>
           </widget>
+          <widget class="QKeySequenceEdit" name="xAxis_pos_hotkey">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>230</x>
+             <y>20</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="xAxis_pos_combobox">
+           <property name="geometry">
+            <rect>
+             <x>230</x>
+             <y>20</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="xAxis_pos_string">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>230</x>
+             <y>20</y>
+             <width>251</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QKeySequenceEdit" name="xAxis_neg_hotkey">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>230</x>
+             <y>50</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="xAxis_neg_combobox">
+           <property name="geometry">
+            <rect>
+             <x>230</x>
+             <y>50</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="xAxis_neg_string">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>230</x>
+             <y>50</y>
+             <width>251</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QKeySequenceEdit" name="yAxis_pos_hotkey">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>230</x>
+             <y>80</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="yAxis_pos_combobox">
+           <property name="geometry">
+            <rect>
+             <x>230</x>
+             <y>80</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="yAxis_pos_string">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>230</x>
+             <y>80</y>
+             <width>251</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QKeySequenceEdit" name="yAxis_neg_hotkey">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>230</x>
+             <y>110</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="yAxis_neg_combobox">
+           <property name="geometry">
+            <rect>
+             <x>230</x>
+             <y>110</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="yAxis_neg_string">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>230</x>
+             <y>110</y>
+             <width>251</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QKeySequenceEdit" name="joystick_button_hotkey">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>230</x>
+             <y>140</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="joystick_button_combobox">
+           <property name="geometry">
+            <rect>
+             <x>230</x>
+             <y>140</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="joystick_button_string">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>230</x>
+             <y>140</y>
+             <width>251</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
          </widget>
          <widget class="QWidget" name="macroTab_encoder">
           <attribute name="title">
@@ -1974,25 +2044,31 @@
            <property name="text">
             <string>Clockwise (Increment, +)</string>
            </property>
+           <property name="buddy">
+            <cstring>encoder_increment</cstring>
+           </property>
           </widget>
           <widget class="QLabel" name="encoder_decrement_label">
            <property name="geometry">
             <rect>
              <x>20</x>
-             <y>50</y>
-             <width>171</width>
+             <y>90</y>
+             <width>211</width>
              <height>21</height>
             </rect>
            </property>
            <property name="text">
             <string>Counter-Clockwise (Decrement, -)</string>
            </property>
+           <property name="buddy">
+            <cstring>encoder_decrement</cstring>
+           </property>
           </widget>
           <widget class="QComboBox" name="encoder_increment">
            <property name="geometry">
             <rect>
-             <x>200</x>
-             <y>20</y>
+             <x>20</x>
+             <y>50</y>
              <width>121</width>
              <height>22</height>
             </rect>
@@ -2031,8 +2107,8 @@
           <widget class="QComboBox" name="encoder_decrement">
            <property name="geometry">
             <rect>
-             <x>200</x>
-             <y>50</y>
+             <x>20</x>
+             <y>120</y>
              <width>121</width>
              <height>22</height>
             </rect>
@@ -2072,7 +2148,7 @@
            <property name="geometry">
             <rect>
              <x>20</x>
-             <y>80</y>
+             <y>160</y>
              <width>41</width>
              <height>21</height>
             </rect>
@@ -2080,12 +2156,15 @@
            <property name="text">
             <string>Button</string>
            </property>
+           <property name="buddy">
+            <cstring>encoder_button</cstring>
+           </property>
           </widget>
           <widget class="QComboBox" name="encoder_button">
            <property name="geometry">
             <rect>
-             <x>200</x>
-             <y>80</y>
+             <x>20</x>
+             <y>190</y>
              <width>121</width>
              <height>22</height>
             </rect>
@@ -2121,15 +2200,123 @@
             </property>
            </item>
           </widget>
+          <widget class="QKeySequenceEdit" name="encoder_increment_hotkey">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>150</x>
+             <y>50</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="encoder_increment_combobox">
+           <property name="geometry">
+            <rect>
+             <x>150</x>
+             <y>50</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="encoder_increment_string">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>150</x>
+             <y>50</y>
+             <width>291</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="encoder_decrement_string">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>150</x>
+             <y>120</y>
+             <width>291</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="encoder_decrement_combobox">
+           <property name="geometry">
+            <rect>
+             <x>150</x>
+             <y>120</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QKeySequenceEdit" name="encoder_decrement_hotkey">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>150</x>
+             <y>120</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QKeySequenceEdit" name="encoder_button_hotkey">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>150</x>
+             <y>190</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="encoder_button_combobox">
+           <property name="geometry">
+            <rect>
+             <x>150</x>
+             <y>190</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="encoder_button_string">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>150</x>
+             <y>190</y>
+             <width>291</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
          </widget>
         </widget>
        </widget>
        <widget class="QGroupBox" name="referenceGroupBox">
         <property name="geometry">
          <rect>
-          <x>479</x>
-          <y>-1</y>
-          <width>311</width>
+          <x>530</x>
+          <y>0</y>
+          <width>301</width>
           <height>531</height>
          </rect>
         </property>
@@ -2153,10 +2340,10 @@
        <widget class="QPushButton" name="apply_config_button">
         <property name="geometry">
          <rect>
-          <x>530</x>
+          <x>580</x>
           <y>540</y>
-          <width>221</width>
-          <height>31</height>
+          <width>201</width>
+          <height>29</height>
          </rect>
         </property>
         <property name="text">
@@ -2170,6 +2357,93 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <tabstops>
+  <tabstop>create_layer_button</tabstop>
+  <tabstop>key_7_hotkey</tabstop>
+  <tabstop>delete_layer_button</tabstop>
+  <tabstop>macroTabs</tabstop>
+  <tabstop>row_select</tabstop>
+  <tabstop>column_select</tabstop>
+  <tabstop>screenkey_0</tabstop>
+  <tabstop>screenkey_1</tabstop>
+  <tabstop>screenkey_2</tabstop>
+  <tabstop>screenkey_3</tabstop>
+  <tabstop>screenkey_4</tabstop>
+  <tabstop>screenkey_5</tabstop>
+  <tabstop>screenkey_6</tabstop>
+  <tabstop>screenkey_7</tabstop>
+  <tabstop>screenkey_8</tabstop>
+  <tabstop>screenkey_9</tabstop>
+  <tabstop>screenkey_10</tabstop>
+  <tabstop>screenkey_11</tabstop>
+  <tabstop>key_0</tabstop>
+  <tabstop>key_1</tabstop>
+  <tabstop>key_2</tabstop>
+  <tabstop>key_3</tabstop>
+  <tabstop>key_4</tabstop>
+  <tabstop>key_5</tabstop>
+  <tabstop>key_6</tabstop>
+  <tabstop>key_7</tabstop>
+  <tabstop>save_config_button</tabstop>
+  <tabstop>key_0_hotkey</tabstop>
+  <tabstop>key_0_string</tabstop>
+  <tabstop>key_1_hotkey</tabstop>
+  <tabstop>back_button</tabstop>
+  <tabstop>key_2_hotkey</tabstop>
+  <tabstop>key_1_string</tabstop>
+  <tabstop>key_3_hotkey</tabstop>
+  <tabstop>key_2_combobox</tabstop>
+  <tabstop>key_4_hotkey</tabstop>
+  <tabstop>key_1_combobox</tabstop>
+  <tabstop>key_5_hotkey</tabstop>
+  <tabstop>key_3_string</tabstop>
+  <tabstop>key_6_hotkey</tabstop>
+  <tabstop>key_4_combobox</tabstop>
+  <tabstop>key_4_string</tabstop>
+  <tabstop>key_2_string</tabstop>
+  <tabstop>key_5_combobox</tabstop>
+  <tabstop>layer_select</tabstop>
+  <tabstop>key_5_string</tabstop>
+  <tabstop>key_3_combobox</tabstop>
+  <tabstop>key_6_combobox</tabstop>
+  <tabstop>key_6_string</tabstop>
+  <tabstop>key_0_combobox</tabstop>
+  <tabstop>key_7_combobox</tabstop>
+  <tabstop>key_7_string</tabstop>
+  <tabstop>xAxis_neg</tabstop>
+  <tabstop>xAxis_pos</tabstop>
+  <tabstop>yAxis_pos</tabstop>
+  <tabstop>yAxis_neg</tabstop>
+  <tabstop>joystick_button</tabstop>
+  <tabstop>xAxis_pos_hotkey</tabstop>
+  <tabstop>xAxis_pos_combobox</tabstop>
+  <tabstop>xAxis_pos_string</tabstop>
+  <tabstop>xAxis_neg_hotkey</tabstop>
+  <tabstop>xAxis_neg_combobox</tabstop>
+  <tabstop>xAxis_neg_string</tabstop>
+  <tabstop>yAxis_pos_hotkey</tabstop>
+  <tabstop>yAxis_pos_combobox</tabstop>
+  <tabstop>yAxis_pos_string</tabstop>
+  <tabstop>yAxis_neg_hotkey</tabstop>
+  <tabstop>yAxis_neg_combobox</tabstop>
+  <tabstop>yAxis_neg_string</tabstop>
+  <tabstop>joystick_button_hotkey</tabstop>
+  <tabstop>joystick_button_combobox</tabstop>
+  <tabstop>joystick_button_string</tabstop>
+  <tabstop>encoder_increment</tabstop>
+  <tabstop>encoder_decrement</tabstop>
+  <tabstop>encoder_button</tabstop>
+  <tabstop>encoder_increment_hotkey</tabstop>
+  <tabstop>encoder_increment_combobox</tabstop>
+  <tabstop>encoder_increment_string</tabstop>
+  <tabstop>encoder_decrement_string</tabstop>
+  <tabstop>encoder_decrement_combobox</tabstop>
+  <tabstop>encoder_decrement_hotkey</tabstop>
+  <tabstop>encoder_button_hotkey</tabstop>
+  <tabstop>encoder_button_combobox</tabstop>
+  <tabstop>encoder_button_string</tabstop>
+  <tabstop>apply_config_button</tabstop>
+ </tabstops>
  <resources>
   <include location="images.qrc"/>
  </resources>
