@@ -50,6 +50,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets, Qt
 from layers_config import slate_config
 from adafruit_hid.keycode import Keycode
 from adafruit_hid.consumer_control_code import ConsumerControlCode
+import screenkey
 
 def convertQttoHID(qt_code):
     if qt_code == QtCore.Qt.Key.Key_A: return Keycode.A
@@ -234,6 +235,95 @@ def convertHIDtoQt(hid_code):
     if hid_code == Keycode.CONTROL: return QtCore.Qt.Key.Key_Control
     if hid_code == Keycode.SHIFT: return QtCore.Qt.Key.Key_Shift
     if hid_code == Keycode.ALT: return QtCore.Qt.Key.Key_Alt
+
+def fillInputForm(self, layer, prefix, macro_type_index):
+        # Get actions for input
+        if prefix == "screenkey":
+            actions = slate_config["layers"][ui.layer_select.currentIndex()]["touch_shortcuts"][layer]["actions"]
+        elif prefix == "key_0":
+            actions = layer["key_shortcuts"][0]["actions"]
+        elif prefix == "key_1":
+            actions = layer["key_shortcuts"][1]["actions"]
+        elif prefix == "key_2":
+            actions = layer["key_shortcuts"][2]["actions"]
+        elif prefix == "key_3":
+            actions = layer["key_shortcuts"][3]["actions"]
+        elif prefix == "key_4":
+            actions = layer["key_shortcuts"][4]["actions"]
+        elif prefix == "key_5":
+            actions = layer["key_shortcuts"][5]["actions"]
+        elif prefix == "key_6":
+            actions = layer["key_shortcuts"][6]["actions"]
+        elif prefix == "key_7":
+            actions = layer["key_shortcuts"][7]["actions"]
+        elif prefix == "xAxis_pos":
+            actions = layer["joystick"]["x+"]
+        elif prefix == "xAxis_neg":
+            actions = layer["joystick"]["x-"]
+        elif prefix == "yAxis_pos":
+            actions = layer["joystick"]["y+"]
+        elif prefix == "yAxis_neg":
+            actions = layer["joystick"]["y-"]
+        elif prefix == "joystick_button":
+            actions = layer["joystick"]["button"]
+        elif prefix == "encoder_increment":
+            actions = layer["encoder"]["increment"]
+        elif prefix == "encoder_decrement":
+            actions = layer["encoder"]["decrement"]
+        elif prefix == "encoder_button":
+            actions = layer["encoder"]["button"]
+
+        # Fill input form
+        if macro_type_index == 0:
+            pass
+        if macro_type_index == 1:
+            getattr(self, "%s_hotkey" % prefix).setKeySequence(convertHIDtoQt(actions[1]))
+        if macro_type_index == 2:
+            getattr(self, "%s_string" % prefix).setText(actions[1])
+        if macro_type_index == 3:
+            if actions[1] == ConsumerControlCode.VOLUME_INCREMENT:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(0)
+            if actions[1] == ConsumerControlCode.VOLUME_DECREMENT:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(1)
+            if actions[1] == ConsumerControlCode.MUTE:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(2)
+            if actions[1] == ConsumerControlCode.PLAY_PAUSE:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(3)
+            if actions[1] == ConsumerControlCode.STOP:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(4)
+            if actions[1] == ConsumerControlCode.REWIND:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(5)
+            if actions[1] == ConsumerControlCode.FAST_FORWARD:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(6)
+            if actions[1] == ConsumerControlCode.RECORD:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(7)
+            if actions[1] == ConsumerControlCode.SCAN_NEXT_TRACK:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(8)
+            if actions[1] == ConsumerControlCode.SCAN_PREVIOUS_TRACK:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(9)
+            if actions[1] == ConsumerControlCode.EJECT:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(10)
+            if actions[1] == ConsumerControlCode.BRIGHTNESS_INCREMENT:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(11)
+            if actions[1] == ConsumerControlCode.BRIGHTNESS_DECREMENT:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(12)
+        if macro_type_index == 4:
+            pass
+        if macro_type_index == 5:
+            if actions[1] == [0, 100, 0]:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(0)
+            if actions[1] == [0, -100, 0]:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(1)
+            if actions[1] == [-100, 0, 0]:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(2)
+            if actions[1] == [100, 0, 0]:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(3)
+            if actions[1] == LEFT_BUTTON:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(4)
+            if actions[1] == RIGHT_BUTTON:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(5)
+            if actions[1] == MIDDLE_BUTTON:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(6)
 
 class Ui_MainWindow(object):
     icon0 = QtGui.QIcon()
@@ -1206,6 +1296,9 @@ class Ui_MainWindow(object):
         self.encoder_button_hotkey.setVisible(False)
         self.encoder_button_string.setVisible(False)
         self.encoder_button_combobox.setVisible(False)
+        ui_screenkey.screenkey_hotkey.setVisible(False)
+        ui_screenkey.screenkey_string.setVisible(False)
+        ui_screenkey.screenkey_combobox.setVisible(False)
 
     def getInputMacroTypeIndex(self, layer, input_type, number):
         if input_type == "touch_shortcuts":
@@ -1306,37 +1399,39 @@ class Ui_MainWindow(object):
         
     def fillInputForm(self, layer, prefix, macro_type_index):
         # Get actions for input
-        if prefix == "key_0":
+        if prefix == "screenkey":
+            actions = slate_config["layers"][ui.layer_select.currentIndex()]["touch_shortcuts"][layer]["actions"]
+        elif prefix == "key_0":
             actions = layer["key_shortcuts"][0]["actions"]
-        if prefix == "key_1":
+        elif prefix == "key_1":
             actions = layer["key_shortcuts"][1]["actions"]
-        if prefix == "key_2":
+        elif prefix == "key_2":
             actions = layer["key_shortcuts"][2]["actions"]
-        if prefix == "key_3":
+        elif prefix == "key_3":
             actions = layer["key_shortcuts"][3]["actions"]
-        if prefix == "key_4":
+        elif prefix == "key_4":
             actions = layer["key_shortcuts"][4]["actions"]
-        if prefix == "key_5":
+        elif prefix == "key_5":
             actions = layer["key_shortcuts"][5]["actions"]
-        if prefix == "key_6":
+        elif prefix == "key_6":
             actions = layer["key_shortcuts"][6]["actions"]
-        if prefix == "key_7":
+        elif prefix == "key_7":
             actions = layer["key_shortcuts"][7]["actions"]
-        if prefix == "xAxis_pos":
+        elif prefix == "xAxis_pos":
             actions = layer["joystick"]["x+"]
-        if prefix == "xAxis_neg":
+        elif prefix == "xAxis_neg":
             actions = layer["joystick"]["x-"]
-        if prefix == "yAxis_pos":
+        elif prefix == "yAxis_pos":
             actions = layer["joystick"]["y+"]
-        if prefix == "yAxis_neg":
+        elif prefix == "yAxis_neg":
             actions = layer["joystick"]["y-"]
-        if prefix == "joystick_button":
+        elif prefix == "joystick_button":
             actions = layer["joystick"]["button"]
-        if prefix == "encoder_increment":
+        elif prefix == "encoder_increment":
             actions = layer["encoder"]["increment"]
-        if prefix == "encoder_decrement":
+        elif prefix == "encoder_decrement":
             actions = layer["encoder"]["decrement"]
-        if prefix == "encoder_button":
+        elif prefix == "encoder_button":
             actions = layer["encoder"]["button"]
 
         # Fill input form
@@ -1471,6 +1566,17 @@ class Ui_MainWindow(object):
         # Fill from first layer
         self.fillFromLayer(0)
 
+    def openScreenKeyDialog(self, key_number):
+        layer = slate_config["layers"][self.layer_select.currentIndex()]
+        current_label = layer["touch_shortcuts"][key_number]["label"]
+        current_image_path = layer["touch_shortcuts"][key_number]["icon"]
+        ui_screenkey.screenkey_macro.setCurrentIndex(self.getInputMacroTypeIndex(layer, "touch_shortcuts", key_number))
+        ui_screenkey.screenkey_name.setText(current_label)
+        ui_screenkey.screenkey_image_path.setText(current_image_path)
+        ui_screenkey.showInputForm("screenkey", ui_screenkey.screenkey_macro.currentIndex())
+        fillInputForm(ui_screenkey, key_number, "screenkey", ui_screenkey.screenkey_macro.currentIndex())
+        EditScreenKey.show()
+
     
 
 import images_rc
@@ -1480,11 +1586,26 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
+    EditScreenKey = QtWidgets.QDialog()
     ui = Ui_MainWindow()
+    ui_screenkey = screenkey.Ui_screenKeyDialog()
+    ui_screenkey.setupUi(EditScreenKey)
     ui.setupUi(MainWindow)
     ui.hide_inputs(MainWindow)
     ui.initFromConfig(MainWindow)
     ui.macroTabs.currentChanged.connect(ui.changePreviewImage)
+    ui.screenkey_0.clicked.connect(lambda: ui.openScreenKeyDialog(0))
+    ui.screenkey_1.clicked.connect(lambda: ui.openScreenKeyDialog(1))
+    ui.screenkey_2.clicked.connect(lambda: ui.openScreenKeyDialog(2))
+    ui.screenkey_3.clicked.connect(lambda: ui.openScreenKeyDialog(3))
+    ui.screenkey_4.clicked.connect(lambda: ui.openScreenKeyDialog(4))
+    ui.screenkey_5.clicked.connect(lambda: ui.openScreenKeyDialog(5))
+    ui.screenkey_6.clicked.connect(lambda: ui.openScreenKeyDialog(6))
+    ui.screenkey_7.clicked.connect(lambda: ui.openScreenKeyDialog(7))
+    ui.screenkey_8.clicked.connect(lambda: ui.openScreenKeyDialog(8))
+    ui.screenkey_9.clicked.connect(lambda: ui.openScreenKeyDialog(9))
+    ui.screenkey_10.clicked.connect(lambda: ui.openScreenKeyDialog(10))
+    ui.screenkey_11.clicked.connect(lambda: ui.openScreenKeyDialog(11))
     ui.key_0.currentIndexChanged.connect(lambda: ui.showInputForm("key_0", ui.key_0.currentIndex()))
     ui.key_1.currentIndexChanged.connect(lambda: ui.showInputForm("key_1", ui.key_1.currentIndex()))
     ui.key_2.currentIndexChanged.connect(lambda: ui.showInputForm("key_2", ui.key_2.currentIndex()))

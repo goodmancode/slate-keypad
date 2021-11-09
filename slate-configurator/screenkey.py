@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'screenkey.ui'
+# Form implementation generated from reading ui file '.\screenkey.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.6
 #
@@ -9,6 +9,32 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+
+COMBOBOX_MEDIA = [
+    "Volume Up",
+    "Volume Down",
+    "Mute",
+    "Play/Pause",
+    "Stop",
+    "Rewind",
+    "Fast Forward",
+    "Record",
+    "Next Track",
+    "Previous Track",
+    "Eject",
+    "Brightness Increase",
+    "Brightness Decrease"
+    ]
+
+COMBOBOX_MOUSE = [
+    "Mouse Up",
+    "Mouse Down",
+    "Mouse Left",
+    "Mouse Right",
+    "Left Button",
+    "Right Button",
+    "Middle Button"
+]
 
 
 class Ui_screenKeyDialog(object):
@@ -23,7 +49,7 @@ class Ui_screenKeyDialog(object):
         screenKeyDialog.setMinimumSize(QtCore.QSize(400, 215))
         screenKeyDialog.setMaximumSize(QtCore.QSize(400, 215))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("slate_windowicon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(".\\slate_windowicon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         screenKeyDialog.setWindowIcon(icon)
         self.verticalLayoutWidget = QtWidgets.QWidget(screenKeyDialog)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(-1, -1, 401, 221))
@@ -56,12 +82,13 @@ class Ui_screenKeyDialog(object):
         self.screenkey_macro.addItem("")
         self.screenkey_macro.addItem("")
         self.screenkey_macro.addItem("")
+        self.screenkey_macro.currentIndexChanged.connect(lambda: self.showInputForm("screenkey", self.screenkey_macro.currentIndex()))
         self.screenkey_image_label = QtWidgets.QLabel(self.widget)
         self.screenkey_image_label.setGeometry(QtCore.QRect(20, 50, 51, 21))
         self.screenkey_image_label.setObjectName("screenkey_image_label")
-        self.screnkey_image_path = QtWidgets.QLineEdit(self.widget)
-        self.screnkey_image_path.setGeometry(QtCore.QRect(80, 50, 111, 20))
-        self.screnkey_image_path.setObjectName("screnkey_image_path")
+        self.screenkey_image_path = QtWidgets.QLineEdit(self.widget)
+        self.screenkey_image_path.setGeometry(QtCore.QRect(80, 50, 111, 20))
+        self.screenkey_image_path.setObjectName("screenkey_image_path")
         self.fileSelect = QtWidgets.QToolButton(self.widget)
         self.fileSelect.setGeometry(QtCore.QRect(200, 50, 25, 21))
         self.fileSelect.setObjectName("fileSelect")
@@ -73,6 +100,17 @@ class Ui_screenKeyDialog(object):
         self.image_preview_label = QtWidgets.QLabel(self.widget)
         self.image_preview_label.setGeometry(QtCore.QRect(300, 90, 47, 16))
         self.image_preview_label.setObjectName("image_preview_label")
+        self.screenkey_string = QtWidgets.QLineEdit(self.widget)
+        self.screenkey_string.setEnabled(True)
+        self.screenkey_string.setGeometry(QtCore.QRect(20, 110, 201, 21))
+        self.screenkey_string.setObjectName("string")
+        self.screenkey_combobox = QtWidgets.QComboBox(self.widget)
+        self.screenkey_combobox.setGeometry(QtCore.QRect(20, 110, 201, 21))
+        self.screenkey_combobox.setObjectName("combobox")
+        self.screenkey_hotkey = QtWidgets.QKeySequenceEdit(self.widget)
+        self.screenkey_hotkey.setEnabled(True)
+        self.screenkey_hotkey.setGeometry(QtCore.QRect(20, 110, 201, 21))
+        self.screenkey_hotkey.setObjectName("hotkey")
         self.verticalLayout.addWidget(self.widget)
 
         self.retranslateUi(screenKeyDialog)
@@ -94,6 +132,53 @@ class Ui_screenKeyDialog(object):
         self.screenkey_image_label.setText(_translate("screenKeyDialog", "Image:"))
         self.fileSelect.setText(_translate("screenKeyDialog", "..."))
         self.image_preview_label.setText(_translate("screenKeyDialog", "<html><head/><body><p align=\"center\">IMAGE</p></body></html>"))
+    
+    def showInputForm(self, prefix, macro_type_index):
+        if macro_type_index == 0:
+            getattr(self, '%s_hotkey' % prefix).setVisible(False)
+            getattr(self, '%s_hotkey' % prefix).clear()
+            getattr(self, '%s_string' % prefix).setVisible(False)
+            getattr(self, '%s_string' % prefix).clear()
+            getattr(self, '%s_combobox' % prefix).setVisible(False)
+            getattr(self, '%s_combobox' % prefix).clear()
+        if macro_type_index == 1:
+            getattr(self, '%s_hotkey' % prefix).setVisible(True)
+            getattr(self, '%s_hotkey' % prefix).clear()
+            getattr(self, '%s_string' % prefix).setVisible(False)
+            getattr(self, '%s_string' % prefix).clear()
+            getattr(self, '%s_combobox' % prefix).setVisible(False)
+            getattr(self, '%s_combobox' % prefix).clear()
+        if macro_type_index == 2:
+            getattr(self, '%s_hotkey' % prefix).setVisible(False)
+            getattr(self, '%s_hotkey' % prefix).clear()
+            getattr(self, '%s_string' % prefix).setVisible(True)
+            getattr(self, '%s_string' % prefix).clear()
+            getattr(self, '%s_combobox' % prefix).setVisible(False)
+            getattr(self, '%s_combobox' % prefix).clear()
+        if macro_type_index == 3:
+            getattr(self, '%s_hotkey' % prefix).setVisible(False)
+            getattr(self, '%s_hotkey' % prefix).clear()
+            getattr(self, '%s_string' % prefix).setVisible(False)
+            getattr(self, '%s_string' % prefix).clear()
+            getattr(self, '%s_combobox' % prefix).setVisible(True)
+            getattr(self, '%s_combobox' % prefix).clear()
+            getattr(self, '%s_combobox' % prefix).addItems(COMBOBOX_MEDIA)
+        if macro_type_index == 4:
+            getattr(self, '%s_hotkey' % prefix).setVisible(False)
+            getattr(self, '%s_hotkey' % prefix).clear()
+            getattr(self, '%s_string' % prefix).setVisible(False)
+            getattr(self, '%s_string' % prefix).clear()
+            getattr(self, '%s_combobox' % prefix).setVisible(True)
+            getattr(self, '%s_combobox' % prefix).clear()
+        if macro_type_index == 5:
+            getattr(self, '%s_hotkey' % prefix).setVisible(False)
+            getattr(self, '%s_hotkey' % prefix).clear()
+            getattr(self, '%s_string' % prefix).setVisible(False)
+            getattr(self, '%s_string' % prefix).clear()
+            getattr(self, '%s_combobox' % prefix).setVisible(True)
+            getattr(self, '%s_combobox' % prefix).clear()
+            getattr(self, '%s_combobox' % prefix).addItems(COMBOBOX_MOUSE)
+
 
 
 if __name__ == "__main__":
