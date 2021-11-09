@@ -16,8 +16,224 @@ CHANGE_LAYER = 6
 MOUSE_CLICK = 7
 MOUSE_MOVE = 8
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+LEFT_BUTTON = 1
+MIDDLE_BUTTON = 4
+RIGHT_BUTTON = 2
+
+COMBOBOX_MEDIA = [
+    "Volume Up",
+    "Volume Down",
+    "Mute",
+    "Play/Pause",
+    "Stop",
+    "Rewind",
+    "Fast Forward",
+    "Record",
+    "Next Track",
+    "Previous Track",
+    "Eject",
+    "Brightness Increase",
+    "Brightness Decrease"
+    ]
+
+COMBOBOX_MOUSE = [
+    "Mouse Up",
+    "Mouse Down",
+    "Mouse Left",
+    "Mouse Right",
+    "Left Button",
+    "Right Button",
+    "Middle Button"
+]
+
+from PyQt5 import QtCore, QtGui, QtWidgets, Qt
 from layers_config import slate_config
+from adafruit_hid.keycode import Keycode
+from adafruit_hid.consumer_control_code import ConsumerControlCode
+
+def convertQttoHID(qt_code):
+    if qt_code == QtCore.Qt.Key.Key_A: return Keycode.A
+    if qt_code == QtCore.Qt.Key.Key_B: return Keycode.B
+    if qt_code == QtCore.Qt.Key.Key_C: return Keycode.C
+    if qt_code == QtCore.Qt.Key.Key_D: return Keycode.D
+    if qt_code == QtCore.Qt.Key.Key_E: return Keycode.E
+    if qt_code == QtCore.Qt.Key.Key_F: return Keycode.F
+    if qt_code == QtCore.Qt.Key.Key_G: return Keycode.G
+    if qt_code == QtCore.Qt.Key.Key_H: return Keycode.H
+    if qt_code == QtCore.Qt.Key.Key_I: return Keycode.I
+    if qt_code == QtCore.Qt.Key.Key_J: return Keycode.J
+    if qt_code == QtCore.Qt.Key.Key_K: return Keycode.K
+    if qt_code == QtCore.Qt.Key.Key_L: return Keycode.L
+    if qt_code == QtCore.Qt.Key.Key_M: return Keycode.M
+    if qt_code == QtCore.Qt.Key.Key_N: return Keycode.N
+    if qt_code == QtCore.Qt.Key.Key_O: return Keycode.O
+    if qt_code == QtCore.Qt.Key.Key_P: return Keycode.P
+    if qt_code == QtCore.Qt.Key.Key_Q: return Keycode.Q
+    if qt_code == QtCore.Qt.Key.Key_R: return Keycode.R
+    if qt_code == QtCore.Qt.Key.Key_S: return Keycode.S
+    if qt_code == QtCore.Qt.Key.Key_T: return Keycode.T
+    if qt_code == QtCore.Qt.Key.Key_U: return Keycode.U
+    if qt_code == QtCore.Qt.Key.Key_V: return Keycode.V
+    if qt_code == QtCore.Qt.Key.Key_W: return Keycode.W
+    if qt_code == QtCore.Qt.Key.Key_X: return Keycode.X
+    if qt_code == QtCore.Qt.Key.Key_Y: return Keycode.Y
+    if qt_code == QtCore.Qt.Key.Key_Z: return Keycode.Z
+    if qt_code == QtCore.Qt.Key.Key_1: return Keycode.ONE
+    if qt_code == QtCore.Qt.Key.Key_2: return Keycode.TWO
+    if qt_code == QtCore.Qt.Key.Key_3: return Keycode.THREE
+    if qt_code == QtCore.Qt.Key.Key_4: return Keycode.FOUR
+    if qt_code == QtCore.Qt.Key.Key_5: return Keycode.FIVE
+    if qt_code == QtCore.Qt.Key.Key_6: return Keycode.SIX
+    if qt_code == QtCore.Qt.Key.Key_7: return Keycode.SEVEN
+    if qt_code == QtCore.Qt.Key.Key_8: return Keycode.EIGHT
+    if qt_code == QtCore.Qt.Key.Key_9: return Keycode.NINE
+    if qt_code == QtCore.Qt.Key.Key_0: return Keycode.ZERO
+    if qt_code == QtCore.Qt.Key.Key_Enter: return Keycode.ENTER
+    if qt_code == QtCore.Qt.Key.Key_Escape: return Keycode.ESCAPE
+    if qt_code == QtCore.Qt.Key.Key_Backspace: return Keycode.BACKSPACE
+    if qt_code == QtCore.Qt.Key.Key_Tab: return Keycode.TAB
+    if qt_code == QtCore.Qt.Key.Key_Space: return Keycode.SPACEBAR
+    if qt_code == QtCore.Qt.Key.Key_Minus: return Keycode.MINUS
+    if qt_code == QtCore.Qt.Key.Key_Equal: return Keycode.EQUALS
+    if qt_code == QtCore.Qt.Key.Key_BracketLeft: return Keycode.LEFT_BRACKET
+    if qt_code == QtCore.Qt.Key.Key_BracketRight: return Keycode.RIGHT_BRACKET
+    if qt_code == QtCore.Qt.Key.Key_Backslash: return Keycode.BACKSLASH
+    if qt_code == QtCore.Qt.Key.Key_NumberSign: return Keycode.POUND
+    if qt_code == QtCore.Qt.Key.Key_Semicolon: return Keycode.SEMICOLON
+    if qt_code == QtCore.Qt.Key.Key_QuoteDbl: return Keycode.QUOTE
+    if qt_code == QtCore.Qt.Key.Key_Backslash: return Keycode.GRAVE_ACCENT
+    if qt_code == QtCore.Qt.Key.Key_Comma: return Keycode.COMMA
+    if qt_code == QtCore.Qt.Key.Key_Period: return Keycode.PERIOD
+    if qt_code == QtCore.Qt.Key.Key_Slash: return Keycode.FORWARD_SLASH
+    if qt_code == QtCore.Qt.Key.Key_CapsLock: return Keycode.CAPS_LOCK
+    if qt_code == QtCore.Qt.Key.Key_F1: return Keycode.F1
+    if qt_code == QtCore.Qt.Key.Key_F2: return Keycode.F2
+    if qt_code == QtCore.Qt.Key.Key_F3: return Keycode.F3
+    if qt_code == QtCore.Qt.Key.Key_F4: return Keycode.F4
+    if qt_code == QtCore.Qt.Key.Key_F5: return Keycode.F5
+    if qt_code == QtCore.Qt.Key.Key_F6: return Keycode.F6
+    if qt_code == QtCore.Qt.Key.Key_F7: return Keycode.F7
+    if qt_code == QtCore.Qt.Key.Key_F8: return Keycode.F8
+    if qt_code == QtCore.Qt.Key.Key_F9: return Keycode.F9
+    if qt_code == QtCore.Qt.Key.Key_F10: return Keycode.F10
+    if qt_code == QtCore.Qt.Key.Key_F11: return Keycode.F11
+    if qt_code == QtCore.Qt.Key.Key_F12: return Keycode.F12
+    if qt_code == QtCore.Qt.Key.Key_Print: return Keycode.PRINT_SCREEN
+    if qt_code == QtCore.Qt.Key.Key_ScrollLock: return Keycode.SCROLL_LOCK
+    if qt_code == QtCore.Qt.Key.Key_Pause: return Keycode.PAUSE
+    if qt_code == QtCore.Qt.Key.Key_Insert: return Keycode.INSERT
+    if qt_code == QtCore.Qt.Key.Key_Home: return Keycode.HOME
+    if qt_code == QtCore.Qt.Key.Key_PageUp: return Keycode.PAGE_UP
+    if qt_code == QtCore.Qt.Key.Key_Delete: return Keycode.DELETE
+    if qt_code == QtCore.Qt.Key.Key_End: return Keycode.END
+    if qt_code == QtCore.Qt.Key.Key_PageDown: return Keycode.PAGE_DOWN
+    if qt_code == QtCore.Qt.Key.Key_Right: return Keycode.RIGHT_ARROW
+    if qt_code == QtCore.Qt.Key.Key_Left: return Keycode.LEFT_ARROW
+    if qt_code == QtCore.Qt.Key.Key_Down: return Keycode.DOWN_ARROW
+    if qt_code == QtCore.Qt.Key.Key_Up: return Keycode.UP_ARROW
+    if qt_code == QtCore.Qt.Key.Key_NumLock: return Keycode.KEYPAD_NUMLOCK
+    if qt_code == QtCore.Qt.Key.Key_Asterisk: return Keycode.KEYPAD_ASTERISK
+    if qt_code == QtCore.Qt.Key.Key_ApplicationLeft: return Keycode.APPLICATION
+    if qt_code == QtCore.Qt.Key.Key_F20: return Keycode.F20
+    if qt_code == QtCore.Qt.Key.Key_F21: return Keycode.F21
+    if qt_code == QtCore.Qt.Key.Key_F22: return Keycode.F22
+    if qt_code == QtCore.Qt.Key.Key_F23: return Keycode.F23
+    if qt_code == QtCore.Qt.Key.Key_F24: return Keycode.F24
+    if qt_code == QtCore.Qt.Key.Key_Control: return Keycode.CONTROL
+    if qt_code == QtCore.Qt.Key.Key_Shift: return Keycode.SHIFT
+    if qt_code == QtCore.Qt.Key.Key_Alt: return Keycode.ALT
+
+def convertHIDtoQt(hid_code):
+    if hid_code == Keycode.A: return QtCore.Qt.Key.Key_A
+    if hid_code == Keycode.B: return QtCore.Qt.Key.Key_B
+    if hid_code == Keycode.C: return QtCore.Qt.Key.Key_C
+    if hid_code == Keycode.D: return QtCore.Qt.Key.Key_D
+    if hid_code == Keycode.E: return QtCore.Qt.Key.Key_E
+    if hid_code == Keycode.F: return QtCore.Qt.Key.Key_F
+    if hid_code == Keycode.G: return QtCore.Qt.Key.Key_G
+    if hid_code == Keycode.H: return QtCore.Qt.Key.Key_H
+    if hid_code == Keycode.I: return QtCore.Qt.Key.Key_I
+    if hid_code == Keycode.J: return QtCore.Qt.Key.Key_J
+    if hid_code == Keycode.K: return QtCore.Qt.Key.Key_K
+    if hid_code == Keycode.L: return QtCore.Qt.Key.Key_L
+    if hid_code == Keycode.M: return QtCore.Qt.Key.Key_M
+    if hid_code == Keycode.N: return QtCore.Qt.Key.Key_N
+    if hid_code == Keycode.O: return QtCore.Qt.Key.Key_O
+    if hid_code == Keycode.P: return QtCore.Qt.Key.Key_P
+    if hid_code == Keycode.Q: return QtCore.Qt.Key.Key_Q
+    if hid_code == Keycode.R: return QtCore.Qt.Key.Key_R
+    if hid_code == Keycode.S: return QtCore.Qt.Key.Key_S
+    if hid_code == Keycode.T: return QtCore.Qt.Key.Key_T
+    if hid_code == Keycode.U: return QtCore.Qt.Key.Key_U
+    if hid_code == Keycode.V: return QtCore.Qt.Key.Key_V
+    if hid_code == Keycode.W: return QtCore.Qt.Key.Key_W
+    if hid_code == Keycode.X: return QtCore.Qt.Key.Key_X
+    if hid_code == Keycode.Y: return QtCore.Qt.Key.Key_Y
+    if hid_code == Keycode.Z: return QtCore.Qt.Key.Key_Z
+    if hid_code == Keycode.ONE: return QtCore.Qt.Key.Key_1 
+    if hid_code == Keycode.TWO: return QtCore.Qt.Key.Key_2
+    if hid_code == Keycode.THREE: return QtCore.Qt.Key.Key_3
+    if hid_code == Keycode.FOUR: return QtCore.Qt.Key.Key_4
+    if hid_code == Keycode.FIVE: return QtCore.Qt.Key.Key_5
+    if hid_code == Keycode.SIX: return QtCore.Qt.Key.Key_6
+    if hid_code == Keycode.SEVEN: return QtCore.Qt.Key.Key_7 
+    if hid_code == Keycode.EIGHT: return QtCore.Qt.Key.Key_8 
+    if hid_code == Keycode.NINE: return QtCore.Qt.Key.Key_9
+    if hid_code == Keycode.ZERO: return QtCore.Qt.Key.Key_0
+    if hid_code == Keycode.ENTER: return QtCore.Qt.Key.Key_Enter
+    if hid_code == Keycode.ESCAPE: return QtCore.Qt.Key.Key_Escape
+    if hid_code == Keycode.BACKSPACE: return QtCore.Qt.Key.Key_Backspace
+    if hid_code == Keycode.TAB: return QtCore.Qt.Key.Key_Tab
+    if hid_code == Keycode.SPACEBAR: return QtCore.Qt.Key.Key_Space
+    if hid_code == Keycode.MINUS: return QtCore.Qt.Key.Key_Minus
+    if hid_code == Keycode.EQUALS: return QtCore.Qt.Key.Key_Equal
+    if hid_code == Keycode.LEFT_BRACKET: return QtCore.Qt.Key.Key_BracketLeft
+    if hid_code == Keycode.RIGHT_BRACKET: return QtCore.Qt.Key.Key_BracketRight
+    if hid_code == Keycode.BACKSLASH: return QtCore.Qt.Key.Key_Backslash
+    if hid_code == Keycode.POUND: return QtCore.Qt.Key.Key_NumberSign
+    if hid_code == Keycode.SEMICOLON: return QtCore.Qt.Key.Key_Semicolon
+    if hid_code == Keycode.QUOTE: return QtCore.Qt.Key.Key_QuoteDbl
+    if hid_code == Keycode.GRAVE_ACCENT: return QtCore.Qt.Key.Key_Backslash
+    if hid_code == Keycode.COMMA: return QtCore.Qt.Key.Key_Comma
+    if hid_code == Keycode.PERIOD: return QtCore.Qt.Key.Key_Period
+    if hid_code == Keycode.FORWARD_SLASH: return QtCore.Qt.Key.Key_Slash
+    if hid_code == Keycode.CAPS_LOCK: return QtCore.Qt.Key.Key_CapsLock
+    if hid_code == Keycode.F1: return QtCore.Qt.Key.Key_F1
+    if hid_code == Keycode.F2: return QtCore.Qt.Key.Key_F2
+    if hid_code == Keycode.F3: return QtCore.Qt.Key.Key_F3
+    if hid_code == Keycode.F4: return QtCore.Qt.Key.Key_F4
+    if hid_code == Keycode.F5: return QtCore.Qt.Key.Key_F5
+    if hid_code == Keycode.F6: return QtCore.Qt.Key.Key_F6
+    if hid_code == Keycode.F7: return QtCore.Qt.Key.Key_F7
+    if hid_code == Keycode.F8: return QtCore.Qt.Key.Key_F8
+    if hid_code == Keycode.F9: return QtCore.Qt.Key.Key_F9
+    if hid_code == Keycode.F10: return QtCore.Qt.Key.Key_F10
+    if hid_code == Keycode.F11: return QtCore.Qt.Key.Key_F11
+    if hid_code == Keycode.F12: return QtCore.Qt.Key.Key_F12
+    if hid_code == Keycode.PRINT_SCREEN: return QtCore.Qt.Key.Key_Print
+    if hid_code == Keycode.SCROLL_LOCK: return QtCore.Qt.Key.Key_ScrollLock
+    if hid_code == Keycode.PAUSE: return QtCore.Qt.Key.Key_Pause
+    if hid_code == Keycode.INSERT: return QtCore.Qt.Key.Key_Insert
+    if hid_code == Keycode.HOME: return QtCore.Qt.Key.Key_Home
+    if hid_code == Keycode.PAGE_UP: return QtCore.Qt.Key.Key_PageUp
+    if hid_code == Keycode.DELETE: return QtCore.Qt.Key.Key_Delete
+    if hid_code == Keycode.END: return QtCore.Qt.Key.Key_End
+    if hid_code == Keycode.PAGE_DOWN: return QtCore.Qt.Key.Key_PageDown
+    if hid_code == Keycode.RIGHT_ARROW: return QtCore.Qt.Key.Key_Right
+    if hid_code == Keycode.LEFT_ARROW: return QtCore.Qt.Key.Key_Left
+    if hid_code == Keycode.DOWN_ARROW: return QtCore.Qt.Key.Key_Down
+    if hid_code == Keycode.UP_ARROW: return QtCore.Qt.Key.Key_Up
+    if hid_code == Keycode.KEYPAD_NUMLOCK: return QtCore.Qt.Key.Key_NumLock
+    if hid_code == Keycode.KEYPAD_ASTERISK: return QtCore.Qt.Key.Key_Asterisk
+    if hid_code == Keycode.APPLICATION: return QtCore.Qt.Key.Key_ApplicationLeft
+    if hid_code == Keycode.F20: return QtCore.Qt.Key.Key_F20
+    if hid_code == Keycode.F21: return QtCore.Qt.Key.Key_F21
+    if hid_code == Keycode.F22: return QtCore.Qt.Key.Key_F22
+    if hid_code == Keycode.F23: return QtCore.Qt.Key.Key_F23
+    if hid_code == Keycode.F24: return QtCore.Qt.Key.Key_F24
+    if hid_code == Keycode.CONTROL: return QtCore.Qt.Key.Key_Control
+    if hid_code == Keycode.SHIFT: return QtCore.Qt.Key.Key_Shift
+    if hid_code == Keycode.ALT: return QtCore.Qt.Key.Key_Alt
 
 class Ui_MainWindow(object):
     icon0 = QtGui.QIcon()
@@ -1042,6 +1258,142 @@ class Ui_MainWindow(object):
             new_image = QtGui.QPixmap("./images/slate_config_ref_encoder.png")
             self.reference_image.setPixmap(new_image)
 
+    def showInputForm(self, prefix, macro_type_index):
+        if macro_type_index == 0:
+            getattr(self, '%s_hotkey' % prefix).setVisible(False)
+            getattr(self, '%s_hotkey' % prefix).clear()
+            getattr(self, '%s_string' % prefix).setVisible(False)
+            getattr(self, '%s_string' % prefix).clear()
+            getattr(self, '%s_combobox' % prefix).setVisible(False)
+            getattr(self, '%s_combobox' % prefix).clear()
+        if macro_type_index == 1:
+            getattr(self, '%s_hotkey' % prefix).setVisible(True)
+            getattr(self, '%s_hotkey' % prefix).clear()
+            getattr(self, '%s_string' % prefix).setVisible(False)
+            getattr(self, '%s_string' % prefix).clear()
+            getattr(self, '%s_combobox' % prefix).setVisible(False)
+            getattr(self, '%s_combobox' % prefix).clear()
+        if macro_type_index == 2:
+            getattr(self, '%s_hotkey' % prefix).setVisible(False)
+            getattr(self, '%s_hotkey' % prefix).clear()
+            getattr(self, '%s_string' % prefix).setVisible(True)
+            getattr(self, '%s_string' % prefix).clear()
+            getattr(self, '%s_combobox' % prefix).setVisible(False)
+            getattr(self, '%s_combobox' % prefix).clear()
+        if macro_type_index == 3:
+            getattr(self, '%s_hotkey' % prefix).setVisible(False)
+            getattr(self, '%s_hotkey' % prefix).clear()
+            getattr(self, '%s_string' % prefix).setVisible(False)
+            getattr(self, '%s_string' % prefix).clear()
+            getattr(self, '%s_combobox' % prefix).setVisible(True)
+            getattr(self, '%s_combobox' % prefix).clear()
+            getattr(self, '%s_combobox' % prefix).addItems(COMBOBOX_MEDIA)
+        if macro_type_index == 4:
+            getattr(self, '%s_hotkey' % prefix).setVisible(False)
+            getattr(self, '%s_hotkey' % prefix).clear()
+            getattr(self, '%s_string' % prefix).setVisible(False)
+            getattr(self, '%s_string' % prefix).clear()
+            getattr(self, '%s_combobox' % prefix).setVisible(True)
+            getattr(self, '%s_combobox' % prefix).clear()
+        if macro_type_index == 5:
+            getattr(self, '%s_hotkey' % prefix).setVisible(False)
+            getattr(self, '%s_hotkey' % prefix).clear()
+            getattr(self, '%s_string' % prefix).setVisible(False)
+            getattr(self, '%s_string' % prefix).clear()
+            getattr(self, '%s_combobox' % prefix).setVisible(True)
+            getattr(self, '%s_combobox' % prefix).clear()
+            getattr(self, '%s_combobox' % prefix).addItems(COMBOBOX_MOUSE)
+        
+    def fillInputForm(self, layer, prefix, macro_type_index):
+        # Get actions for input
+        if prefix == "key_0":
+            actions = layer["key_shortcuts"][0]["actions"]
+        if prefix == "key_1":
+            actions = layer["key_shortcuts"][1]["actions"]
+        if prefix == "key_2":
+            actions = layer["key_shortcuts"][2]["actions"]
+        if prefix == "key_3":
+            actions = layer["key_shortcuts"][3]["actions"]
+        if prefix == "key_4":
+            actions = layer["key_shortcuts"][4]["actions"]
+        if prefix == "key_5":
+            actions = layer["key_shortcuts"][5]["actions"]
+        if prefix == "key_6":
+            actions = layer["key_shortcuts"][6]["actions"]
+        if prefix == "key_7":
+            actions = layer["key_shortcuts"][7]["actions"]
+        if prefix == "xAxis_pos":
+            actions = layer["joystick"]["x+"]
+        if prefix == "xAxis_neg":
+            actions = layer["joystick"]["x-"]
+        if prefix == "yAxis_pos":
+            actions = layer["joystick"]["y+"]
+        if prefix == "yAxis_neg":
+            actions = layer["joystick"]["y-"]
+        if prefix == "joystick_button":
+            actions = layer["joystick"]["button"]
+        if prefix == "encoder_increment":
+            actions = layer["encoder"]["increment"]
+        if prefix == "encoder_decrement":
+            actions = layer["encoder"]["decrement"]
+        if prefix == "encoder_button":
+            actions = layer["encoder"]["button"]
+
+        # Fill input form
+        if macro_type_index == 0:
+            pass
+        if macro_type_index == 1:
+            getattr(self, "%s_hotkey" % prefix).setKeySequence(convertHIDtoQt(actions[1]))
+        if macro_type_index == 2:
+            getattr(self, "%s_string" % prefix).setText(actions[1])
+        if macro_type_index == 3:
+            if actions[1] == ConsumerControlCode.VOLUME_INCREMENT:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(0)
+            if actions[1] == ConsumerControlCode.VOLUME_DECREMENT:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(1)
+            if actions[1] == ConsumerControlCode.MUTE:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(2)
+            if actions[1] == ConsumerControlCode.PLAY_PAUSE:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(3)
+            if actions[1] == ConsumerControlCode.STOP:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(4)
+            if actions[1] == ConsumerControlCode.REWIND:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(5)
+            if actions[1] == ConsumerControlCode.FAST_FORWARD:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(6)
+            if actions[1] == ConsumerControlCode.RECORD:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(7)
+            if actions[1] == ConsumerControlCode.SCAN_NEXT_TRACK:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(8)
+            if actions[1] == ConsumerControlCode.SCAN_PREVIOUS_TRACK:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(9)
+            if actions[1] == ConsumerControlCode.EJECT:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(10)
+            if actions[1] == ConsumerControlCode.BRIGHTNESS_INCREMENT:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(11)
+            if actions[1] == ConsumerControlCode.BRIGHTNESS_DECREMENT:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(12)
+        if macro_type_index == 4:
+            pass
+        if macro_type_index == 5:
+            if actions[1] == [0, 100, 0]:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(0)
+            if actions[1] == [0, -100, 0]:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(1)
+            if actions[1] == [-100, 0, 0]:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(2)
+            if actions[1] == [100, 0, 0]:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(3)
+            if actions[1] == LEFT_BUTTON:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(4)
+            if actions[1] == RIGHT_BUTTON:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(5)
+            if actions[1] == MIDDLE_BUTTON:
+                getattr(self, "%s_combobox" % prefix).setCurrentIndex(6)
+
+            
+            
+
     def fillFromLayer(self, index):
         # Get layer from index
         layer = slate_config["layers"][index]
@@ -1060,23 +1412,55 @@ class Ui_MainWindow(object):
         self.screenkey_11_label.setText(self.getScreenKeyLabel(layer, 11))
         # TODO: Fill physical keys
         self.key_0.setCurrentIndex(self.getInputMacroTypeIndex(layer, "key_shortcuts", 0))
+        self.showInputForm("key_0", self.key_0.currentIndex())
+        self.fillInputForm(layer, "key_0", self.key_0.currentIndex())
         self.key_1.setCurrentIndex(self.getInputMacroTypeIndex(layer, "key_shortcuts", 1))
+        self.showInputForm("key_1", self.key_1.currentIndex())
+        self.fillInputForm(layer, "key_1", self.key_1.currentIndex())
         self.key_2.setCurrentIndex(self.getInputMacroTypeIndex(layer, "key_shortcuts", 2))
+        self.showInputForm("key_2", self.key_2.currentIndex())
+        self.fillInputForm(layer, "key_2", self.key_2.currentIndex())
         self.key_3.setCurrentIndex(self.getInputMacroTypeIndex(layer, "key_shortcuts", 3))
+        self.showInputForm("key_3", self.key_3.currentIndex())
+        self.fillInputForm(layer, "key_3", self.key_3.currentIndex())
         self.key_4.setCurrentIndex(self.getInputMacroTypeIndex(layer, "key_shortcuts", 4))
+        self.showInputForm("key_4", self.key_4.currentIndex())
+        self.fillInputForm(layer, "key_4", self.key_4.currentIndex())
         self.key_5.setCurrentIndex(self.getInputMacroTypeIndex(layer, "key_shortcuts", 5))
+        self.showInputForm("key_5", self.key_5.currentIndex())
+        self.fillInputForm(layer, "key_5", self.key_5.currentIndex())
         self.key_6.setCurrentIndex(self.getInputMacroTypeIndex(layer, "key_shortcuts", 6))
+        self.showInputForm("key_6", self.key_6.currentIndex())
+        self.fillInputForm(layer, "key_6", self.key_6.currentIndex())
         self.key_7.setCurrentIndex(self.getInputMacroTypeIndex(layer, "key_shortcuts", 7))
+        self.showInputForm("key_7", self.key_7.currentIndex())
+        self.fillInputForm(layer, "key_7", self.key_7.currentIndex())
         # TODO: Fill joystick
         self.xAxis_pos.setCurrentIndex(self.getInputMacroTypeIndex(layer, "joystick", 0))
+        self.showInputForm("xAxis_pos", self.xAxis_pos.currentIndex())
+        self.fillInputForm(layer, "xAxis_pos", self.xAxis_pos.currentIndex())
         self.xAxis_neg.setCurrentIndex(self.getInputMacroTypeIndex(layer, "joystick", 1))
+        self.showInputForm("xAxis_neg", self.xAxis_neg.currentIndex())
+        self.fillInputForm(layer, "xAxis_neg", self.xAxis_neg.currentIndex())
         self.yAxis_pos.setCurrentIndex(self.getInputMacroTypeIndex(layer, "joystick", 2))
+        self.showInputForm("yAxis_pos", self.yAxis_pos.currentIndex())
+        self.fillInputForm(layer, "yAxis_pos", self.yAxis_pos.currentIndex())
         self.yAxis_neg.setCurrentIndex(self.getInputMacroTypeIndex(layer, "joystick", 3))
+        self.showInputForm("yAxis_neg", self.yAxis_neg.currentIndex())
+        self.fillInputForm(layer, "yAxis_neg", self.yAxis_neg.currentIndex())
         self.joystick_button.setCurrentIndex(self.getInputMacroTypeIndex(layer, "joystick", 4))
+        self.showInputForm("joystick_button", self.joystick_button.currentIndex())
+        self.fillInputForm(layer, "joystick_button", self.joystick_button.currentIndex())
         # TODO: Fill encoder
         self.encoder_increment.setCurrentIndex(self.getInputMacroTypeIndex(layer, "encoder", 0))
+        self.showInputForm("encoder_increment", self.encoder_increment.currentIndex())
+        self.fillInputForm(layer, "encoder_increment", self.encoder_increment.currentIndex())
         self.encoder_decrement.setCurrentIndex(self.getInputMacroTypeIndex(layer, "encoder", 1))
+        self.showInputForm("encoder_decrement", self.encoder_decrement.currentIndex())
+        self.fillInputForm(layer, "encoder_decrement", self.encoder_decrement.currentIndex())
         self.encoder_button.setCurrentIndex(self.getInputMacroTypeIndex(layer, "encoder", 2))
+        self.showInputForm("encoder_button", self.encoder_button.currentIndex())
+        self.fillInputForm(layer, "encoder_button", self.encoder_button.currentIndex())
 
     def initFromConfig(self, MainWindow):
         # Fill combobox with layer names
@@ -1088,10 +1472,6 @@ class Ui_MainWindow(object):
         self.fillFromLayer(0)
 
     
-        
-
-
-
 
 import images_rc
 
@@ -1105,5 +1485,22 @@ if __name__ == "__main__":
     ui.hide_inputs(MainWindow)
     ui.initFromConfig(MainWindow)
     ui.macroTabs.currentChanged.connect(ui.changePreviewImage)
+    ui.key_0.currentIndexChanged.connect(lambda: ui.showInputForm("key_0", ui.key_0.currentIndex()))
+    ui.key_1.currentIndexChanged.connect(lambda: ui.showInputForm("key_1", ui.key_1.currentIndex()))
+    ui.key_2.currentIndexChanged.connect(lambda: ui.showInputForm("key_2", ui.key_2.currentIndex()))
+    ui.key_3.currentIndexChanged.connect(lambda: ui.showInputForm("key_3", ui.key_3.currentIndex()))
+    ui.key_4.currentIndexChanged.connect(lambda: ui.showInputForm("key_4", ui.key_4.currentIndex()))
+    ui.key_5.currentIndexChanged.connect(lambda: ui.showInputForm("key_5", ui.key_5.currentIndex()))
+    ui.key_6.currentIndexChanged.connect(lambda: ui.showInputForm("key_6", ui.key_6.currentIndex()))
+    ui.key_7.currentIndexChanged.connect(lambda: ui.showInputForm("key_7", ui.key_7.currentIndex()))
+    ui.xAxis_pos.currentIndexChanged.connect(lambda: ui.showInputForm("xAxis_pos", ui.xAxis_pos.currentIndex()))
+    ui.xAxis_neg.currentIndexChanged.connect(lambda: ui.showInputForm("xAxis_neg", ui.xAxis_neg.currentIndex()))
+    ui.yAxis_pos.currentIndexChanged.connect(lambda: ui.showInputForm("yAxis_pos", ui.yAxis_pos.currentIndex()))
+    ui.yAxis_neg.currentIndexChanged.connect(lambda: ui.showInputForm("yAxis_neg", ui.yAxis_neg.currentIndex()))
+    ui.joystick_button.currentIndexChanged.connect(lambda: ui.showInputForm("joystick_button", ui.joystick_button.currentIndex()))
+    ui.encoder_increment.currentIndexChanged.connect(lambda: ui.showInputForm("encoder_increment", ui.encoder_increment.currentIndex()))
+    ui.encoder_decrement.currentIndexChanged.connect(lambda: ui.showInputForm("encoder_decrement", ui.encoder_decrement.currentIndex()))
+    ui.encoder_button.currentIndexChanged.connect(lambda: ui.showInputForm("encoder_button", ui.encoder_encoder.currentIndex()))
     MainWindow.show()
+    
     sys.exit(app.exec_())
