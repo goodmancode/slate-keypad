@@ -187,7 +187,7 @@ slate_config = {
             "key_shortcuts": [
                 {
                     "assigned_key": 0,
-                    "actions": (KEY, 0xE9),
+                    "actions": (KEY, 0x04),
                 },
                 {
                     "assigned_key": 1,
