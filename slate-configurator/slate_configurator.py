@@ -1566,6 +1566,64 @@ class Ui_MainWindow(object):
         # Fill from first layer
         self.fillFromLayer(0)
 
+    def mediaControlObject(self, media_combobox_index):
+        if media_combobox_index == 0:   # Volume Up
+            return ConsumerControlCode.VOLUME_INCREMENT
+        if media_combobox_index == 1:   # Volume Down
+            return ConsumerControlCode.VOLUME_DECREMENT
+        if media_combobox_index == 2:   # Mute
+            return ConsumerControlCode.MUTE
+        if media_combobox_index == 3:   # Play / Pause
+            return ConsumerControlCode.PLAY_PAUSE
+        if media_combobox_index == 4:   # Stop
+            return ConsumerControlCode.STOP
+        if media_combobox_index == 5:   # Rewind
+            return ConsumerControlCode.REWIND
+        if media_combobox_index == 6:   # Fast Forward
+            return ConsumerControlCode.FAST_FORWARD
+        if media_combobox_index == 7:   # Record
+            return ConsumerControlCode.RECORD
+        if media_combobox_index == 8:   # Next Track
+            return ConsumerControlCode.SCAN_NEXT_TRACK
+        if media_combobox_index == 9:   # Previous Track
+            return ConsumerControlCode.SCAN_PREVIOUS_TRACK
+        if media_combobox_index == 10:   # Eject
+            return ConsumerControlCode.EJECT
+        if media_combobox_index == 11:   # Brightness Increase
+            return ConsumerControlCode.BRIGHTNESS_INCREMENT
+        if media_combobox_index == 12:   # Brightness Decrease
+            return ConsumerControlCode.BRIGHTNESS_DECREMENT
+
+    def mouseObject(self, mouse_combobox_index):
+        if mouse_combobox_index == 0: # Mouse Up
+            return [0, 100, 0]
+        if mouse_combobox_index == 1: # Mouse Down
+            return [0, -100, 0]
+        if mouse_combobox_index == 2: # Mouse Left
+            return [-100, 0, 0]
+        if mouse_combobox_index == 3: # Mouse Right
+            return [100, 0, 0]
+        if mouse_combobox_index == 4: # Left Button
+            return LEFT_BUTTON
+        if mouse_combobox_index == 5: # Right Button
+            return RIGHT_BUTTON
+        if mouse_combobox_index == 6: # Middle Button
+            return MIDDLE_BUTTON
+
+    def writeScreenKeyActions(self, macro_type):
+        if macro_type == 0:
+            return (None, None)
+        if macro_type == 1: # Hotkey
+            return (KEY, [convertQttoHID(ui_screenkey.screenkey_hotkey.keySequence())])
+        if macro_type == 2: # String
+            return (STRING, ui_screenkey.screenkey_string.text())
+        if macro_type == 3: # Media Control
+            return self.mediaControlObject(ui_screenkey.screenkey_combobox.currentIndex())
+        if macro_type == 4: # Windows
+            pass
+        if macro_type == 5: # Mouse Control
+            return self.mouseObject(ui_screenkey.screenkey_combobox.currentIndex())
+            
     def openScreenKeyDialog(self, key_number):
         layer = slate_config["layers"][self.layer_select.currentIndex()]
         current_label = layer["touch_shortcuts"][key_number]["label"]
@@ -1575,9 +1633,11 @@ class Ui_MainWindow(object):
         ui_screenkey.screenkey_image_path.setText(current_image_path)
         ui_screenkey.showInputForm("screenkey", ui_screenkey.screenkey_macro.currentIndex())
         fillInputForm(ui_screenkey, key_number, "screenkey", ui_screenkey.screenkey_macro.currentIndex())
-        EditScreenKey.show()
-
-    
+        if EditScreenKey.exec() == 1:
+            # User pressed ok on dialog --> save contents to cached config
+            layer["touch_shortcuts"][key_number]["label"] = ui_screenkey.screenkey_name.text()
+            layer["touch_shortcuts"][key_number]["icon"] = ui_screenkey.screenkey_image_path.text()
+            layer["touch_shortcuts"][key_number]["actions"] = self.writeScreenKeyActions(ui_screenkey.screenkey_macro.currentIndex())
 
 import images_rc
 
