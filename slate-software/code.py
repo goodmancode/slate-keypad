@@ -61,9 +61,9 @@ KEY_PINS = (
     board.D2,  # Key 2
     board.SDA,  # Key 3
     board.SCL, # Key 4
-    board.D10,  # Key 5
-    board.D11,  # Key 6
-    board.D12,  # Key 7
+    board.D11,  # Key 5
+    board.D12,  # Key 6
+    board.D13,  # Key 7
 )
 ENC_CLK = board.A0
 ENC_DT = board.A1
