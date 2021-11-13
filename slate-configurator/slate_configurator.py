@@ -1714,6 +1714,9 @@ class Ui_MainWindow(object):
         self.fillInputForm(layer, "encoder_button", self.encoder_button.currentIndex())
 
         self.prevLayerIndex = index
+        
+        # Any time a change is made beyond a blank layer, allow deletion of layer
+        self.delete_layer_button.setEnabled(True)
 
     def initFromConfig(self, MainWindow):
         # Fill combobox with layer names
@@ -1924,6 +1927,8 @@ class Ui_MainWindow(object):
             renamed_layer_index = self.layer_select.currentIndex()
             slate_config["layers"][renamed_layer_index]["name"] = new_name
             self.layer_select.setItemText(renamed_layer_index, new_name)
+            # If the blank layer gets renamed, allow deletion
+            self.delete_layer_button.setEnabled(True)
 
     def openDeleteLayerDialog(self):
         # Play sound to indicate user is making a change that needs confirmation
@@ -1935,6 +1940,8 @@ class Ui_MainWindow(object):
                 slate_config["layers"][0] = copy.deepcopy(BLANK_LAYER)
                 self.layer_select.setItemText(0, "Blank")
                 self.fillFromLayer(0)
+                # When all layers deleted and the blank layer is generated, disable delete button
+                self.delete_layer_button.setEnabled(False)
             else:
                 current_index = self.layer_select.currentIndex()
                 slate_config["layers"].pop(current_index)
