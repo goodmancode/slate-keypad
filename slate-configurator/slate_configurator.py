@@ -160,7 +160,10 @@ BLANK_LAYER = {
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets, Qt
-from layers_config import slate_config
+import pickle
+layers_file = open('layers.pkl', 'rb')
+slate_config = pickle.load(layers_file)
+#from layers_config import slate_config
 from adafruit_hid.keycode import Keycode
 from adafruit_hid.consumer_control_code import ConsumerControlCode
 import screenkey
@@ -458,10 +461,17 @@ class Ui_MainWindow(object):
 
     prevLayerIndex = -1
 
+    changesMade = False
+
     def generateScreenKeyIcon(self, layer, number):
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("../slate-software/" + layer["touch_shortcuts"][number]["icon"]), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         return icon
+
+    def closeEvent(self):
+        print("user has clicked on red x")
+        import sys
+        sys.exit(0)
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -494,7 +504,7 @@ class Ui_MainWindow(object):
         self.exit_button = QtWidgets.QPushButton(self.widget)
         self.exit_button.setGeometry(QtCore.QRect(110, 540, 111, 29))
         self.exit_button.setObjectName("exit_button")
-        self.exit_button.clicked.connect(exit)
+        self.exit_button.clicked.connect(lambda: self.closeEvent(QtGui.QCloseEvent()))
         self.save_config_button = QtWidgets.QPushButton(self.widget)
         self.save_config_button.setGeometry(QtCore.QRect(250, 540, 141, 29))
         self.save_config_button.setObjectName("save_config_button")
@@ -1718,6 +1728,8 @@ class Ui_MainWindow(object):
         # Any time a change is made beyond a blank layer, allow deletion of layer
         self.delete_layer_button.setEnabled(True)
 
+        self.changesMade = True
+
     def initFromConfig(self, MainWindow):
         # Fill combobox with layer names
         for layer in slate_config["layers"]:
@@ -1726,6 +1738,7 @@ class Ui_MainWindow(object):
         #self.layer_select.setCurrentIndex(0)
         # Fill from first layer
         self.fillFromLayer(0)
+        self.changesMade = False
 
     def mediaControlObject(self, media_combobox_index):
         if media_combobox_index == 0:   # Volume Up
@@ -1947,6 +1960,35 @@ class Ui_MainWindow(object):
                 slate_config["layers"].pop(current_index)
                 self.layer_select.removeItem(current_index)
 
+    def exitAndDumpConfig(a):
+        import pickle
+        with open('layers.pkl', 'wb') as outp:
+            pickle.dump(slate_config, outp)
+        exit(a)
+    
+    def closeEvent(self, event):
+        if self.changesMade:
+            msgBox = QtWidgets.QMessageBox()
+            msgBox.setWindowTitle("Exit")
+            icon = QtGui.QIcon()
+            icon.addPixmap(QtGui.QPixmap("slate_windowicon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            msgBox.setWindowIcon(icon)
+            msgBox.setText("<b align='center'>The config has been modified.</b>")
+            msgBox.setInformativeText("Do you want to save your changes?")
+            msgBox.setStandardButtons(QtWidgets.QMessageBox.Save | QtWidgets.QMessageBox.Discard | QtWidgets.QMessageBox.Cancel)
+            msgBox.setDefaultButton(QtWidgets.QMessageBox.Save)
+            ret = msgBox.exec()
+            if ret == QtWidgets.QMessageBox.Save:
+                self.exitAndDumpConfig()
+            elif ret == QtWidgets.QMessageBox.Discard:
+                event.accept()
+                exit()
+            if ret == QtWidgets.QMessageBox.Cancel:
+                event.ignore()
+        else:
+            event.accept()
+            exit()
+
 import images_rc
 
 
@@ -2000,6 +2042,7 @@ if __name__ == "__main__":
     ui.create_layer_button.clicked.connect(ui.openNewLayerDialog)
     ui.rename_layer_button.clicked.connect(ui.openRenameLayerDialog)
     ui.delete_layer_button.clicked.connect(ui.openDeleteLayerDialog)
+    MainWindow.closeEvent = ui.closeEvent
     MainWindow.show()
     
     sys.exit(app.exec_())
