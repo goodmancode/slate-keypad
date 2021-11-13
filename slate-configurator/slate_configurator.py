@@ -1981,7 +1981,7 @@ class Ui_MainWindow(object):
             return
         try:
             copy2('layers_config.py', layers_path)
-            print("hello")
+            print("Layers config applied successfully.")
         except IOError as er:
             print(er)
 
