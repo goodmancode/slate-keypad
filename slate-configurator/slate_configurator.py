@@ -160,10 +160,7 @@ BLANK_LAYER = {
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets, Qt
-import pickle
-layers_file = open('layers.pkl', 'rb')
-slate_config = pickle.load(layers_file)
-#from layers_config import slate_config
+from layers_config import slate_config
 from adafruit_hid.keycode import Keycode
 from adafruit_hid.consumer_control_code import ConsumerControlCode
 import screenkey
@@ -1960,11 +1957,12 @@ class Ui_MainWindow(object):
                 slate_config["layers"].pop(current_index)
                 self.layer_select.removeItem(current_index)
 
-    def exitAndDumpConfig(a):
-        import pickle
-        with open('layers.pkl', 'wb') as outp:
-            pickle.dump(slate_config, outp)
-        exit(a)
+    def writeToFile(self):
+        from pprint import pprint
+        new_config = slate_config
+        with open('layers_config.py', 'w') as out:
+            out.write('slate_config =')
+            pprint(new_config, stream=out)
     
     def closeEvent(self, event):
         if self.changesMade:
@@ -1979,7 +1977,8 @@ class Ui_MainWindow(object):
             msgBox.setDefaultButton(QtWidgets.QMessageBox.Save)
             ret = msgBox.exec()
             if ret == QtWidgets.QMessageBox.Save:
-                self.exitAndDumpConfig()
+                self.writeToFile()
+                exit()
             elif ret == QtWidgets.QMessageBox.Discard:
                 event.accept()
                 exit()
@@ -1988,6 +1987,7 @@ class Ui_MainWindow(object):
         else:
             event.accept()
             exit()
+    
 
 import images_rc
 
@@ -2044,5 +2044,4 @@ if __name__ == "__main__":
     ui.delete_layer_button.clicked.connect(ui.openDeleteLayerDialog)
     MainWindow.closeEvent = ui.closeEvent
     MainWindow.show()
-    
     sys.exit(app.exec_())
