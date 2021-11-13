@@ -34,7 +34,7 @@ COMBOBOX_MEDIA = [
     "Eject",
     "Brightness Increase",
     "Brightness Decrease"
-    ]
+]
 
 COMBOBOX_MOUSE = [
     "Mouse Up",
@@ -46,11 +46,128 @@ COMBOBOX_MOUSE = [
     "Middle Button"
 ]
 
+BLANK_LAYER = {
+            "name": "Blank",
+            "touch_shortcuts": [
+                {
+                    "label": "Label",
+                    "icon": "icons/pr_blank.bmp",
+                    "actions": (None, None),
+                },
+                {
+                    "label": "Label",
+                    "icon": "icons/pr_blank.bmp",
+                    "actions": (None, None),
+                },
+               {
+                    "label": "Label",
+                    "icon": "icons/pr_blank.bmp",
+                    "actions": (None, None),
+                },
+                {
+                    "label": "Label",
+                    "icon": "icons/pr_blank.bmp",
+                    "actions": (None, None),
+                },
+                {
+                    "label": "Label",
+                    "icon": "icons/pr_blank.bmp",
+                    "actions": (None, None),
+                },
+               {
+                    "label": "Label",
+                    "icon": "icons/pr_blank.bmp",
+                    "actions": (None, None),
+                },
+                {
+                    "label": "Label",
+                    "icon": "icons/pr_blank.bmp",
+                    "actions": (None, None),
+                },
+                {
+                    "label": "Label",
+                    "icon": "icons/pr_blank.bmp",
+                    "actions": (None, None),
+                },
+               {
+                    "label": "Label",
+                    "icon": "icons/pr_blank.bmp",
+                    "actions": (None, None),
+                },
+                {
+                    "label": "Label",
+                    "icon": "icons/pr_blank.bmp",
+                    "actions": (None, None),
+                },
+                {
+                    "label": "Label",
+                    "icon": "icons/pr_blank.bmp",
+                    "actions": (None, None),
+                },
+               {
+                    "label": "Label",
+                    "icon": "icons/pr_blank.bmp",
+                    "actions": (None, None),
+                },
+            ],
+            "key_shortcuts": [
+                {
+                    "assigned_key": 0,
+                    "actions": (None, None),
+                },
+                {
+                    "assigned_key": 1,
+                    "actions": (None, None),
+                },
+                {
+                    "assigned_key": 2,
+                    "actions": [None, None],
+                },
+                {
+                    "assigned_key": 3,
+                    "actions": (None, None),
+                },
+                {
+                    "assigned_key": 4,
+                    "actions": (None, None),
+                },
+                {
+                    "assigned_key": 5,
+                    "actions": (None, None),
+                },
+                {
+                    "assigned_key": 6,
+                    "actions": (None, None),
+                },
+                {
+                    "assigned_key": 7,
+                    "actions": (None, None),
+                },
+            ],
+            "encoder": {
+                "increment": (None, None),
+                "decrement": (None, None),
+                "button": (None, None),
+            },
+            "joystick": {
+                "x+": (None, None),
+                "x-": (None, None),
+                "y+": (None, None),
+                "y-": (None, None),
+                "button": (None, None),
+            }
+        }
+
+
 from PyQt5 import QtCore, QtGui, QtWidgets, Qt
 from layers_config import slate_config
 from adafruit_hid.keycode import Keycode
 from adafruit_hid.consumer_control_code import ConsumerControlCode
 import screenkey
+import new_layer
+import delete_layer
+import winsound
+import copy
 
 def convertQttoHID(qt_code):
     if qt_code == QtCore.Qt.Key.Key_A: return Keycode.A
@@ -339,6 +456,8 @@ class Ui_MainWindow(object):
     icon10 = QtGui.QIcon()
     icon11 = QtGui.QIcon()
 
+    prevLayerIndex = -1
+
     def generateScreenKeyIcon(self, layer, number):
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("../slate-software/" + layer["touch_shortcuts"][number]["icon"]), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -385,7 +504,6 @@ class Ui_MainWindow(object):
         self.layer_select = QtWidgets.QComboBox(self.layerGroupBox)
         self.layer_select.setGeometry(QtCore.QRect(60, 20, 141, 29))
         self.layer_select.setObjectName("layer_select")
-        self.layer_select.currentIndexChanged.connect(self.fillFromLayer)
         self.delete_layer_button = QtWidgets.QPushButton(self.layerGroupBox)
         self.delete_layer_button.setGeometry(QtCore.QRect(440, 20, 71, 29))
         self.delete_layer_button.setObjectName("delete_layer_button")
@@ -400,9 +518,9 @@ class Ui_MainWindow(object):
         self.layer_separator_2.setFrameShape(QtWidgets.QFrame.VLine)
         self.layer_separator_2.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.layer_separator_2.setObjectName("layer_separator_2")
-        self.create_layer_button_2 = QtWidgets.QPushButton(self.layerGroupBox)
-        self.create_layer_button_2.setGeometry(QtCore.QRect(220, 20, 61, 29))
-        self.create_layer_button_2.setObjectName("create_layer_button_2")
+        self.rename_layer_button = QtWidgets.QPushButton(self.layerGroupBox)
+        self.rename_layer_button.setGeometry(QtCore.QRect(220, 20, 61, 29))
+        self.rename_layer_button.setObjectName("rename_layer_button")
         self.layer_separator_3 = QtWidgets.QFrame(self.layerGroupBox)
         self.layer_separator_3.setGeometry(QtCore.QRect(280, 20, 21, 29))
         self.layer_separator_3.setFrameShape(QtWidgets.QFrame.VLine)
@@ -1106,7 +1224,7 @@ class Ui_MainWindow(object):
         self.delete_layer_button.setText(_translate("MainWindow", "Delete"))
         self.create_layer_button.setText(_translate("MainWindow", "+ Create layer"))
         self.layer_select_label.setText(_translate("MainWindow", "Select:"))
-        self.create_layer_button_2.setText(_translate("MainWindow", "Rename"))
+        self.rename_layer_button.setText(_translate("MainWindow", "Rename"))
         self.macroGroupBox.setTitle(_translate("MainWindow", "Macros"))
         self.row_select_label.setText(_translate("MainWindow", "Rows"))
         self.column_select_label.setText(_translate("MainWindow", "Columns"))
@@ -1490,7 +1608,33 @@ class Ui_MainWindow(object):
             
 
     def fillFromLayer(self, index):
+        # Cache existing input data for previous layer first
+        # (except screenkeys which are already dynamically cached)
+        if self.prevLayerIndex != -1:
+            print("Saving cached data from layer " + str(self.prevLayerIndex) + "...")
+            # Save cached data for physical keys
+            layer = slate_config["layers"][self.prevLayerIndex]
+            layer["key_shortcuts"][0]["actions"] = self.writeActions("key_0", self.key_0.currentIndex())
+            layer["key_shortcuts"][1]["actions"] = self.writeActions("key_1", self.key_1.currentIndex())
+            layer["key_shortcuts"][2]["actions"] = self.writeActions("key_2", self.key_2.currentIndex())
+            layer["key_shortcuts"][3]["actions"] = self.writeActions("key_3", self.key_3.currentIndex())
+            layer["key_shortcuts"][4]["actions"] = self.writeActions("key_4", self.key_4.currentIndex())
+            layer["key_shortcuts"][5]["actions"] = self.writeActions("key_5", self.key_5.currentIndex())
+            layer["key_shortcuts"][6]["actions"] = self.writeActions("key_6", self.key_6.currentIndex())
+            layer["key_shortcuts"][7]["actions"] = self.writeActions("key_7", self.key_7.currentIndex())
+            # Save cached data for joystick
+            layer["joystick"]["x+"] = self.writeActions("xAxis_pos", self.xAxis_pos.currentIndex())
+            layer["joystick"]["x-"] = self.writeActions("xAxis_neg", self.xAxis_neg.currentIndex())
+            layer["joystick"]["y+"] = self.writeActions("yAxis_pos", self.yAxis_pos.currentIndex())
+            layer["joystick"]["y-"] = self.writeActions("yAxis_neg", self.yAxis_neg.currentIndex())
+            layer["joystick"]["button"] = self.writeActions("joystick_button", self.joystick_button.currentIndex())
+            # Save cached data for encoder
+            layer["encoder"]["increment"] = self.writeActions("encoder_increment", self.encoder_increment.currentIndex())
+            layer["encoder"]["decrement"] = self.writeActions("encoder_decrement", self.encoder_decrement.currentIndex())
+            layer["encoder"]["button"] = self.writeActions("encoder_button", self.encoder_button.currentIndex())
+
         # Get layer from index
+        print("Number of layers: " + str(len(slate_config["layers"])))
         layer = slate_config["layers"][index]
         # TODO: Fill screen keys
         self.screenkey_0.setIcon(self.generateScreenKeyIcon(slate_config["layers"][self.layer_select.currentIndex()], 0))
@@ -1569,12 +1713,14 @@ class Ui_MainWindow(object):
         self.showInputForm("encoder_button", self.encoder_button.currentIndex())
         self.fillInputForm(layer, "encoder_button", self.encoder_button.currentIndex())
 
+        self.prevLayerIndex = index
+
     def initFromConfig(self, MainWindow):
         # Fill combobox with layer names
         for layer in slate_config["layers"]:
             self.layer_select.addItem(layer["name"])
         # Set combobox to have first layer selected
-        self.layer_select.setCurrentIndex(0)
+        #self.layer_select.setCurrentIndex(0)
         # Fill from first layer
         self.fillFromLayer(0)
 
@@ -1721,6 +1867,20 @@ class Ui_MainWindow(object):
             return (None, None)
         if macro_type == 5: # Mouse Control
             return self.mouseObject(ui_screenkey.screenkey_combobox.currentIndex())
+
+    def writeActions(self, prefix, macro_type):
+        if macro_type == 0:
+            return (None, None)
+        if macro_type == 1: # Hotkey
+            return (KEY, self.constructHIDList(getattr(self, "%s_hotkey" % prefix).keySequence()))
+        if macro_type == 2: # String
+            return (STRING, getattr(self, "%s_string" % prefix).text())
+        if macro_type == 3: # Media Control
+            return (MEDIA, self.mediaControlObject(getattr(self, "%s_combobox" % prefix).currentIndex()))
+        if macro_type == 4: # Windows
+            return (None, None)
+        if macro_type == 5: # Mouse Control
+            return self.mouseObject(getattr(self, "%s_combobox" % prefix).currentIndex())
             
     def openScreenKeyDialog(self, key_number):
         layer = slate_config["layers"][self.layer_select.currentIndex()]
@@ -1738,6 +1898,47 @@ class Ui_MainWindow(object):
             action = self.writeScreenKeyActions(ui_screenkey.screenkey_macro.currentIndex())
             print("Wrote action to cached config: " + str(action))
             layer["touch_shortcuts"][key_number]["actions"] = action
+            self.prevLayerIndex = -1
+            self.fillFromLayer(self.layer_select.currentIndex())
+
+    def openNewLayerDialog(self):
+        LayerDialog.setWindowTitle("Create New Layer")
+        ui_layerdialog.label.setText("New layer name:")
+        ui_layerdialog.newlayer_name.clear()
+        if LayerDialog.exec() == 1:
+            # User pressed ok on dialog --> generate new layer
+            new_name = ui_layerdialog.newlayer_name.text()
+            slate_config["layers"].append(copy.deepcopy(BLANK_LAYER))
+            self.layer_select.addItem(new_name)
+            new_layer_index = len(slate_config["layers"]) - 1
+            slate_config["layers"][new_layer_index]["name"] = new_name
+            self.layer_select.setCurrentIndex(new_layer_index)
+
+    def openRenameLayerDialog(self):
+        LayerDialog.setWindowTitle("Rename Layer")
+        ui_layerdialog.label.setText("Layer name:")
+        ui_layerdialog.newlayer_name.setText(self.layer_select.currentText())
+        if LayerDialog.exec() == 1:
+            # User pressed ok on dialog --> rename layer
+            new_name = ui_layerdialog.newlayer_name.text()
+            renamed_layer_index = self.layer_select.currentIndex()
+            slate_config["layers"][renamed_layer_index]["name"] = new_name
+            self.layer_select.setItemText(renamed_layer_index, new_name)
+
+    def openDeleteLayerDialog(self):
+        # Play sound to indicate user is making a change that needs confirmation
+        winsound.MessageBeep()
+        if DeleteLayerDialog.exec() == 1:
+            # User pressed ok on dialog --> delete current layer
+            self.prevLayerIndex = -1
+            if len(slate_config["layers"]) == 1:
+                slate_config["layers"][0] = copy.deepcopy(BLANK_LAYER)
+                self.layer_select.setItemText(0, "Blank")
+                self.fillFromLayer(0)
+            else:
+                current_index = self.layer_select.currentIndex()
+                slate_config["layers"].pop(current_index)
+                self.layer_select.removeItem(current_index)
 
 import images_rc
 
@@ -1747,13 +1948,20 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     EditScreenKey = QtWidgets.QDialog()
+    LayerDialog = QtWidgets.QDialog()
+    DeleteLayerDialog = QtWidgets.QDialog()
     ui = Ui_MainWindow()
     ui_screenkey = screenkey.Ui_screenKeyDialog()
     ui_screenkey.setupUi(EditScreenKey)
+    ui_layerdialog = new_layer.Ui_newLayerDialog()
+    ui_layerdialog.setupUi(LayerDialog)
+    ui_deletelayerdialog = delete_layer.Ui_deleteLayerDialog()
+    ui_deletelayerdialog.setupUi(DeleteLayerDialog)
     ui.setupUi(MainWindow)
     ui.hide_inputs(MainWindow)
     ui.initFromConfig(MainWindow)
     ui.macroTabs.currentChanged.connect(ui.changePreviewImage)
+    ui.layer_select.currentIndexChanged.connect(ui.fillFromLayer)
     ui.screenkey_0.clicked.connect(lambda: ui.openScreenKeyDialog(0))
     ui.screenkey_1.clicked.connect(lambda: ui.openScreenKeyDialog(1))
     ui.screenkey_2.clicked.connect(lambda: ui.openScreenKeyDialog(2))
@@ -1781,7 +1989,10 @@ if __name__ == "__main__":
     ui.joystick_button.currentIndexChanged.connect(lambda: ui.showInputForm("joystick_button", ui.joystick_button.currentIndex()))
     ui.encoder_increment.currentIndexChanged.connect(lambda: ui.showInputForm("encoder_increment", ui.encoder_increment.currentIndex()))
     ui.encoder_decrement.currentIndexChanged.connect(lambda: ui.showInputForm("encoder_decrement", ui.encoder_decrement.currentIndex()))
-    ui.encoder_button.currentIndexChanged.connect(lambda: ui.showInputForm("encoder_button", ui.encoder_encoder.currentIndex()))
+    ui.encoder_button.currentIndexChanged.connect(lambda: ui.showInputForm("encoder_button", ui.encoder_button.currentIndex()))
+    ui.create_layer_button.clicked.connect(ui.openNewLayerDialog)
+    ui.rename_layer_button.clicked.connect(ui.openRenameLayerDialog)
+    ui.delete_layer_button.clicked.connect(ui.openDeleteLayerDialog)
     MainWindow.show()
     
     sys.exit(app.exec_())

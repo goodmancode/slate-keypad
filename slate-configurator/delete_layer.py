@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'new_layer.ui'
+# Form implementation generated from reading ui file 'delete_layer.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -11,21 +11,21 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_newLayerDialog(object):
-    def setupUi(self, newLayerDialog):
-        newLayerDialog.setObjectName("newLayerDialog")
-        newLayerDialog.resize(230, 100)
+class Ui_deleteLayerDialog(object):
+    def setupUi(self, deleteLayerDialog):
+        deleteLayerDialog.setObjectName("deleteLayerDialog")
+        deleteLayerDialog.resize(230, 100)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(newLayerDialog.sizePolicy().hasHeightForWidth())
-        newLayerDialog.setSizePolicy(sizePolicy)
-        newLayerDialog.setMinimumSize(QtCore.QSize(230, 100))
-        newLayerDialog.setMaximumSize(QtCore.QSize(230, 100))
+        sizePolicy.setHeightForWidth(deleteLayerDialog.sizePolicy().hasHeightForWidth())
+        deleteLayerDialog.setSizePolicy(sizePolicy)
+        deleteLayerDialog.setMinimumSize(QtCore.QSize(230, 100))
+        deleteLayerDialog.setMaximumSize(QtCore.QSize(230, 100))
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("slate_windowicon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        newLayerDialog.setWindowIcon(icon)
-        self.verticalLayoutWidget = QtWidgets.QWidget(newLayerDialog)
+        deleteLayerDialog.setWindowIcon(icon)
+        self.verticalLayoutWidget = QtWidgets.QWidget(deleteLayerDialog)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 0, 231, 101))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
@@ -38,30 +38,28 @@ class Ui_newLayerDialog(object):
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
-        self.newlayer_name = QtWidgets.QLineEdit(self.widget)
-        self.newlayer_name.setGeometry(QtCore.QRect(20, 30, 191, 20))
-        self.newlayer_name.setObjectName("newlayer_name")
         self.label = QtWidgets.QLabel(self.widget)
-        self.label.setGeometry(QtCore.QRect(70, 0, 91, 31))
+        self.label.setGeometry(QtCore.QRect(70, 20, 91, 31))
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
         self.verticalLayout.addWidget(self.widget)
 
-        self.retranslateUi(newLayerDialog)
-        self.buttonBox.accepted.connect(newLayerDialog.accept) # type: ignore
-        self.buttonBox.rejected.connect(newLayerDialog.reject) # type: ignore
-        QtCore.QMetaObject.connectSlotsByName(newLayerDialog)
+        self.retranslateUi(deleteLayerDialog)
+        self.buttonBox.accepted.connect(deleteLayerDialog.accept) # type: ignore
+        self.buttonBox.rejected.connect(deleteLayerDialog.reject) # type: ignore
+        QtCore.QMetaObject.connectSlotsByName(deleteLayerDialog)
 
-    def retranslateUi(self, newLayerDialog):
+    def retranslateUi(self, deleteLayerDialog):
         _translate = QtCore.QCoreApplication.translate
-        newLayerDialog.setWindowTitle(_translate("newLayerDialog", "Create New Layer"))
-        self.label.setText(_translate("newLayerDialog", "New layer name:"))
+        deleteLayerDialog.setWindowTitle(_translate("deleteLayerDialog", "Delete Layer"))
+        self.label.setText(_translate("deleteLayerDialog", "Delete layer?"))
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    newLayerDialog = QtWidgets.QDialog()
-    ui = Ui_newLayerDialog()
-    ui.setupUi(newLayerDialog)
-    newLayerDialog.show()
+    deleteLayerDialog = QtWidgets.QDialog()
+    ui = Ui_deleteLayerDialog()
+    ui.setupUi(deleteLayerDialog)
+    deleteLayerDialog.show()
     sys.exit(app.exec_())
