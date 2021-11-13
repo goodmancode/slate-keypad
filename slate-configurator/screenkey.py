@@ -70,6 +70,7 @@ class Ui_screenKeyDialog(object):
         self.screenkey_name = QtWidgets.QLineEdit(self.widget)
         self.screenkey_name.setGeometry(QtCore.QRect(80, 20, 121, 20))
         self.screenkey_name.setObjectName("screenkey_name")
+        self.screenkey_name.setMaxLength(14)
         self.screenkey_macro_label = QtWidgets.QLabel(self.widget)
         self.screenkey_macro_label.setGeometry(QtCore.QRect(20, 80, 51, 21))
         self.screenkey_macro_label.setObjectName("screenkey_macro_label")
