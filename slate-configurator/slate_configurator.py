@@ -168,6 +168,7 @@ import new_layer
 import delete_layer
 import winsound
 import copy
+import wmi
 
 def convertQttoHID(qt_code):
     if qt_code == QtCore.Qt.Key.Key_A: return Keycode.A
@@ -1114,6 +1115,7 @@ class Ui_MainWindow(object):
         self.apply_config_button = QtWidgets.QPushButton(self.widget)
         self.apply_config_button.setGeometry(QtCore.QRect(580, 540, 201, 29))
         self.apply_config_button.setObjectName("apply_config_button")
+        self.apply_config_button.clicked.connect(self.applyToSlate)
         self.verticalLayout.addWidget(self.widget)
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -1963,6 +1965,26 @@ class Ui_MainWindow(object):
         with open('layers_config.py', 'w') as out:
             out.write('slate_config =')
             pprint(new_config, stream=out)
+
+    def applyToSlate(self):
+        from shutil import copy2
+        layers_path = ""
+        self.writeToFile()
+
+        c = wmi.WMI()
+        for drive in c.Win32_LogicalDisk():
+            if drive.VolumeName == "CIRCUITPY":
+                layers_path = drive.Caption + "/layers.py"
+
+        if layers_path == "":
+            print("CIRCUITPY not found")
+            return
+        try:
+            copy2('layers_config.py', layers_path)
+            print("hello")
+        except IOError as er:
+            print(er)
+
     
     def closeEvent(self, event):
         if self.changesMade:
@@ -2042,6 +2064,9 @@ if __name__ == "__main__":
     ui.create_layer_button.clicked.connect(ui.openNewLayerDialog)
     ui.rename_layer_button.clicked.connect(ui.openRenameLayerDialog)
     ui.delete_layer_button.clicked.connect(ui.openDeleteLayerDialog)
+    # ui.apply_config_button.clicked.connect(ui.applyToSlate)
+
     MainWindow.closeEvent = ui.closeEvent
     MainWindow.show()
+
     sys.exit(app.exec_())
