@@ -36,19 +36,22 @@ from adafruit_hid.keyboard import Keyboard
 from adafruit_hid.keyboard_layout_us import KeyboardLayoutUS
 from adafruit_hid.consumer_control import ConsumerControl
 from adafruit_hid.keycode import Keycode
-from layers import (
-    slate_config,
-    KEY,
-    STRING,
-    MEDIA,
-    KEY_PRESS,
-    KEY_RELEASE,
-    CHANGE_LAYER,
-    MOUSE_CLICK,
-    MOUSE_MOVE,
-)
+from layers import slate_config
 from adafruit_simplemath import map_range
 from adafruit_hid.mouse import Mouse
+
+MEDIA = 1
+KEY = 2
+STRING = 3
+KEY_PRESS = 4
+KEY_RELEASE = 5
+CHANGE_LAYER = 6
+MOUSE_CLICK = 7
+MOUSE_MOVE = 8
+
+LEFT_BUTTON = 1
+MIDDLE_BUTTON = 4
+RIGHT_BUTTON = 2
 
 # Garbage collect and print free memory space
 gc.collect()
