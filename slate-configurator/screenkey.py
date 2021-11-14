@@ -49,7 +49,7 @@ class Ui_screenKeyDialog(object):
         screenKeyDialog.setMinimumSize(QtCore.QSize(400, 215))
         screenKeyDialog.setMaximumSize(QtCore.QSize(400, 215))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(".\\slate_windowicon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("images/slate_windowicon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         screenKeyDialog.setWindowIcon(icon)
         self.verticalLayoutWidget = QtWidgets.QWidget(screenKeyDialog)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(-1, -1, 401, 221))

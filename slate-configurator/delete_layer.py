@@ -23,7 +23,7 @@ class Ui_deleteLayerDialog(object):
         deleteLayerDialog.setMinimumSize(QtCore.QSize(230, 100))
         deleteLayerDialog.setMaximumSize(QtCore.QSize(230, 100))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("slate_windowicon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("images/slate_windowicon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         deleteLayerDialog.setWindowIcon(icon)
         self.verticalLayoutWidget = QtWidgets.QWidget(deleteLayerDialog)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 0, 231, 101))

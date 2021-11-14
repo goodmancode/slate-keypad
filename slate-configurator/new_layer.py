@@ -23,7 +23,7 @@ class Ui_newLayerDialog(object):
         newLayerDialog.setMinimumSize(QtCore.QSize(230, 100))
         newLayerDialog.setMaximumSize(QtCore.QSize(230, 100))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("slate_windowicon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("images/slate_windowicon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         newLayerDialog.setWindowIcon(icon)
         self.verticalLayoutWidget = QtWidgets.QWidget(newLayerDialog)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 0, 231, 101))
