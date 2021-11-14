@@ -21,4 +21,4 @@ You may need to install pyqt5 first:
 `pip install pyqt5`
 
 
-![Main Window UI](example_ui.png)
+![Main Window UI](images/example_ui.png)

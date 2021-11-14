@@ -482,7 +482,7 @@ class Ui_MainWindow(object):
         MainWindow.setMinimumSize(QtCore.QSize(850, 610))
         MainWindow.setMaximumSize(QtCore.QSize(850, 610))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("slate_windowicon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("images/slate_windowicon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -1106,7 +1106,7 @@ class Ui_MainWindow(object):
         self.referenceGroupBox = QtWidgets.QGroupBox(self.widget)
         self.referenceGroupBox.setGeometry(QtCore.QRect(530, 0, 301, 531))
         self.referenceGroupBox.setObjectName("referenceGroupBox")
-        self.reference_image_pixmap = QtGui.QPixmap("./images/slate_config_ref_screenkeys.png")
+        self.reference_image_pixmap = QtGui.QPixmap("images/slate_config_ref_screenkeys.png")
         self.reference_image = QtWidgets.QLabel(self.referenceGroupBox)
         self.reference_image.setObjectName("reference_image")
         self.reference_image.setPixmap(self.reference_image_pixmap)
@@ -1466,16 +1466,16 @@ class Ui_MainWindow(object):
 
     def changePreviewImage(self, index):
         if index == 0:
-            new_image = QtGui.QPixmap("./images/slate_config_ref_screenkeys.png")
+            new_image = QtGui.QPixmap("images/slate_config_ref_screenkeys.png")
             self.reference_image.setPixmap(new_image)
         if index == 1:
-            new_image = QtGui.QPixmap("./images/slate_config_ref_keys.png")
+            new_image = QtGui.QPixmap("images/slate_config_ref_keys.png")
             self.reference_image.setPixmap(new_image)
         if index == 2:
-            new_image = QtGui.QPixmap("./images/slate_config_ref_joystick.png")
+            new_image = QtGui.QPixmap("images/slate_config_ref_joystick.png")
             self.reference_image.setPixmap(new_image)
         if index == 3:
-            new_image = QtGui.QPixmap("./images/slate_config_ref_encoder.png")
+            new_image = QtGui.QPixmap("images/slate_config_ref_encoder.png")
             self.reference_image.setPixmap(new_image)
 
     def showInputForm(self, prefix, macro_type_index):
@@ -1991,7 +1991,7 @@ class Ui_MainWindow(object):
             msgBox = QtWidgets.QMessageBox()
             msgBox.setWindowTitle("Success")
             icon = QtGui.QIcon()
-            icon.addPixmap(QtGui.QPixmap("slate_windowicon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            icon.addPixmap(QtGui.QPixmap("images/slate_windowicon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
             msgBox.setWindowIcon(icon)
             msgBox.setIcon(QtWidgets.QMessageBox.Information)
             msgBox.setText("Config applied successfully!\nSlate is rebooting...")
@@ -2007,7 +2007,7 @@ class Ui_MainWindow(object):
             msgBox = QtWidgets.QMessageBox()
             msgBox.setWindowTitle("Exit")
             icon = QtGui.QIcon()
-            icon.addPixmap(QtGui.QPixmap("slate_windowicon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            icon.addPixmap(QtGui.QPixmap("images/slate_windowicon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
             msgBox.setWindowIcon(icon)
             msgBox.setText("<b align='center'>The config has been modified.</b>")
             msgBox.setInformativeText("Do you want to save your changes?")
