@@ -2025,10 +2025,6 @@ class Ui_MainWindow(object):
         else:
             event.accept()
             exit()
-    
-
-import images_rc
-
 
 if __name__ == "__main__":
     import sys
