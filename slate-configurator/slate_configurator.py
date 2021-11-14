@@ -2001,6 +2001,18 @@ class Ui_MainWindow(object):
         except IOError as er:
             print(er)
 
+    def saveConfigFile(self):
+        #TODO: allow user to save config with custom name/location
+        # For now, just write current edits to file
+        # Caches current layer data
+        self.fillFromLayer(self.layer_select.currentIndex())
+        # Writes cached object to file
+        self.writeToFile()
+        # Allows user to exit without prompt
+        self.changesMade = False
+        # Print what happened
+        print("Config saved manually to layers_config.py")
+
     
     def closeEvent(self, event):
         if self.changesMade:
@@ -2077,6 +2089,7 @@ if __name__ == "__main__":
     ui.rename_layer_button.clicked.connect(ui.openRenameLayerDialog)
     ui.delete_layer_button.clicked.connect(ui.openDeleteLayerDialog)
     # ui.apply_config_button.clicked.connect(ui.applyToSlate)
+    ui.save_config_button.clicked.connect(ui.saveConfigFile)
 
     MainWindow.closeEvent = ui.closeEvent
     MainWindow.show()
