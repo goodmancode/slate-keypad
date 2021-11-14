@@ -1941,6 +1941,8 @@ class Ui_MainWindow(object):
             self.layer_select.setItemText(renamed_layer_index, new_name)
             # If the blank layer gets renamed, allow deletion
             self.delete_layer_button.setEnabled(True)
+            # Renaming a layer counts as a change
+            self.changesMade = True
 
     def openDeleteLayerDialog(self):
         # Play sound to indicate user is making a change that needs confirmation
