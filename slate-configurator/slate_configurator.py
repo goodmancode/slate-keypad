@@ -1979,9 +1979,23 @@ class Ui_MainWindow(object):
         if layers_path == "":
             print("CIRCUITPY not found")
             return
+
         try:
+            # Copy file used by configurator to Slate's internal memory
             copy2('layers_config.py', layers_path)
             print("Layers config applied successfully.")
+            # Show a message box after successfully applying config
+            winsound.MessageBeep()
+            msgBox = QtWidgets.QMessageBox()
+            msgBox.setWindowTitle("Success")
+            icon = QtGui.QIcon()
+            icon.addPixmap(QtGui.QPixmap("slate_windowicon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            msgBox.setWindowIcon(icon)
+            msgBox.setIcon(QtWidgets.QMessageBox.Information)
+            msgBox.setText("Config applied successfully!\nSlate is rebooting...")
+            msgBox.setStandardButtons(QtWidgets.QMessageBox.Ok)
+            msgBox.setDefaultButton(QtWidgets.QMessageBox.Ok)
+            msgBox.exec()
         except IOError as er:
             print(er)
 
