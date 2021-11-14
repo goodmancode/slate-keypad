@@ -163,9 +163,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets, Qt
 from layers_config import slate_config
 from adafruit_hid.keycode import Keycode
 from adafruit_hid.consumer_control_code import ConsumerControlCode
-import screenkey
-import new_layer
-import delete_layer
+import dialogs.screenkey as screenkey
+import dialogs.new_layer as new_layer
+import dialogs.delete_layer as delete_layer
 import winsound
 import copy
 import wmi
