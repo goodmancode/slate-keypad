@@ -660,26 +660,26 @@ while True:
     if abs(joystick_current_pos[0] - joystick_last_pos[0]) > 5:
         if print_joystick: print("[Joystick] position: " + str(joystick_current_pos))
         # Only implmentation currently is for discrete movement, not analog
-        # X+
-        if joystick_current_pos[0] > 95 and layer_uses_joystick:
-            _cur_actions = slate_config["layers"][current_layer]["joystick"].get("x+")
-            performActions(_cur_actions)
         # X-
-        if joystick_current_pos[0] < -95 and layer_uses_joystick:
+        if joystick_current_pos[0] > 95 and layer_uses_joystick:
             _cur_actions = slate_config["layers"][current_layer]["joystick"].get("x-")
+            performActions(_cur_actions)
+        # X+
+        if joystick_current_pos[0] < -95 and layer_uses_joystick:
+            _cur_actions = slate_config["layers"][current_layer]["joystick"].get("x+")
             performActions(_cur_actions)
         joystick_last_pos = joystick_current_pos
     # Y position changed
     if abs(joystick_current_pos[1] - joystick_last_pos[1]) > 5:
         if print_joystick: print("[Joystick] position: " + str(joystick_current_pos))
         # Only implmentation currently is for discrete movement, not analog
-        # Y+
-        if joystick_current_pos[1] > 95 and layer_uses_joystick:
-            _cur_actions = slate_config["layers"][current_layer]["joystick"].get("y+")
-            performActions(_cur_actions)
         # Y-
-        if joystick_current_pos[1] < -95 and layer_uses_joystick:
+        if joystick_current_pos[1] > 95 and layer_uses_joystick:
             _cur_actions = slate_config["layers"][current_layer]["joystick"].get("y-")
+            performActions(_cur_actions)
+        # Y+
+        if joystick_current_pos[1] < -95 and layer_uses_joystick:
+            _cur_actions = slate_config["layers"][current_layer]["joystick"].get("y+")
             performActions(_cur_actions)
         joystick_last_pos = joystick_current_pos
     # Check if joystick button pressed
