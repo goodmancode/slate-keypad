@@ -25,6 +25,9 @@ if disable_prints == True:
     main_loop_prints = False
     print_joystick = False
 
+# Enable / disable USER key to enter REPL
+enable_repl_key = True
+
 # Print starting memory
 import gc
 gc.collect()
@@ -95,6 +98,12 @@ JOY_X = board.A5
 JOY_Y = board.A4
 JOY_SW = board.A3
 VDIV_PIN = board.VOLTAGE_MONITOR
+REPL_PIN = board.SWITCH
+
+# Set up REPL button
+repl_button = digitalio.DigitalInOut(REPL_PIN)
+repl_button.direction = digitalio.Direction.INPUT
+repl_button.pull = digitalio.Pull.UP
 
 # Scales battery voltage values in range 0-100
 battery = analogio.AnalogIn(VDIV_PIN)
@@ -562,6 +571,9 @@ usb_power = False
 
 #  main loop
 while True:
+    # Check if REPL key pressed
+    if repl_button.value == False:
+        break
     # Poll battery every 5 seconds and print at every 0.01v change
     current_battery_voltage = round(get_voltage_averaged(battery), 2)
     battery_charging = isBatteryCharging()
