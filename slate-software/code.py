@@ -7,10 +7,29 @@
 """
 This version runs on Feather nRF52840 Express with a 3.5" FeatherWing
 """
+
+# Enable or disable startup prints ("false" improves boot speed during reload)
+startup_prints = True
+
+# Enable or disable main loop prints ("false" improves speed during use)
+main_loop_prints = True
+
+# Enable or disable joystick position change prints
+print_joystick = False
+
+# Flag to disable all console prints (set to "True" for production, improves speed)
+disable_prints = False
+
+if disable_prints == True:
+    startup_prints = False
+    main_loop_prints = False
+    print_joystick = False
+
 # Print starting memory
 import gc
 gc.collect()
-print("[MemCheck] bytes free before imports:\t\t\t\t" + str(gc.mem_free()))
+if startup_prints:
+    print("[MemCheck] bytes free before imports:\t\t\t\t" + str(gc.mem_free()))
 
 # Imports
 import time
@@ -55,7 +74,8 @@ RIGHT_BUTTON = 2
 
 # Garbage collect and print free memory space
 gc.collect()
-print("[MemCheck] bytes free after imports:\t\t\t\t" + str(gc.mem_free()))
+if startup_prints:
+    print("[MemCheck] bytes free after imports:\t\t\t\t" + str(gc.mem_free()))
 
 # Pin Assignments
 KEY_PINS = (
@@ -76,9 +96,6 @@ JOY_Y = board.A4
 JOY_SW = board.A3
 VDIV_PIN = board.VOLTAGE_MONITOR
 
-# Print flags
-print_joystick = False
-
 # Scales battery voltage values in range 0-100
 battery = analogio.AnalogIn(VDIV_PIN)
 def get_voltage(pin):
@@ -97,7 +114,8 @@ last_battery_voltage = round(get_voltage_averaged(battery), 2)
 current_battery_voltage = last_battery_voltage
 battery_charging = False
 battery_poll_timer = 0
-print("[System] battery voltage: "+ str(last_battery_voltage))
+if startup_prints:
+    print("[System] battery voltage: "+ str(last_battery_voltage))
 
 # Physical keys setup
 keys = keypad.Keys(KEY_PINS, value_when_pressed=False, pull=True)
@@ -128,7 +146,8 @@ if supervisor.runtime.usb_connected:
     cc = ConsumerControl(usb_hid.devices)
     kbd_layout = KeyboardLayoutUS(kbd)
     mouse = Mouse(usb_hid.devices)
-    print("[USB] connected and HID service started.")
+    if startup_prints:
+        print("[USB] connected and HID service started.")
 
 # Bluetooth HID setup
 ble_hid = HIDService()
@@ -370,21 +389,24 @@ def load_layer(layer_index):
     while len(layout) > 0:
         layout.pop()
         gc.collect()
-        print("[MemCheck] bytes free after popping an icon:\t\t\t" + str(gc.mem_free()))
+        if main_loop_prints:
+            print("[MemCheck] bytes free after popping an icon:\t\t\t" + str(gc.mem_free()))
 
     # set the layer labeled at the top of the screen
     layer_label.text = slate_config["layers"][layer_index]["name"]
     battery_label.text = "{}%".format(batteryPercentage(last_battery_voltage))
     # Garbage collect and print free memory space
     gc.collect()
-    print("[MemCheck] bytes free before loading custom icons:\t\t" + str(gc.mem_free()))
+    if main_loop_prints:
+        print("[MemCheck] bytes free before loading custom icons:\t\t" + str(gc.mem_free()))
     # loop over each shortcut and it's index
     for i, shortcut in enumerate(slate_config["layers"][layer_index]["touch_shortcuts"]):
         # create an icon for the current shortcut
         _new_icon = IconWidget(shortcut["label"], shortcut["icon"], on_disk=True)
         # Garbage collect and print free memory space
         gc.collect()
-        print("[MemCheck] bytes free after loading icon " + str(i) + ":\t\t\t" + str(gc.mem_free()))
+        if main_loop_prints:
+            print("[MemCheck] bytes free after loading icon " + str(i) + ":\t\t\t" + str(gc.mem_free()))
         # add it to the list of icons
         _icons.append(_new_icon)
 
@@ -413,7 +435,8 @@ def connect_screen():
             current_battery_voltage = round(get_voltage_averaged(battery), 2)
             battery_poll_timer = current_time
             if current_battery_voltage < last_battery_voltage:
-                print("[System] battery voltage: " + str(current_battery_voltage))
+                if main_loop_prints:
+                    print("[System] battery voltage: " + str(current_battery_voltage))
                 last_battery_voltage = current_battery_voltage
                 battery_label.text = "{}%".format(batteryPercentage(last_battery_voltage))
     if supervisor.runtime.usb_connected:
@@ -421,15 +444,18 @@ def connect_screen():
         cc = ConsumerControl(usb_hid.devices)
         kbd_layout = KeyboardLayoutUS(kbd)
         mouse = Mouse(usb_hid.devices)
-        print("[USB] connected and HID service started.")
+        if main_loop_prints:
+            print("[USB] connected and HID service started.")
     if ble.connected:
-        print("[Bluetooth] connected.")
+        if main_loop_prints:
+            print("[Bluetooth] connected.")
     layer_label.text = last_layer_name
     current_battery_voltage = round(get_voltage_averaged(battery), 2)
     battery_poll_timer = time.time()
     main_group.pop()
     gc.collect()
-    print("[MemCheck] bytes free before loading after host connected:\t\t" + str(gc.mem_free()))
+    if main_loop_prints:
+        print("[MemCheck] bytes free before loading after host connected:\t\t" + str(gc.mem_free()))
     return last_battery_voltage
 
 def performActions(_cur_actions):
@@ -510,18 +536,21 @@ main_group.append(layout)
 
 # check existing Bluetooth connection
 if not ble.connected:
-    print("[Bluetooth] advertising.")
+    if startup_prints:
+        print("[Bluetooth] advertising.")
     ble.start_advertising(advertisement, scan_response)
     ble_advertising = True
 else:
-    print("[Bluetooth] already connected.")
+    if startup_prints:
+        print("[Bluetooth] already connected.")
     print(ble.connections)
     ble_advertising = False
     showBluetoothSymbol(True)
 
 # Garbage collect and print free memory space
 gc.collect()
-print("[MemCheck] bytes free before load_layer:\t\t\t" + str(gc.mem_free()))
+if startup_prints:  
+    print("[MemCheck] bytes free before load_layer:\t\t\t" + str(gc.mem_free()))
 # load the first layer to start
 load_layer(current_layer)
 
@@ -538,61 +567,73 @@ while True:
     battery_charging = isBatteryCharging()
     current_time = time.time()
     if battery_charging and not charging_indicator_visible:
-        print("[Status] Power connected, displaying charging indicator.")
+        if main_loop_prints:
+            print("[Status] Power connected, displaying charging indicator.")
         changeChargingSymbol("/icons/charging.bmp")
         charging_indicator_visible = True
     if not battery_charging and charging_indicator_visible:
-        print("[Status] Power disconnected, hiding charging indicator.")
+        if main_loop_prints:
+            print("[Status] Power disconnected, hiding charging indicator.")
         changeChargingSymbol("/icons/blanksymbol.bmp")
         fully_charged = False
         charging_indicator_visible = False
     if (current_time - battery_poll_timer) >= 5:
         if battery_charging:
             if last_battery_voltage >= 4.2 and fully_charged == False:
-                print("[Status] Battery full, changing charging indicator to green.")
+                if main_loop_prints:
+                    print("[Status] Battery full, changing charging indicator to green.")
                 changeChargingSymbol("/icons/charged.bmp")
                 fully_charged = True
             if current_battery_voltage > last_battery_voltage:
-                print("[System] Battery voltage: " + str(current_battery_voltage))
+                if main_loop_prints:
+                    print("[System] Battery voltage: " + str(current_battery_voltage))
                 last_battery_voltage = current_battery_voltage
                 battery_label.text = "{}%".format(batteryPercentage(last_battery_voltage))
         else:
             if current_battery_voltage < last_battery_voltage:
-                print("[System] Battery voltage: " + str(current_battery_voltage))
+                if main_loop_prints:
+                    print("[System] Battery voltage: " + str(current_battery_voltage))
                 last_battery_voltage = current_battery_voltage
                 battery_label.text = "{}%".format(batteryPercentage(last_battery_voltage))
         battery_poll_timer = current_time
 
     # Display USB indicator if connected to USB host
     if not usb_indicator_visible and supervisor.runtime.usb_connected:
-        print("[Status] USB host connected, displaying USB host indicator.")
+        if main_loop_prints:
+            print("[Status] USB host connected, displaying USB host indicator.")
         showUSBSymbol(True)
         usb_indicator_visible = True
 
     if usb_indicator_visible and not supervisor.runtime.usb_connected:
-        print("[Status] USB host disconnected, hiding USB host indicator.")
+        if main_loop_prints:
+            print("[Status] USB host disconnected, hiding USB host indicator.")
         showUSBSymbol(False)
         usb_indicator_visible = False
 
     # Bluetooth
     if not ble_advertising and not ble.connected:
-        print("[Status] BLE host disconnected, hiding BLE host indicator.")
+        if main_loop_prints:
+            print("[Status] BLE host disconnected, hiding BLE host indicator.")
         showBluetoothSymbol(False)
         ble.start_advertising(advertisement, scan_response)
         ble_advertising = True
-        print("[Bluetooth] advertising.")
+        if main_loop_prints:
+            print("[Bluetooth] advertising.")
     connected_message_printed = False
     if ble.connected:
         just_connected = ble_advertising
         if just_connected:
-            print("[Status] BLE host connected, displaying BLE host indicator.")
+            if main_loop_prints:
+                print("[Status] BLE host connected, displaying BLE host indicator.")
             showBluetoothSymbol(True)
-            print("[Bluetooth] connected.")
+            if main_loop_prints:
+                print("[Bluetooth] connected.")
         ble_advertising = False
 
     # Wait at connect screen if not connected to a Host device
     if not (supervisor.runtime.usb_connected or ble.connected):
-        print("[System] host device not found. Waiting on connection...")
+        if main_loop_prints:
+            print("[System] host device not found. Waiting on connection...")
         last_battery_voltage = connect_screen()
     
 
@@ -610,7 +651,8 @@ while True:
     # Physical key events and actions
     keyevent = keys.events.get()
     if keyevent:
-        print(keyevent)
+        if main_loop_prints:
+            print(keyevent)
         if keyevent.pressed and layer_uses_keys:
             # update input feedback label at top of screen
             input_label.text = "KEY " + str(keyevent.key_number)
@@ -633,7 +675,8 @@ while True:
             if layer_uses_encoder:
                 _cur_actions = slate_config["layers"][current_layer]["encoder"].get("increment")
                 performActions(_cur_actions)
-            print("[Encoder] position: " + str(encoder_current_pos))
+            if main_loop_prints:
+                print("[Encoder] position: " + str(encoder_current_pos))
     # Check if encoder rotated counter-clockwise
     if encoder_change < 0:
         for _ in range(-encoder_change):
@@ -641,7 +684,8 @@ while True:
             if layer_uses_encoder:
                 _cur_actions = slate_config["layers"][current_layer]["encoder"].get("decrement")
                 performActions(_cur_actions)
-            print("[Encoder] position: " + str(encoder_current_pos))
+            if main_loop_prints:
+                print("[Encoder] position: " + str(encoder_current_pos))
     encoder_last_pos = encoder_current_pos
     # Check if encoder button pressed
     if not encoder_button.value and encoder_button_state is None:
@@ -651,7 +695,8 @@ while True:
         if layer_uses_encoder:
             _cur_actions = slate_config["layers"][current_layer]["encoder"]["button"]
             performActions(_cur_actions)
-        print("[Encoder] button pressed.")
+        if main_loop_prints:
+            print("[Encoder] button pressed.")
         encoder_button_state = None
 
     # Check if joystick position changed
