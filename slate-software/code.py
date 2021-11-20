@@ -59,14 +59,14 @@ print("[MemCheck] bytes free after imports:\t\t\t\t" + str(gc.mem_free()))
 
 # Pin Assignments
 KEY_PINS = (
-    board.RX,  # Key 0
-    board.TX,  # Key 1
-    board.D2,  # Key 2
-    board.SDA,  # Key 3
-    board.SCL, # Key 4
-    board.D11,  # Key 5
-    board.D12,  # Key 6
-    board.D13,  # Key 7
+    board.SCL,  # Key 0
+    board.D11,  # Key 1
+    board.D12,  # Key 2
+    board.D13,  # Key 3
+    board.RX, # Key 4
+    board.TX,  # Key 5
+    board.D2,  # Key 6
+    board.SDA,  # Key 7
 )
 ENC_CLK = board.A0
 ENC_DT = board.A1
