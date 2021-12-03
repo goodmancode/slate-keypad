@@ -15,6 +15,7 @@ KEY_RELEASE = 5
 CHANGE_LAYER = 6
 MOUSE_CLICK = 7
 MOUSE_MOVE = 8
+OPEN_APP = 9
 
 LEFT_BUTTON = 1
 MIDDLE_BUTTON = 4
@@ -426,7 +427,7 @@ def fillInputForm(self, layer, prefix, macro_type_index):
         if actions[1] == ConsumerControlCode.BRIGHTNESS_DECREMENT:
             getattr(self, "%s_combobox" % prefix).setCurrentIndex(12)
     if macro_type_index == 4:
-        pass
+        getattr(self, "%s_string" % prefix).setText(actions[1])
     if macro_type_index == 5:
         if actions[1] == [0, 100, 0]:
             getattr(self, "%s_combobox" % prefix).setCurrentIndex(0)
@@ -1259,7 +1260,7 @@ class Ui_MainWindow(object):
         self.key_0.setItemText(1, _translate("MainWindow", "Hotkey"))
         self.key_0.setItemText(2, _translate("MainWindow", "String"))
         self.key_0.setItemText(3, _translate("MainWindow", "Media Control"))
-        self.key_0.setItemText(4, _translate("MainWindow", "Windows"))
+        self.key_0.setItemText(4, _translate("MainWindow", "Open App"))
         self.key_0.setItemText(5, _translate("MainWindow", "Mouse"))
         self.key_1_label.setText(_translate("MainWindow", "Key 2"))
         self.key_2_label.setText(_translate("MainWindow", "Key 3"))
@@ -1272,43 +1273,43 @@ class Ui_MainWindow(object):
         self.key_1.setItemText(1, _translate("MainWindow", "Hotkey"))
         self.key_1.setItemText(2, _translate("MainWindow", "String"))
         self.key_1.setItemText(3, _translate("MainWindow", "Media Control"))
-        self.key_1.setItemText(4, _translate("MainWindow", "Windows"))
+        self.key_1.setItemText(4, _translate("MainWindow", "Open App"))
         self.key_1.setItemText(5, _translate("MainWindow", "Mouse"))
         self.key_3.setItemText(0, _translate("MainWindow", "None"))
         self.key_3.setItemText(1, _translate("MainWindow", "Hotkey"))
         self.key_3.setItemText(2, _translate("MainWindow", "String"))
         self.key_3.setItemText(3, _translate("MainWindow", "Media Control"))
-        self.key_3.setItemText(4, _translate("MainWindow", "Windows"))
+        self.key_3.setItemText(4, _translate("MainWindow", "Open App"))
         self.key_3.setItemText(5, _translate("MainWindow", "Mouse"))
         self.key_2.setItemText(0, _translate("MainWindow", "None"))
         self.key_2.setItemText(1, _translate("MainWindow", "Hotkey"))
         self.key_2.setItemText(2, _translate("MainWindow", "String"))
         self.key_2.setItemText(3, _translate("MainWindow", "Media Control"))
-        self.key_2.setItemText(4, _translate("MainWindow", "Windows"))
+        self.key_2.setItemText(4, _translate("MainWindow", "Open App"))
         self.key_2.setItemText(5, _translate("MainWindow", "Mouse"))
         self.key_5.setItemText(0, _translate("MainWindow", "None"))
         self.key_5.setItemText(1, _translate("MainWindow", "Hotkey"))
         self.key_5.setItemText(2, _translate("MainWindow", "String"))
         self.key_5.setItemText(3, _translate("MainWindow", "Media Control"))
-        self.key_5.setItemText(4, _translate("MainWindow", "Windows"))
+        self.key_5.setItemText(4, _translate("MainWindow", "Open App"))
         self.key_5.setItemText(5, _translate("MainWindow", "Mouse"))
         self.key_4.setItemText(0, _translate("MainWindow", "None"))
         self.key_4.setItemText(1, _translate("MainWindow", "Hotkey"))
         self.key_4.setItemText(2, _translate("MainWindow", "String"))
         self.key_4.setItemText(3, _translate("MainWindow", "Media Control"))
-        self.key_4.setItemText(4, _translate("MainWindow", "Windows"))
+        self.key_4.setItemText(4, _translate("MainWindow", "Open App"))
         self.key_4.setItemText(5, _translate("MainWindow", "Mouse"))
         self.key_7.setItemText(0, _translate("MainWindow", "None"))
         self.key_7.setItemText(1, _translate("MainWindow", "Hotkey"))
         self.key_7.setItemText(2, _translate("MainWindow", "String"))
         self.key_7.setItemText(3, _translate("MainWindow", "Media Control"))
-        self.key_7.setItemText(4, _translate("MainWindow", "Windows"))
+        self.key_7.setItemText(4, _translate("MainWindow", "Open App"))
         self.key_7.setItemText(5, _translate("MainWindow", "Mouse"))
         self.key_6.setItemText(0, _translate("MainWindow", "None"))
         self.key_6.setItemText(1, _translate("MainWindow", "Hotkey"))
         self.key_6.setItemText(2, _translate("MainWindow", "String"))
         self.key_6.setItemText(3, _translate("MainWindow", "Media Control"))
-        self.key_6.setItemText(4, _translate("MainWindow", "Windows"))
+        self.key_6.setItemText(4, _translate("MainWindow", "Open App"))
         self.key_6.setItemText(5, _translate("MainWindow", "Mouse"))
         self.macroTabs.setTabText(self.macroTabs.indexOf(self.macroTab_physicalkeys), _translate("MainWindow", "Physical Keys"))
         self.xAxis_neg_label.setText(_translate("MainWindow", "X-Axis (-)"))
@@ -1317,33 +1318,33 @@ class Ui_MainWindow(object):
         self.xAxis_neg.setItemText(1, _translate("MainWindow", "Hotkey"))
         self.xAxis_neg.setItemText(2, _translate("MainWindow", "String"))
         self.xAxis_neg.setItemText(3, _translate("MainWindow", "Media Control"))
-        self.xAxis_neg.setItemText(4, _translate("MainWindow", "Windows"))
+        self.xAxis_neg.setItemText(4, _translate("MainWindow", "Open App"))
         self.xAxis_neg.setItemText(5, _translate("MainWindow", "Mouse"))
         self.xAxis_pos.setItemText(0, _translate("MainWindow", "None"))
         self.xAxis_pos.setItemText(1, _translate("MainWindow", "Hotkey"))
         self.xAxis_pos.setItemText(2, _translate("MainWindow", "String"))
         self.xAxis_pos.setItemText(3, _translate("MainWindow", "Media Control"))
-        self.xAxis_pos.setItemText(4, _translate("MainWindow", "Windows"))
+        self.xAxis_pos.setItemText(4, _translate("MainWindow", "Open App"))
         self.xAxis_pos.setItemText(5, _translate("MainWindow", "Mouse"))
         self.yAxis_pos.setItemText(0, _translate("MainWindow", "None"))
         self.yAxis_pos.setItemText(1, _translate("MainWindow", "Hotkey"))
         self.yAxis_pos.setItemText(2, _translate("MainWindow", "String"))
         self.yAxis_pos.setItemText(3, _translate("MainWindow", "Media Control"))
-        self.yAxis_pos.setItemText(4, _translate("MainWindow", "Windows"))
+        self.yAxis_pos.setItemText(4, _translate("MainWindow", "Open App"))
         self.yAxis_pos.setItemText(5, _translate("MainWindow", "Mouse"))
         self.yAxis_pos_label.setText(_translate("MainWindow", "Y-Axis (+)"))
         self.yAxis_neg.setItemText(0, _translate("MainWindow", "None"))
         self.yAxis_neg.setItemText(1, _translate("MainWindow", "Hotkey"))
         self.yAxis_neg.setItemText(2, _translate("MainWindow", "String"))
         self.yAxis_neg.setItemText(3, _translate("MainWindow", "Media Control"))
-        self.yAxis_neg.setItemText(4, _translate("MainWindow", "Windows"))
+        self.yAxis_neg.setItemText(4, _translate("MainWindow", "Open App"))
         self.yAxis_neg.setItemText(5, _translate("MainWindow", "Mouse"))
         self.yAxis_neg_label.setText(_translate("MainWindow", "Y-Axis (-)"))
         self.joystick_button.setItemText(0, _translate("MainWindow", "None"))
         self.joystick_button.setItemText(1, _translate("MainWindow", "Hotkey"))
         self.joystick_button.setItemText(2, _translate("MainWindow", "String"))
         self.joystick_button.setItemText(3, _translate("MainWindow", "Media Control"))
-        self.joystick_button.setItemText(4, _translate("MainWindow", "Windows"))
+        self.joystick_button.setItemText(4, _translate("MainWindow", "Open App"))
         self.joystick_button.setItemText(5, _translate("MainWindow", "Mouse"))
         self.joystick_button_label.setText(_translate("MainWindow", "Button"))
         self.macroTabs.setTabText(self.macroTabs.indexOf(self.macroTab_joystick), _translate("MainWindow", "Joystick"))
@@ -1353,20 +1354,20 @@ class Ui_MainWindow(object):
         self.encoder_increment.setItemText(1, _translate("MainWindow", "Hotkey"))
         self.encoder_increment.setItemText(2, _translate("MainWindow", "String"))
         self.encoder_increment.setItemText(3, _translate("MainWindow", "Media Control"))
-        self.encoder_increment.setItemText(4, _translate("MainWindow", "Windows"))
+        self.encoder_increment.setItemText(4, _translate("MainWindow", "Open App"))
         self.encoder_increment.setItemText(5, _translate("MainWindow", "Mouse"))
         self.encoder_decrement.setItemText(0, _translate("MainWindow", "None"))
         self.encoder_decrement.setItemText(1, _translate("MainWindow", "Hotkey"))
         self.encoder_decrement.setItemText(2, _translate("MainWindow", "String"))
         self.encoder_decrement.setItemText(3, _translate("MainWindow", "Media Control"))
-        self.encoder_decrement.setItemText(4, _translate("MainWindow", "Windows"))
+        self.encoder_decrement.setItemText(4, _translate("MainWindow", "Open App"))
         self.encoder_decrement.setItemText(5, _translate("MainWindow", "Mouse"))
         self.encoder_button_label.setText(_translate("MainWindow", "Button"))
         self.encoder_button.setItemText(0, _translate("MainWindow", "None"))
         self.encoder_button.setItemText(1, _translate("MainWindow", "Hotkey"))
         self.encoder_button.setItemText(2, _translate("MainWindow", "String"))
         self.encoder_button.setItemText(3, _translate("MainWindow", "Media Control"))
-        self.encoder_button.setItemText(4, _translate("MainWindow", "Windows"))
+        self.encoder_button.setItemText(4, _translate("MainWindow", "Open App"))
         self.encoder_button.setItemText(5, _translate("MainWindow", "Mouse"))
         self.macroTabs.setTabText(self.macroTabs.indexOf(self.macroTab_encoder), _translate("MainWindow", "Rotary Encoder"))
         self.referenceGroupBox.setTitle(_translate("MainWindow", "Reference"))
@@ -1458,6 +1459,8 @@ class Ui_MainWindow(object):
             return 2
         if macroType == MEDIA:
             return 3
+        if macroType == OPEN_APP:
+            return 4
         if macroType == MOUSE_CLICK or MOUSE_MOVE:
             return 5
                 
@@ -1511,9 +1514,9 @@ class Ui_MainWindow(object):
         if macro_type_index == 4:
             getattr(self, '%s_hotkey' % prefix).setVisible(False)
             getattr(self, '%s_hotkey' % prefix).clear()
-            getattr(self, '%s_string' % prefix).setVisible(False)
+            getattr(self, '%s_string' % prefix).setVisible(True)
             getattr(self, '%s_string' % prefix).clear()
-            getattr(self, '%s_combobox' % prefix).setVisible(True)
+            getattr(self, '%s_combobox' % prefix).setVisible(False)
             getattr(self, '%s_combobox' % prefix).clear()
         if macro_type_index == 5:
             getattr(self, '%s_hotkey' % prefix).setVisible(False)
@@ -1596,7 +1599,7 @@ class Ui_MainWindow(object):
             if actions[1] == ConsumerControlCode.BRIGHTNESS_DECREMENT:
                 getattr(self, "%s_combobox" % prefix).setCurrentIndex(12)
         if macro_type_index == 4:
-            pass
+            getattr(self, "%s_string" % prefix).setText(actions[1])
         if macro_type_index == 5:
             if actions[1] == [0, 100, 0]:
                 getattr(self, "%s_combobox" % prefix).setCurrentIndex(0)
@@ -1878,8 +1881,8 @@ class Ui_MainWindow(object):
             return (STRING, ui_screenkey.screenkey_string.text())
         if macro_type == 3: # Media Control
             return (MEDIA, self.mediaControlObject(ui_screenkey.screenkey_combobox.currentIndex()))
-        if macro_type == 4: # Windows
-            return (None, None)
+        if macro_type == 4: # Open App
+            return (OPEN_APP, ui_screenkey.screenkey_string.text())
         if macro_type == 5: # Mouse Control
             return self.mouseObject(ui_screenkey.screenkey_combobox.currentIndex())
 
@@ -1892,8 +1895,8 @@ class Ui_MainWindow(object):
             return (STRING, getattr(self, "%s_string" % prefix).text())
         if macro_type == 3: # Media Control
             return (MEDIA, self.mediaControlObject(getattr(self, "%s_combobox" % prefix).currentIndex()))
-        if macro_type == 4: # Windows
-            return (None, None)
+        if macro_type == 4: # Open App
+            return (OPEN_APP, getattr(self, "%s_string" % prefix).text())
         if macro_type == 5: # Mouse Control
             return self.mouseObject(getattr(self, "%s_combobox" % prefix).currentIndex())
             

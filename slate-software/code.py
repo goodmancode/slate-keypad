@@ -70,6 +70,7 @@ KEY_RELEASE = 5
 CHANGE_LAYER = 6
 MOUSE_CLICK = 7
 MOUSE_MOVE = 8
+OPEN_APP = 9
 
 LEFT_BUTTON = 1
 MIDDLE_BUTTON = 4
@@ -524,6 +525,21 @@ def performActions(_cur_actions):
                 ble_mouse.move(_action[1][0], _action[1][1], _action[1][2])
             else:
                 mouse.move(_action[1][0], _action[1][1], _action[1][2])
+        elif _action[0] == OPEN_APP:
+            if bluetooth:
+                ble_kbd.press(*[Keycode.GUI, Keycode.R])
+                ble_kbd.release(*[Keycode.GUI, Keycode.R])
+                time.sleep(0.25)
+                ble_kbd_layout.write(_action[1])
+                ble_kbd.press(*[Keycode.ENTER])
+                ble_kbd.release(*[Keycode.ENTER])
+            else:
+                kbd.press(*[Keycode.GUI, Keycode.R])
+                kbd.release(*[Keycode.GUI, Keycode.R])
+                time.sleep(0.1)
+                kbd_layout.write(_action[1])
+                kbd.press(*[Keycode.ENTER])
+                kbd.release(*[Keycode.ENTER])
         # Change Layer
         elif _action[0] == CHANGE_LAYER:
             if isinstance(
