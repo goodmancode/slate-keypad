@@ -12,13 +12,13 @@ This version runs on Feather nRF52840 Express with a 3.5" FeatherWing
 startup_prints = True
 
 # Enable or disable main loop prints ("false" improves speed during use)
-main_loop_prints = True
+main_loop_prints = False
 
 # Enable or disable joystick position change prints
 print_joystick = False
 
 # Flag to disable all console prints (set to "True" for production, improves speed)
-disable_prints = False
+disable_prints = True
 
 if disable_prints == True:
     startup_prints = False
@@ -514,11 +514,9 @@ def performActions(_cur_actions):
         # Mouse click
         elif _action[0] == MOUSE_CLICK:
             if bluetooth:
-                ble_mouse.press(_action[1])
-                ble_mouse.release(_action[1])
+                ble_mouse.click(_action[1])
             else:
-                mouse.press(_action[1])
-                mouse.release(_action[1])
+                mouse.click(_action[1])
         # Mouse movement
         elif _action[0] == MOUSE_MOVE:
             if bluetooth:

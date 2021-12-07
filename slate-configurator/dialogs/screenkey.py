@@ -128,7 +128,7 @@ class Ui_screenKeyDialog(object):
         self.screenkey_macro.setItemText(1, _translate("screenKeyDialog", "Hotkey"))
         self.screenkey_macro.setItemText(2, _translate("screenKeyDialog", "String"))
         self.screenkey_macro.setItemText(3, _translate("screenKeyDialog", "Media Control"))
-        self.screenkey_macro.setItemText(4, _translate("screenKeyDialog", "Window Sizing"))
+        self.screenkey_macro.setItemText(4, _translate("screenKeyDialog", "Open App"))
         self.screenkey_macro.setItemText(5, _translate("screenKeyDialog", "Mouse"))
         self.screenkey_image_label.setText(_translate("screenKeyDialog", "Image:"))
         self.fileSelect.setText(_translate("screenKeyDialog", "..."))
@@ -167,9 +167,9 @@ class Ui_screenKeyDialog(object):
         if macro_type_index == 4:
             getattr(self, '%s_hotkey' % prefix).setVisible(False)
             getattr(self, '%s_hotkey' % prefix).clear()
-            getattr(self, '%s_string' % prefix).setVisible(False)
+            getattr(self, '%s_string' % prefix).setVisible(True)
             getattr(self, '%s_string' % prefix).clear()
-            getattr(self, '%s_combobox' % prefix).setVisible(True)
+            getattr(self, '%s_combobox' % prefix).setVisible(False)
             getattr(self, '%s_combobox' % prefix).clear()
         if macro_type_index == 5:
             getattr(self, '%s_hotkey' % prefix).setVisible(False)

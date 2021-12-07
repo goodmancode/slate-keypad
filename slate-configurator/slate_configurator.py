@@ -262,6 +262,7 @@ def convertQttoHID(qt_code):
     if qt_code == QtCore.Qt.Key.Key_Control: return Keycode.CONTROL
     if qt_code == QtCore.Qt.Key.Key_Shift: return Keycode.SHIFT
     if qt_code == QtCore.Qt.Key.Key_Alt: return Keycode.ALT
+    if qt_code == QtCore.Qt.Key.Key_Meta: return Keycode.GUI
 
 def convertHIDtoQt(hid_code):
     if hid_code == Keycode.A: return QtCore.Qt.Key.Key_A
@@ -355,6 +356,7 @@ def convertHIDtoQt(hid_code):
     if hid_code == Keycode.SHIFT: return QtCore.Qt.KeyboardModifier.ShiftModifier
     if hid_code == Keycode.RIGHT_SHIFT: return QtCore.Qt.KeyboardModifier.ShiftModifier
     if hid_code == Keycode.ALT: return QtCore.Qt.KeyboardModifier.AltModifier
+    if hid_code == Keycode.GUI: return QtCore.Qt.Key.Key_Meta
 
 def fillInputForm(self, layer, prefix, macro_type_index):
     # Get actions for input
